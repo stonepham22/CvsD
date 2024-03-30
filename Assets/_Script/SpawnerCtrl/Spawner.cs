@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : LoboMonoBehaviour
+public abstract class Spawner : LoboMonoBehaviour
 {
     
     [Header("Spawner")]
     [SerializeField] protected Transform holder;
+
+    [SerializeField] protected int currentPrefabs = 0;
+    public int CurrentPrefabs => currentPrefabs;
 
     [SerializeField] protected int spawnedCount = 0;
     public int SpawnedCount => spawnedCount;
@@ -67,6 +70,7 @@ public class Spawner : LoboMonoBehaviour
         newPrefab.SetPositionAndRotation(spawnPos, rotation);
 
         this.SetParentNewPrefab(newPrefab);
+        this.currentPrefabs++;
         this.spawnedCount++;
         return newPrefab;
     }
@@ -97,7 +101,7 @@ public class Spawner : LoboMonoBehaviour
     {
         this.poolObjs.Add(obj);
         obj.gameObject.SetActive(false);
-        this.spawnedCount--;
+        this.currentPrefabs--;
         obj.SetParent(this.holder, false);
     }
 
