@@ -10,10 +10,23 @@ public class DogSpawner : Spawner
 
     [SerializeField] private float _timer;
     [SerializeField] private float _timeDelay = 5f;
-
     [SerializeField] private Transform _spawnPoint;
-    
     [SerializeField] private bool _isSpawn;
+
+    [SerializeField] private int _spawnCount;
+    [SerializeField] private int _spawnCountLimiteInWave;
+
+    protected void Start()
+    {
+        this.UpdateSpawnCountLimiteInWave();
+    }
+
+    private void UpdateSpawnCountLimiteInWave()
+    {
+        this._spawnCountLimiteInWave = ManagerCtrl.Instance.Wave.GetSpawnCountLimiteInWave();
+        this._spawnCount = 0;
+        this._isSpawn = true;
+    }
 
     protected override void LoadComponents()
     {
@@ -37,13 +50,33 @@ public class DogSpawner : Spawner
     {
         if (!this._isSpawn) return;
         if (this.CheckTimeDelay()) return;
+        this.Spawn();
+        this._spawnCount++;
+        this.CheckSpawnedEnemiesCount();
+    }
+
+    private void Spawn()
+    {
         Transform prefab = this.RandomPrefab();
         Transform spawnPoint = this._spawnPosition.RamdomSpawnPoint();
         this._spawnPoint = spawnPoint;
         Vector3 spawnPos = spawnPoint.position;
         Transform obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
         obj.gameObject.SetActive(true);
-    }
+    }    
+
+    private void CheckSpawnedEnemiesCount()
+    {
+        if (this._spawnCount < _spawnCountLimiteInWave) return;
+        this._isSpawn = false;
+        this.NextWave();
+        this.UpdateSpawnCountLimiteInWave();
+    }    
+
+    private void NextWave()
+    {
+        ManagerCtrl.Instance.Wave.NextWave();
+    }    
 
     protected override void SetParentNewPrefab(Transform newPrefab)
     {
