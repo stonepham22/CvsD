@@ -24,6 +24,12 @@ public class WaveManager : MonoBehaviour
     {
         this._currentWave++;
         this._spawnCountLimiteInWave *= 2;
+        this.ShowWaveText();
+    }
+
+    private void ShowWaveText()
+    {
+        UICtrl.Instance.GameplayScreen.TopScreen.WaveText.UpdateWaveText(_currentWave);
     }
 
 
