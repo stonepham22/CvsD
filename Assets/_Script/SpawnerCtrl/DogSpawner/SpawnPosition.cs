@@ -10,6 +10,9 @@ public class SpawnPosition : LoboMonoBehaviour
 
     [SerializeField] private float _offsetShooting = -2;
 
+    [SerializeField] private bool _isDogsStillAlive;
+    public bool IsDogsStillAlive => _isDogsStillAlive;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();

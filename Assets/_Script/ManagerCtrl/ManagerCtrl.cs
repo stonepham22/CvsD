@@ -17,6 +17,9 @@ public class ManagerCtrl : LoboMonoBehaviour
     [SerializeField] private PlayerManager _playerManager;
     public PlayerManager PlayerManager => _playerManager;
 
+    [SerializeField] private WaveManager _wave;
+    public WaveManager Wave => _wave;
+
     protected override void Awake()
     {
         if (ManagerCtrl._instance != null) Debug.LogError("only 1 ManagerCtrl allow to exist");
@@ -29,6 +32,7 @@ public class ManagerCtrl : LoboMonoBehaviour
         this.LoadInputManager();
         this.LoadPlayerPrefsManager();
         this.LoadPlayerManager();
+        this.LoadWaveManager();
     }
 
     void LoadInputManager()
@@ -50,6 +54,13 @@ public class ManagerCtrl : LoboMonoBehaviour
         if (this._playerManager != null) return;
         this._playerManager = GetComponentInChildren<PlayerManager>();
         Debug.LogWarning(transform.name + ": LoadPlayerManager", gameObject);
+    }
+
+    void LoadWaveManager()
+    {
+        if (this._wave != null) return;
+        this._wave = GetComponentInChildren<WaveManager>();
+        Debug.LogWarning(transform.name + ": LoadWaveManager", gameObject);
     }
 
 }
