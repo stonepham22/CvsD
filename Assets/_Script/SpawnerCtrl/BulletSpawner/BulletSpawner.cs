@@ -7,10 +7,10 @@ public class BulletSpawner : Spawner
    
     public void Spawning(Vector3 spawnPos)
     {
-        Transform prefab = this.RandomPrefab();
+        GameObject prefab = this.RandomPrefab();
         Quaternion rotation = transform.parent.rotation;
-        Transform newBullet = this.Spawn(prefab, spawnPos, rotation);
-        newBullet.gameObject.SetActive(true);
+        GameObject newBullet = this.Spawn(prefab, spawnPos, rotation);
+        newBullet.SetActive(true);
     }    
 
 }
