@@ -13,7 +13,6 @@ public abstract class Spawner : LoboMonoBehaviour
     public int SpawnedCount => spawnedCount;
 
     [SerializeField] protected List<GameObject> prefabs;
-    public Dictionary<GameObject, List<GameObject>> dicPool = new Dictionary<GameObject, List<GameObject>>();
 
     protected override void LoadComponents()
     {
@@ -69,26 +68,14 @@ public abstract class Spawner : LoboMonoBehaviour
 
     protected virtual GameObject GetObjectFromPool(GameObject prefab)
     {
-        if (dicPool.ContainsKey(prefab) && dicPool[prefab].Count > 0)
-        {
-            GameObject obj = dicPool[prefab][0];
-            dicPool[prefab].RemoveAt(0);
-            return obj;
-        }
-
-        GameObject newPrefab = Instantiate(prefab);
-        newPrefab.name = prefab.name;
-        return newPrefab;
+        return PoolManager.Instance.GetObject(prefab);
     }
 
-    public virtual void Despawn(GameObject obj)
+    public virtual void Despawn(GameObject prefab)
     {
-        obj.SetActive(false);
-        if (!dicPool.ContainsKey(obj)) dicPool[obj] = new List<GameObject>();
-        
-        dicPool[obj].Add(obj);
+        prefab.SetActive(false);
         currentPrefabs--;
-        obj.transform.SetParent(holder, false);
+        prefab.transform.SetParent(holder, false);
     }
 
     public virtual GameObject RandomPrefab()
