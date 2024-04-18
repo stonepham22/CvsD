@@ -11,15 +11,15 @@ public class ShieldSpawner : Spawner
     {
         this._parent = UICtrl.Instance.DragAndDrop.ContainersCtrl.LobbyCtrl.CheckLobbyEmpty();
         if (this._parent == null) return;
-        Transform prefab = this.RandomPrefab();
+        GameObject prefab = this.RandomPrefab();
         Vector3 spawnPos = transform.position;
-        Transform obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
-        obj.gameObject.SetActive(true);
+        GameObject obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
+        obj.SetActive(true);
     }
 
-    protected override void SetParentNewPrefab(Transform newPrefab)
+    protected override void SetParentNewPrefab(GameObject newPrefab)
     {
-        newPrefab.SetParent(this._parent, false);
+        newPrefab.transform.SetParent(this._parent, false);
     }
 
     public void DontUpgradeShield()

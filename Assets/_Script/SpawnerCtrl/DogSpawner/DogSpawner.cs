@@ -67,12 +67,12 @@ public class DogSpawner : Spawner
 
     private void Spawn()
     {
-        Transform prefab = this.RandomPrefab();
+        GameObject prefab = this.RandomPrefab();
         Transform spawnPoint = this._spawnPosition.RamdomSpawnPoint();
         this._spawnPoint = spawnPoint;
         Vector3 spawnPos = spawnPoint.position;
-        Transform obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
-        obj.gameObject.SetActive(true);
+        GameObject obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
+        obj.SetActive(true);
     }    
 
     private void CheckSpawnedEnemiesCount()
@@ -86,9 +86,9 @@ public class DogSpawner : Spawner
         ManagerCtrl.Instance.Wave.NextWave();
     }    
 
-    protected override void SetParentNewPrefab(Transform newPrefab)
+    protected override void SetParentNewPrefab(GameObject newPrefab)
     {
-        newPrefab.parent = this._spawnPoint;
+        newPrefab.transform.parent = this._spawnPoint;
     }
 
     bool CheckTimeDelay()

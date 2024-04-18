@@ -7,7 +7,7 @@ public class ShieldPrefabDespawn : MonoBehaviour
     
     public void Despawning()
     {
-        UICtrl.Instance.DragAndDrop.UISpawnerCtrl.ShieldSpawner.Despawn(transform.parent);
+        UICtrl.Instance.DragAndDrop.UISpawnerCtrl.ShieldSpawner.Despawn(transform.parent.gameObject);
     }
 
 }

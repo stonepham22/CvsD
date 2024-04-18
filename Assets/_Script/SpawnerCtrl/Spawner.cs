@@ -12,19 +12,18 @@ public abstract class Spawner : LoboMonoBehaviour
     [SerializeField] protected int spawnedCount = 0;
     public int SpawnedCount => spawnedCount;
 
-    [SerializeField] protected List<Transform> prefabs;
-    [SerializeField] protected Dictionary<string, List<Transform>> dicPool = new Dictionary<string, List<Transform>>();
+    [SerializeField] protected List<GameObject> prefabs;
 
     protected override void LoadComponents()
     {
-        LoadPrefabs();
-        LoadHolder();
+        this.LoadPrefabs();
+        this.LoadHolder();
     }
 
     protected virtual void LoadHolder()
     {
-        if (holder != null) return;
-        holder = transform.Find("Holder");
+        if (this.holder != null) return;
+        this.holder = transform.Find("Holder");
         Debug.Log(name + ": LoadHolder", gameObject);
     }
 
@@ -35,38 +34,26 @@ public abstract class Spawner : LoboMonoBehaviour
         Transform prefabObj = transform.Find("Prefabs");
         foreach (Transform prefab in prefabObj)
         {
-            prefabs.Add(prefab);
+            prefabs.Add(prefab.gameObject);
         }
 
-        HidePrefabs();
+        this.HidePrefabs();
 
         Debug.Log(name + ": LoadPrefabs", gameObject);
     }
 
     protected virtual void HidePrefabs()
     {
-        foreach (Transform prefab in prefabs)
+        foreach (GameObject prefab in prefabs)
         {
-            prefab.gameObject.SetActive(false);
+            prefab.SetActive(false);
         }
     }
 
-    public virtual Transform Spawn(string prefabName, Vector3 spawnPos, Quaternion rotation)
+    public virtual GameObject Spawn(GameObject prefab, Vector3 spawnPos, Quaternion rotation)
     {
-        Transform prefab = GetPrefabByName(prefabName);
-        if (prefab == null)
-        {
-            Debug.LogWarning("Prefab not found: " + prefabName);
-            return null;
-        }
-
-        return Spawn(prefab, spawnPos, rotation);
-    }
-
-    public virtual Transform Spawn(Transform prefab, Vector3 spawnPos, Quaternion rotation)
-    {
-        Transform newPrefab = GetObjectFromPool(prefab);
-        newPrefab.SetPositionAndRotation(spawnPos, rotation);
+        GameObject newPrefab = GetObjectFromPool(prefab);
+        newPrefab.transform.SetPositionAndRotation(spawnPos, rotation);
 
         SetParentNewPrefab(newPrefab);
         currentPrefabs++;
@@ -74,51 +61,24 @@ public abstract class Spawner : LoboMonoBehaviour
         return newPrefab;
     }
 
-    protected virtual void SetParentNewPrefab(Transform newPrefab)
+    protected virtual void SetParentNewPrefab(GameObject newPrefab)
     {
-        newPrefab.parent = holder;
+        newPrefab.transform.parent = holder;
     }
 
-    protected virtual Transform GetObjectFromPool(Transform prefab)
+    protected virtual GameObject GetObjectFromPool(GameObject prefab)
     {
-        string prefabName = prefab.name;
-        if (dicPool.ContainsKey(prefabName) && dicPool[prefabName].Count > 0)
-        {
-            Transform obj = dicPool[prefabName][0];
-            dicPool[prefabName].RemoveAt(0);
-            return obj;
-        }
-
-        Transform newPrefab = Instantiate(prefab);
-        newPrefab.name = prefabName;
-        return newPrefab;
+        return PoolManager.Instance.GetObject(prefab);
     }
 
-    public virtual void Despawn(Transform obj)
+    public virtual void Despawn(GameObject prefab)
     {
-        string prefabName = obj.name;
-        if (!dicPool.ContainsKey(prefabName))
-        {
-            dicPool[prefabName] = new List<Transform>();
-        }
-
-        dicPool[prefabName].Add(obj);
-        obj.gameObject.SetActive(false);
+        prefab.SetActive(false);
         currentPrefabs--;
-        obj.SetParent(holder, false);
+        prefab.transform.SetParent(holder, false);
     }
 
-    public virtual Transform GetPrefabByName(string prefabName)
-    {
-        foreach (Transform prefab in prefabs)
-        {
-            if (prefab.name == prefabName) return prefab;
-        }
-
-        return null;
-    }
-
-    public virtual Transform RandomPrefab()
+    public virtual GameObject RandomPrefab()
     {
         int rand = Random.Range(0, prefabs.Count);
         return prefabs[rand];
