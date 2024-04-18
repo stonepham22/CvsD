@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerCtrl : LoboMonoBehaviour
+public class ManagerCtrl : BaseSingleton<ManagerCtrl>
 {
-
-    private static ManagerCtrl _instance;
-    public static ManagerCtrl Instance => _instance;
 
     [SerializeField] private InputManager _inputManager;
     public InputManager InputManager => _inputManager;
@@ -19,12 +16,6 @@ public class ManagerCtrl : LoboMonoBehaviour
 
     [SerializeField] private WaveManager _wave;
     public WaveManager Wave => _wave;
-
-    protected override void Awake()
-    {
-        if (ManagerCtrl._instance != null) Debug.LogError("only 1 ManagerCtrl allow to exist");
-        ManagerCtrl._instance = this;
-    }
 
     protected override void LoadComponents()
     {
