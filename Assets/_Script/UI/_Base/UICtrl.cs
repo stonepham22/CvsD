@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UICtrl : LoboMonoBehaviour
+public class UICtrl : BaseSingleton<UICtrl>
 {
     
-    private static UICtrl _instance;
-    public static UICtrl Instance => _instance;
-
     [SerializeField] private DragAndDrop _dragAndDrop;
     public DragAndDrop DragAndDrop => _dragAndDrop;
 
@@ -16,12 +13,6 @@ public class UICtrl : LoboMonoBehaviour
 
     [SerializeField] private ShoppingMenu _shoppingMenu;
     public ShoppingMenu ShoppingMenu => _shoppingMenu;
-
-    protected override void Awake()
-    {
-        if (UICtrl._instance != null) Debug.LogError("only 1 UICtrl allow to exist");
-        UICtrl._instance = this;
-    }
 
     protected override void LoadComponents()
     {

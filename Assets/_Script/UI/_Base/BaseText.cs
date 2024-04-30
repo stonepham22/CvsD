@@ -20,4 +20,9 @@ public class BaseText : LoboMonoBehaviour
         Debug.LogWarning(transform.name + ": LoadText", gameObject);
     }
 
+    protected void ShowText(string text)
+    {
+        this.text.text = text;
+    }
+
 }

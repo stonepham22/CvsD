@@ -1,118 +1,86 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : LoboMonoBehaviour
+public abstract class Spawner : LoboMonoBehaviour
 {
-    
     [Header("Spawner")]
     [SerializeField] protected Transform holder;
+
+    [SerializeField] protected int currentPrefabs = 0;
+    public int CurrentPrefabs => currentPrefabs;
 
     [SerializeField] protected int spawnedCount = 0;
     public int SpawnedCount => spawnedCount;
 
-    [SerializeField] protected List<Transform> prefabs;
-    [SerializeField] protected List<Transform> poolObjs = new List<Transform>();
-    
+    [SerializeField] protected List<GameObject> prefabs;
+
     protected override void LoadComponents()
     {
         this.LoadPrefabs();
         this.LoadHolder();
     }
-    
+
     protected virtual void LoadHolder()
     {
         if (this.holder != null) return;
         this.holder = transform.Find("Holder");
-        Debug.Log(transform.name + ": LoadHolder", gameObject);
+        Debug.Log(name + ": LoadHolder", gameObject);
     }
 
     protected virtual void LoadPrefabs()
     {
-        if (this.prefabs.Count > 0) return;
+        if (prefabs.Count > 0) return;
 
         Transform prefabObj = transform.Find("Prefabs");
         foreach (Transform prefab in prefabObj)
         {
-            this.prefabs.Add(prefab);
+            prefabs.Add(prefab.gameObject);
         }
 
-        this.Hideprefabs();
+        this.HidePrefabs();
 
-        Debug.Log(transform.name + ": LoadPrefabs", gameObject);
+        Debug.Log(name + ": LoadPrefabs", gameObject);
     }
 
-    protected virtual void Hideprefabs()
+    protected virtual void HidePrefabs()
     {
-        foreach (Transform prefab in this.prefabs)
+        foreach (GameObject prefab in prefabs)
         {
-            prefab.gameObject.SetActive(false);
+            prefab.SetActive(false);
         }
     }
 
-    public virtual Transform Spawn(string prefabName, Vector3 spawnPos, Quaternion rotation)
+    public virtual GameObject Spawn(GameObject prefab, Vector3 spawnPos, Quaternion rotation)
     {
-        Transform prefab = this.GetPrefabByName(prefabName);
-        if (prefab == null)
-        {
-            Debug.LogWarning("Prefab not found:" + prefabName);
-            return null;
-        }
+        GameObject newPrefab = GetObjectFromPool(prefab);
+        newPrefab.transform.SetPositionAndRotation(spawnPos, rotation);
 
-        return this.Spawn(prefab, spawnPos, rotation);
-    }
-
-    public virtual Transform Spawn(Transform prefab, Vector3 spawnPos, Quaternion rotation)
-    {
-        Transform newPrefab = this.GetObjectFromPoll(prefab);
-        newPrefab.SetPositionAndRotation(spawnPos, rotation);
-
-        this.SetParentNewPrefab(newPrefab);
-        this.spawnedCount++;
+        SetParentNewPrefab(newPrefab);
+        currentPrefabs++;
+        spawnedCount++;
         return newPrefab;
     }
 
-    protected virtual void SetParentNewPrefab(Transform newPrefab)
+    protected virtual void SetParentNewPrefab(GameObject newPrefab)
     {
-        newPrefab.parent = this.holder;
-    }    
-
-    protected virtual Transform GetObjectFromPoll(Transform prefab)
-    {
-        for (int i = this.poolObjs.Count - 1; i >= 0; i--)
-        {
-            Transform poolObj = this.poolObjs[i];
-            if (poolObj.name == prefab.name)
-            {
-                this.poolObjs.RemoveAt(i);
-                return poolObj;
-            }
-        }
-
-        Transform newPrefab = Instantiate(prefab);
-        newPrefab.name = prefab.name;
-        return newPrefab;
+        newPrefab.transform.parent = holder;
     }
 
-    public virtual void Despawn(Transform obj)
+    protected virtual GameObject GetObjectFromPool(GameObject prefab)
     {
-        this.poolObjs.Add(obj);
-        obj.gameObject.SetActive(false);
-        this.spawnedCount--;
-        obj.SetParent(this.holder, false);
+        return ManagerCtrl.Instance.Pool.GetObject(prefab);
     }
 
-    public virtual Transform GetPrefabByName(string prefabName)
+    public virtual void Despawn(GameObject prefab)
     {
-        foreach (Transform prefab in this.prefabs)
-        {
-            if (prefab.name == prefabName) return prefab;
-        }
-
-        return null;
+        prefab.SetActive(false);
+        currentPrefabs--;
+        prefab.transform.SetParent(holder, false);
     }
-    public virtual Transform RandomPrefab()
+
+    public virtual GameObject RandomPrefab()
     {
-        int rand = Random.Range(0, this.prefabs.Count);
-        return this.prefabs[rand];
+        int rand = Random.Range(0, prefabs.Count);
+        return prefabs[rand];
     }
 }

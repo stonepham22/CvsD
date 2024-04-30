@@ -2,23 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerCtrl : LoboMonoBehaviour
+public class SpawnerCtrl : BaseSingleton<SpawnerCtrl>
 {
-
-    private static SpawnerCtrl _instance;
-    public static SpawnerCtrl Instance => _instance;
 
     [SerializeField] private DogSpawner _dogSpawner;
     public DogSpawner DogSpawner => _dogSpawner;
 
     [SerializeField] private BulletSpawner _bulletSpawner;
     public BulletSpawner BulletSpawner => _bulletSpawner;
-
-    protected override void Awake()
-    {
-        if (SpawnerCtrl._instance != null) Debug.LogError("only 1 UICtrl allow to exist");
-        SpawnerCtrl._instance = this;
-    }
 
     protected override void LoadComponents()
     {

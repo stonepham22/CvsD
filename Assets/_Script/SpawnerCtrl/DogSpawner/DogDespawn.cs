@@ -7,7 +7,7 @@ public class DogDespawn : MonoBehaviour
     
     public void Despawning()
     {
-        SpawnerCtrl.Instance.DogSpawner.Despawn(transform.parent);
+        SpawnerCtrl.Instance.DogSpawner.Despawn(transform.parent.gameObject);
     }
 
 }

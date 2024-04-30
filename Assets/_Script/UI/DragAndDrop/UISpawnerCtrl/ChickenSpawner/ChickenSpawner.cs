@@ -7,13 +7,13 @@ public class ChickenSpawner : Spawner
 
     [SerializeField] public Transform Holder => holder;
     [SerializeField] private Transform _parent;
-    void ChickenSpawnInLobby(Transform prefab)
+    void ChickenSpawnInLobby(GameObject prefab)
     {
         this._parent = UICtrl.Instance.DragAndDrop.ContainersCtrl.LobbyCtrl.CheckLobbyEmpty();
         if (this._parent == null) return;
         Vector3 spawnPos = transform.position;
-        Transform obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
-        obj.gameObject.SetActive(true);
+        GameObject obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
+        obj.SetActive(true);
     }
 
     public void ChickenZeroSpawnInLobby()
@@ -23,14 +23,14 @@ public class ChickenSpawner : Spawner
     
     public void ChickenSpawnInLobbyFromEgg()
     {
-        int wave = UICtrl.Instance.GameplayScreen.TopScreen.WaveText.wave;
+        int wave = UICtrl.Instance.GameplayScreen.TopScreen.WaveText.Wave;
         int prefabNumber = Random.Range(0, wave+1);
         this.ChickenSpawnInLobby(this.prefabs[prefabNumber]);
     }
 
-    protected override void SetParentNewPrefab(Transform newPrefab)
+    protected override void SetParentNewPrefab(GameObject newPrefab)
     {
-        newPrefab.SetParent(this._parent, false);
+        newPrefab.transform.SetParent(this._parent, false);
     }
 
     public virtual void SetFalseIsSelectedAllChickenPrefab()

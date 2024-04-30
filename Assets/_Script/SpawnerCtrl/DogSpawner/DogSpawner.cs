@@ -10,10 +10,25 @@ public class DogSpawner : Spawner
 
     [SerializeField] private float _timer;
     [SerializeField] private float _timeDelay = 5f;
-
     [SerializeField] private Transform _spawnPoint;
     
     [SerializeField] private bool _isSpawn;
+    public bool IsSpawn => _isSpawn;
+
+    [SerializeField] private int _spawnCountLimiteInWave;
+
+    protected void Start()
+    {
+        this.UpdateSpawnCountLimiteInWave();
+    }
+
+    private void UpdateSpawnCountLimiteInWave()
+    {
+        this._spawnCountLimiteInWave = ManagerCtrl.Instance.Wave.GetSpawnCountLimiteInWave();
+        this.currentPrefabs = 0;
+        this.spawnedCount = 0;
+        this._isSpawn = true;
+    }
 
     protected override void LoadComponents()
     {
@@ -31,23 +46,49 @@ public class DogSpawner : Spawner
     private void FixedUpdate()
     {
         this.Spawning();
+        this.CheckNextWave();
     }
 
-    void Spawning()
+    private void CheckNextWave()
+    {
+        if (this._isSpawn) return;
+        if (this.currentPrefabs > 0) return;
+        this.NextWave();
+        this.UpdateSpawnCountLimiteInWave();
+    }
+
+    private void Spawning()
     {
         if (!this._isSpawn) return;
         if (this.CheckTimeDelay()) return;
-        Transform prefab = this.RandomPrefab();
+        this.Spawn();
+        this.CheckSpawnedEnemiesCount();
+    }
+
+    private void Spawn()
+    {
+        GameObject prefab = this.RandomPrefab();
         Transform spawnPoint = this._spawnPosition.RamdomSpawnPoint();
         this._spawnPoint = spawnPoint;
         Vector3 spawnPos = spawnPoint.position;
-        Transform obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
-        obj.gameObject.SetActive(true);
-    }
+        GameObject obj = this.Spawn(prefab, spawnPos, Quaternion.identity);
+        obj.SetActive(true);
+    }    
 
-    protected override void SetParentNewPrefab(Transform newPrefab)
+    private void CheckSpawnedEnemiesCount()
     {
-        newPrefab.parent = this._spawnPoint;
+        if (this.spawnedCount < _spawnCountLimiteInWave) return;
+        this._isSpawn = false;
+    }    
+
+    private void NextWave()
+    {
+        ManagerCtrl.Instance.Wave.NextWave();
+    }    
+
+    protected override void SetParentNewPrefab(GameObject newPrefab)
+    {
+        newPrefab.transform.parent = this._spawnPoint;
     }
 
     bool CheckTimeDelay()
