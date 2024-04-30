@@ -10213,6 +10213,7 @@ MonoBehaviour:
   _playerPrefs: {fileID: 186476313}
   _playerManager: {fileID: 1053741225}
   _wave: {fileID: 2074327235}
+  _pool: {fileID: 1241494364}
 --- !u!4 &838422586
 Transform:
   m_ObjectHideFlags: 0

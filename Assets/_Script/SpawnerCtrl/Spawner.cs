@@ -68,7 +68,7 @@ public abstract class Spawner : LoboMonoBehaviour
 
     protected virtual GameObject GetObjectFromPool(GameObject prefab)
     {
-        return PoolManager.Instance.GetObject(prefab);
+        return ManagerCtrl.Instance.Pool.GetObject(prefab);
     }
 
     public virtual void Despawn(GameObject prefab)
