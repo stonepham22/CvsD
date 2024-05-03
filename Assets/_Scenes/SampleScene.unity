@@ -7691,7 +7691,7 @@ MonoBehaviour:
   - {fileID: 966886085}
   _spawnPosition: {fileID: 39705352}
   _timer: 0
-  _timeDelay: 2
+  _timeDelay: 5
   _spawnPoint: {fileID: 0}
   _isSpawn: 0
   _spawnCountLimiteInWave: 1000
@@ -19546,7 +19546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1528463344}
-  _wave: 0
+  _wave: 1
 --- !u!1001 &1530612141
 PrefabInstance:
   m_ObjectHideFlags: 0

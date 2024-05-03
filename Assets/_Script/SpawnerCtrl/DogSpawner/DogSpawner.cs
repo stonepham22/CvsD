@@ -83,7 +83,7 @@ public class DogSpawner : Spawner
 
     private void NextWave()
     {
-        ManagerCtrl.Instance.Wave.NextWave();
+        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.NextWave);
     }    
 
     protected override void SetParentNewPrefab(GameObject newPrefab)

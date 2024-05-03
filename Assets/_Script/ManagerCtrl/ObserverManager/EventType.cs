@@ -1,6 +1,6 @@
 public enum EventType
 {
     EnableShoppingMenu = 0, 
-    Menu = 1, 
-    Setting = 2
+    NextWave = 1, 
+    ShowWaveText = 2
 }

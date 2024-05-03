@@ -2,19 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+public class WaveManager : MonoBehaviour, IObserverListener
 {
 
     [SerializeField] int _currentWave = 1;
     [SerializeField] private int _totalWave = 7;
     [SerializeField] private int _spawnCountLimiteInWave = 10;
 
+    private void Start()
+    {
+        ManagerCtrl.Instance.Observer.Register(EventType.NextWave, this);
+    }
+
+    public void NotifyEvent()
+    {
+        this.NextWave();
+    }
+
     public int GetSpawnCountLimiteInWave()
     {
         return _spawnCountLimiteInWave;
     }    
 
-    public void NextWave()
+    private void NextWave()
     {
         if (_currentWave == _totalWave) this.WinGame();
         else this.UpdateNewWave();
@@ -29,13 +39,14 @@ public class WaveManager : MonoBehaviour
 
     private void ShowWaveText()
     {
-        UICtrl.Instance.GameplayScreen.TopScreen.WaveText.UpdateWaveText(_currentWave);
-    }
+        //UICtrl.Instance.GameplayScreen.TopScreen.WaveText.UpdateWaveText(_currentWave);
 
+        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowWaveText);
+    }
 
     private void WinGame()
     {
         Debug.Log("WinGame");
-    }    
+    }
 
 }
