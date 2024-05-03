@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShoppingMenu : LoboMonoBehaviour
+public class ShoppingMenu : LoboMonoBehaviour, IObserverListener
 {
 
     [SerializeField] private ItemBuyList _itemBuyList;
@@ -22,21 +22,21 @@ public class ShoppingMenu : LoboMonoBehaviour
         this.LoadPrice();
     }
 
-    void LoadItemBuyList()
+    private void LoadItemBuyList()
     {
         if (this._itemBuyList != null) return;
         this._itemBuyList = GetComponentInChildren<ItemBuyList>();
         Debug.LogWarning(transform.name + ": LoadItemBuyList", gameObject);
     }
 
-    void LoadButtonOn()
+    private void LoadButtonOn()
     {
         if (this._buttonOn != null) return;
         this._buttonOn = GetComponentInChildren<ButtonOn>();
         Debug.LogWarning(transform.name + ": LoadButtonOn", gameObject);
     }
 
-    void LoadPrice()
+    private void LoadPrice()
     {
         if (this._price != null) return;
         this._price = GetComponentInChildren<Price>();
@@ -46,6 +46,16 @@ public class ShoppingMenu : LoboMonoBehaviour
     public void CheckPriceAll()
     {
         this._buttonOn.CheckPriceAll();
-    }   
+    }
 
+    private void Start()
+    {
+        ManagerCtrl.Instance.Observer.Register(EventType.EnableShoppingMenu, this);
+        transform.gameObject.SetActive(false);
+    }
+
+    public void NotifyEvent()
+    {
+        transform.gameObject.SetActive(true);
+    }
 }

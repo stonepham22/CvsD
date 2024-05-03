@@ -20,6 +20,9 @@ public class ManagerCtrl : BaseSingleton<ManagerCtrl>
     [SerializeField] private PoolManager _pool;
     public PoolManager Pool => _pool;
 
+    [SerializeField] private ObserverManager _observer;
+    public ObserverManager Observer => _observer;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -28,6 +31,7 @@ public class ManagerCtrl : BaseSingleton<ManagerCtrl>
         this.LoadPlayerManager();
         this.LoadWaveManager();
         this.LoadPoolManager();
+        this.LoadObserverManager();
     }
 
     private void LoadInputManager()
@@ -63,6 +67,13 @@ public class ManagerCtrl : BaseSingleton<ManagerCtrl>
         if (this._pool != null) return;
         this._pool = GetComponentInChildren<PoolManager>();
         Debug.LogWarning(transform.name + ": LoadPoolManager", gameObject);
+    }
+
+    private void LoadObserverManager()
+    {
+        if (this._observer != null) return;
+        this._observer = GetComponentInChildren<ObserverManager>();
+        Debug.LogWarning(transform.name + ": LoadObserverManager", gameObject);
     }
 
 }
