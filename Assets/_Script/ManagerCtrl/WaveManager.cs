@@ -14,7 +14,7 @@ public class WaveManager : MonoBehaviour, IObserverListener
         ManagerCtrl.Instance.Observer.Register(EventType.NextWave, this);
     }
 
-    public void NotifyEvent()
+    public void NotifyEvent(object data)
     {
         this.NextWave();
     }

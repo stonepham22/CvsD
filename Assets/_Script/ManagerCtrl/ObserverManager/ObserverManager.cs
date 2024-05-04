@@ -17,7 +17,7 @@ public class ObserverManager : MonoBehaviour
         if(!dicListeners.ContainsKey(type)) dicListeners.Add(type, new List<IObserverListener>());
         foreach(IObserverListener listener in dicListeners[type])
         {
-            listener.NotifyEvent();
+            listener.NotifyEvent(listener);
         }
     }
 

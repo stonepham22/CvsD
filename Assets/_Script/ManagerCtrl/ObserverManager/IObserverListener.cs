@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IObserverListener
 {
-    public void NotifyEvent();   
+    public void NotifyEvent(object data);   
 }

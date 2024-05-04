@@ -23,7 +23,8 @@ public class PlayerExperience : BasePlayerManager
     {
         if (this._xp < this._totalExp) return;
         this.CalExpNextLevel();
-        this.playerManager.PlayerLevel.LevelUp();
+        UICtrl.Instance.GameplayScreen.TopScreen.LevelText.LevelUp();
+        this.ShowExpSlider();
     }
 
     public void CalExpNextLevel()

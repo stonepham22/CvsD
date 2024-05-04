@@ -13,7 +13,7 @@ public class WaveText : BaseText, IObserverListener
         ManagerCtrl.Instance.Observer.Register(EventType.ShowWaveText, this);
     }
 
-    public void NotifyEvent()
+    public void NotifyEvent(object data)
     {
         this.UpdateWaveText();
     }

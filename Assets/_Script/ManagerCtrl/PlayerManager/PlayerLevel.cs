@@ -21,13 +21,13 @@ public class PlayerLevel : BasePlayerManager
 
     void ShowLevel()
     {
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelText.ShowLevel(this._level);
+        //UICtrl.Instance.GameplayScreen.TopScreen.LevelText.ShowLevel(this._level);
     }    
 
     public void LevelUp()
     {
         this._level++;
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelText.ShowLevel(this._level);
+        //UICtrl.Instance.GameplayScreen.TopScreen.LevelText.ShowLevel(this._level);
         UICtrl.Instance.GameplayScreen.TopScreen.LevelExp.ShowExpSlider(0);
     }    
 

@@ -54,7 +54,7 @@ public class ShoppingMenu : LoboMonoBehaviour, IObserverListener
         transform.gameObject.SetActive(false);
     }
 
-    public void NotifyEvent()
+    public void NotifyEvent(object data)
     {
         transform.gameObject.SetActive(true);
     }

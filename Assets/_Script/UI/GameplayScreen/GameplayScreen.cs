@@ -37,7 +37,7 @@ public class GameplayScreen : LoboMonoBehaviour, IObserverListener
         ManagerCtrl.Instance.Observer.Register(EventType.EnableShoppingMenu, this);
     }
 
-    public void NotifyEvent()
+    public void NotifyEvent(object data)
     {
         transform.gameObject.SetActive(false);
     }

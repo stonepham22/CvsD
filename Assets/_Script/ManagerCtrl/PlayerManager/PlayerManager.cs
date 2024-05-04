@@ -22,21 +22,21 @@ public class PlayerManager : LoboMonoBehaviour
         this.LoadPlayerCoin();
     }
 
-    void LoadPlayerExperience()
+    private void LoadPlayerExperience()
     {
         if (this._playerExperience != null) return;
         this._playerExperience = GetComponentInChildren<PlayerExperience>();
         Debug.LogWarning(transform.name + ": LoadPlayerExperience", gameObject);
     }
 
-    void LoadPlayerLevel()
+    private void LoadPlayerLevel()
     {
         if (this._playerLevel != null) return;
         this._playerLevel = GetComponentInChildren<PlayerLevel>();
         Debug.LogWarning(transform.name + ": LoadPlayerLevel", gameObject);
     }
 
-    void LoadPlayerCoin()
+    private void LoadPlayerCoin()
     {
         if (this._playerCoin != null) return;
         this._playerCoin = GetComponentInChildren<PlayerCoin>();
