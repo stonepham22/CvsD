@@ -5,7 +5,8 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour, IObserverListener
 {
 
-    [SerializeField] int _currentWave = 1;
+    [SerializeField] private int _currentWave = 1;
+    public int CurrentWave => _currentWave;
     [SerializeField] private int _totalWave = 7;
     [SerializeField] private int _spawnCountLimiteInWave = 10;
 
@@ -39,9 +40,7 @@ public class WaveManager : MonoBehaviour, IObserverListener
 
     private void ShowWaveText()
     {
-        //UICtrl.Instance.GameplayScreen.TopScreen.WaveText.UpdateWaveText(_currentWave);
-
-        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowWaveText);
+        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowWaveText, this._currentWave);
     }
 
     private void WinGame()

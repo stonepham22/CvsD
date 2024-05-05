@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class WaveText : BaseText, IObserverListener
 {
-
-    [SerializeField] private int _wave = 1;
-    public int Wave => _wave;
-
     private void Start()
     {
         ManagerCtrl.Instance.Observer.Register(EventType.ShowWaveText, this);
@@ -15,18 +11,12 @@ public class WaveText : BaseText, IObserverListener
 
     public void NotifyEvent(object data)
     {
-        this.UpdateWaveText();
+        this.ShowWaveText((int)data);
     }
 
-    private void UpdateWaveText()
+    private void ShowWaveText(int wave)
     {
-        this._wave++;
-        this.ShowWaveText();
-    }
-    
-    private void ShowWaveText()
-    {
-        this.ShowText(_wave.ToString());
+        this.ShowText(wave.ToString());
     }
 
 }
