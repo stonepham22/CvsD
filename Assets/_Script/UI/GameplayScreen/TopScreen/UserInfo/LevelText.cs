@@ -2,35 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelText : BaseText
+public class LevelText : BaseText, IObserverListener
 {
-
-    [SerializeField] private int _level = 1;
 
     private void Start()
     {
-        this.LoadLevel();
-        this.ShowLevel();
+        ManagerCtrl.Instance.Observer.Register(EventType.ShowLevel, this);
     }
 
-    private void LoadLevel()
+    public void NotifyEvent(object data)
     {
-        
+        int level = (int)data;
+        this.ShowLevel(level);
     }
 
-    private void ShowLevel()
+    private void ShowLevel(int level)
     {
-        this.text.text = this._level.ToString();
+        this.text.text = level.ToString();
     }
-
-
-    public void LevelUp()
-    {
-        this._level++;
-        this.ShowLevel();
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelExp.ShowExpSlider(0);
-    }
-
     
-
 }

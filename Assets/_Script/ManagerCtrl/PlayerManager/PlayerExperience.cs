@@ -19,11 +19,11 @@ public class PlayerExperience : BasePlayerManager
         this.CheckExp();
     }
 
-    void CheckExp()
+    private void CheckExp()
     {
         if (this._xp < this._totalExp) return;
         this.CalExpNextLevel();
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelText.LevelUp();
+        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.LevelUp, null);
         this.ShowExpSlider();
     }
 
@@ -39,10 +39,11 @@ public class PlayerExperience : BasePlayerManager
         this.ShowExpSlider();
     }
 
-    void ShowExpSlider()
+    private void ShowExpSlider()
     {
         float value = (float)this._xp / (float)this._totalExp;
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelExp.ShowExpSlider(value);
+        //UICtrl.Instance.GameplayScreen.TopScreen.LevelExp.ShowExpSlider(value);
+        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowExp, value);
     }   
 
 }

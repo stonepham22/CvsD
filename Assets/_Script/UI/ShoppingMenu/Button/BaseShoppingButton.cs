@@ -47,7 +47,7 @@ public abstract class BaseShoppingButton : BaseButton
 
     void CheckLevel()
     {
-        int levelPlayer = ManagerCtrl.Instance.PlayerManager.PlayerLevel.GetLevel();
+        int levelPlayer = ManagerCtrl.Instance.PlayerManager.PlayerLevel.Level;
         if (this.level < levelPlayer) return;
         transform.gameObject.SetActive(false);
         this.OnEnableButtonMax();

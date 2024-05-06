@@ -3,37 +3,40 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-public class PlayerLevel : BasePlayerManager
+public class PlayerLevel : BasePlayerManager, IObserverListener
 {
 
     [SerializeField] private int _level = 1;
+    public int Level => _level;
 
     private void Start()
     {
         this.LoadLevel();
         this.ShowLevel();
+
+        ManagerCtrl.Instance.Observer.Register(EventType.LevelUp, this);
+
     }
 
-    void LoadLevel()
+    public void NotifyEvent(object data)
+    {
+        this.LevelUp();
+    }
+
+    private void LoadLevel()
     {
             
-    }    
-
-    void ShowLevel()
-    {
-        //UICtrl.Instance.GameplayScreen.TopScreen.LevelText.ShowLevel(this._level);
-    }    
+    }
 
     public void LevelUp()
     {
         this._level++;
-        //UICtrl.Instance.GameplayScreen.TopScreen.LevelText.ShowLevel(this._level);
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelExp.ShowExpSlider(0);
-    }    
-
-    public int GetLevel()
-    {
-        return this._level;
+        this.ShowLevel();
     }
+
+    private void ShowLevel()
+    {
+        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowLevel, this._level);
+    }    
 
 }
