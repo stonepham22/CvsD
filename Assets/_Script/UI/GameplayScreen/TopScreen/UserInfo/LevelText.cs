@@ -7,7 +7,7 @@ public class LevelText : BaseText, IObserverListener
 
     private void Start()
     {
-        ManagerCtrl.Instance.Observer.Register(EventType.ShowLevel, this);
+        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.ShowLevel, this);
     }
 
     public void NotifyEvent(object data)

@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour, IObserverListener
 
     private void Start()
     {
-        ManagerCtrl.Instance.Observer.Register(EventType.NextWave, this);
+        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.NextWave, this);
     }
 
     public void NotifyEvent(object data)

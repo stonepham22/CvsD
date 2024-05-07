@@ -50,7 +50,7 @@ public class ShoppingMenu : LoboMonoBehaviour, IObserverListener
 
     private void Start()
     {
-        ManagerCtrl.Instance.Observer.Register(EventType.EnableShoppingMenu, this);
+        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.EnableShoppingMenu, this);
         transform.gameObject.SetActive(false);
     }
 

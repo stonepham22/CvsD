@@ -8,5 +8,7 @@ public enum EventType
     LevelUp = 3,
     ShowLevel = 4,
 
-    ShowExp = 5
+    ShowExp = 5,
+
+    ShowCoin = 6
 }

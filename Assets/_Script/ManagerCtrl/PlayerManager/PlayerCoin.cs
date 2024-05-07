@@ -11,6 +11,10 @@ public class PlayerCoin : MonoBehaviour
     private void Awake()
     {
         this.GetCoinFromPlayerPrefs();
+    }
+
+    private void Start()
+    {
         this.ShowCoin();
     }
 
@@ -35,7 +39,7 @@ public class PlayerCoin : MonoBehaviour
 
     void ShowCoin()
     {
-        UICtrl.Instance.GameplayScreen.TopScreen.CoinText.ShowCoin(this._coin);
+        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowCoin, this._coin);
     }
 
     void SaveCoin()

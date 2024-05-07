@@ -6,7 +6,7 @@ public class ObserverManager : MonoBehaviour
 {
     public Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
 
-    public void Register(EventType type, IObserverListener listener)
+    public void RegisterEvent(EventType type, IObserverListener listener)
     {
         if(!dicListeners.ContainsKey(type)) dicListeners.Add(type, new List<IObserverListener>());
         dicListeners[type].Add(listener);
