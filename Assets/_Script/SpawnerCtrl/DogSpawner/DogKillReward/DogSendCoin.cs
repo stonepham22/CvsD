@@ -2,17 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogSendCoin : BaseDogKillReward
+public class DogSendCoin : BaseDogSendReward, IObserverListener
 {
-    [Header("DogSendCoin")]
+    [Header("Dog Send Coin")]
 
-    [SerializeField] private int _coinDefault = 1;    
-    
+    [SerializeField] private int _coinDefault = 1;
+
+    private void Start()
+    {
+        this.RegisterEventDogOnDead();
+    }
+
+    public void NotifyEvent(object data)
+    {
+        if (transform.parent != (Transform)data) return;
+        this.SendCoin();
+    }
+
+    private void RegisterEventDogOnDead()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+    }
+
     public void SendCoin()
     {
-        int scale = this.dogKillReward.GetScale();
-        int coin = scale * this._coinDefault;
-        ManagerCtrl.Instance.PlayerManager.PlayerCoin.IncreaseCoin(coin);
+        int coin = this.scale * this._coinDefault;
+        ObserverManager.Instance.NotifyEvent(EventType.IncreaseCoin, coin);
     }    
 
 }

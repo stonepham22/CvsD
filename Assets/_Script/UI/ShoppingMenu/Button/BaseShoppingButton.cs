@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BaseShoppingButton : BaseButton
+public abstract class BaseShoppingButton : BaseButton, IObserverListener
 {
 
     [SerializeField] protected ShoppingMenu shoppingMenu;
@@ -14,25 +14,36 @@ public abstract class BaseShoppingButton : BaseButton
     [SerializeField] protected int price = 1;
     [SerializeField] protected int scale = 1;
 
+    [SerializeField] protected int levelPlayer;
+
+    protected override void Start()
+    {
+        base.Start();
+        ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
+        ObserverManager.Instance.NotifyEvent(EventType.ShoppingMenu, false);
+    }
+
+    public void NotifyEvent(object data)
+    {
+        int level = (int)data;
+        this.levelPlayer = level;
+        Debug.Log(levelPlayer);
+    }
+
+    public void CheckPrice()
+    {
+        int playerCoin = ManagerCtrl.Instance.PlayerManager.PlayerCoin.GetCoin();
+        if (this.price < playerCoin) return;
+        transform.gameObject.SetActive(false);
+        this.OnEnableButtonOff();
+        this.ShowPrice();
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadShoppingMenu();
         this.LoadText();
-    }
-
-    void LoadShoppingMenu()
-    {
-        if (this.shoppingMenu != null) return;
-        this.shoppingMenu = GetComponentInParent<ShoppingMenu>();
-        Debug.LogWarning(transform.name + ": LoadShoppingMenu", gameObject);
-    }
-
-    void LoadText()
-    {
-        if (this.text != null) return;
-        this.text = GetComponentInChildren<Text>();
-        Debug.LogWarning(transform.name + ": LoadText", gameObject);
     }
 
     protected override void OnClick()
@@ -45,36 +56,41 @@ public abstract class BaseShoppingButton : BaseButton
         this.CheckLevel();
     }
 
-    void CheckLevel()
+    private void LoadShoppingMenu()
     {
-        int levelPlayer = ManagerCtrl.Instance.PlayerManager.PlayerLevel.Level;
-        if (this.level < levelPlayer) return;
+        if (this.shoppingMenu != null) return;
+        this.shoppingMenu = GetComponentInParent<ShoppingMenu>();
+        Debug.LogWarning(transform.name + ": LoadShoppingMenu", gameObject);
+    }
+
+    private void LoadText()
+    {
+        if (this.text != null) return;
+        this.text = GetComponentInChildren<Text>();
+        Debug.LogWarning(transform.name + ": LoadText", gameObject);
+    }
+
+    private void CheckLevel()
+    {
+        if (this.level < this.levelPlayer) return;
         transform.gameObject.SetActive(false);
         this.OnEnableButtonMax();
     }
 
-    public void CheckPrice()
-    {
-        int playerCoin = ManagerCtrl.Instance.PlayerManager.PlayerCoin.GetCoin();
-        if (this.price < playerCoin) return;
-        transform.gameObject.SetActive(false);
-        this.OnEnableButtonOff();
-        this.ShowPrice();
-    }
-    
-    void OnEnableButtonOff()
+    private void OnEnableButtonOff()
     {
         UICtrl.Instance.OnEnableButtonOff(this.index);
     }    
 
-    void OnEnableButtonMax()
+    private void OnEnableButtonMax()
     {
         this.shoppingMenu.ItemBuyList.OnEnableButtonMax(this.index);
     }
 
-    void ShowPrice()
+    private void ShowPrice()
     {
         this.shoppingMenu.Price.ShowText(this.index, this.price);
-    }    
+    }
 
+   
 }

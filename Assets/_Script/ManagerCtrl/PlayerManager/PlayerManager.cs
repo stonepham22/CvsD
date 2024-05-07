@@ -5,9 +5,6 @@ using UnityEngine;
 public class PlayerManager : LoboMonoBehaviour
 {
 
-    [SerializeField] private PlayerExperience _playerExperience;
-    public PlayerExperience PlayerExperience => _playerExperience;
-
     [SerializeField] private PlayerLevel _playerLevel;
     public PlayerLevel PlayerLevel => _playerLevel;
 
@@ -17,16 +14,8 @@ public class PlayerManager : LoboMonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadPlayerExperience();
         this.LoadPlayerLevel();
         this.LoadPlayerCoin();
-    }
-
-    private void LoadPlayerExperience()
-    {
-        if (this._playerExperience != null) return;
-        this._playerExperience = GetComponentInChildren<PlayerExperience>();
-        Debug.LogWarning(transform.name + ": LoadPlayerExperience", gameObject);
     }
 
     private void LoadPlayerLevel()

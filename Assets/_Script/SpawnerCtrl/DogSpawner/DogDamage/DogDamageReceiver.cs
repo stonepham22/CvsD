@@ -13,7 +13,7 @@ public class DogDamageReceiver : DamageReceiver
         this.LoadDogPrefabCtrl();
     }
 
-    void LoadDogPrefabCtrl()
+    private void LoadDogPrefabCtrl()
     {
         if (this._dogPrefabCtrl != null) return;
         this._dogPrefabCtrl = GetComponentInParent<DogPrefabCtrl>();
@@ -22,19 +22,8 @@ public class DogDamageReceiver : DamageReceiver
 
     protected override void OnDead()
     {
-        this._dogPrefabCtrl.Animation.SetDead();
-        Invoke(nameof(DogDespawn), 1f);
-        this.SendReward();
-    }
-
-    void DogDespawn()
-    {
-        this._dogPrefabCtrl.Despawn.Despawning();
-    }
-
-    void SendReward()
-    {
-        this._dogPrefabCtrl.DogKillReward.SendReward();
+        Transform prefab = transform.parent.parent;
+        ObserverManager.Instance.NotifyEvent(EventType.DogOnDead, prefab);
     }
 
 }

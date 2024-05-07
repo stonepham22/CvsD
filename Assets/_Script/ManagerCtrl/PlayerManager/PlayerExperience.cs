@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerExperience : BasePlayerManager, IObserverListener
 {
-
-    private int _totalExp = 100; 
-    private int _expToNextLevel = 0;
+    [Header("Player Experience")]
+    [SerializeField] private int _totalExp = 100;
     [SerializeField] private int _xp = 0;
+    [SerializeField] private float _scale = 1.5f;
 
     private void Start()
     {
@@ -43,8 +43,7 @@ public class PlayerExperience : BasePlayerManager, IObserverListener
 
     private void CalculateExpNextLevel()
     {
-        this._expToNextLevel = (int)(this._expToNextLevel + this._totalExp * 1.5);
-        this._totalExp = this._expToNextLevel + this._totalExp;
+        this._totalExp += (int)(this._totalExp * this._scale);
     }
 
     private void ReceiveExp(int expPoint)

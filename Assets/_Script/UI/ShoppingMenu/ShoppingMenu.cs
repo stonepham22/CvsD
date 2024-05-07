@@ -14,6 +14,17 @@ public class ShoppingMenu : LoboMonoBehaviour, IObserverListener
     [SerializeField] private Price _price;
     public Price Price => _price;
 
+    private void Start()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.ShoppingMenu, this);
+    }
+
+    public void NotifyEvent(object data)
+    {
+        bool activeSeft = (bool)data;
+        transform.gameObject.SetActive(activeSeft);
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -48,14 +59,5 @@ public class ShoppingMenu : LoboMonoBehaviour, IObserverListener
         this._buttonOn.CheckPriceAll();
     }
 
-    private void Start()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenu, this);
-        transform.gameObject.SetActive(false);
-    }
-
-    public void NotifyEvent(object data)
-    {
-        transform.gameObject.SetActive(true);
-    }
+    
 }

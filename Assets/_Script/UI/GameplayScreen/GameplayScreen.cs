@@ -34,12 +34,13 @@ public class GameplayScreen : LoboMonoBehaviour, IObserverListener
 
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenu, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShoppingMenu, this);
     }
 
     public void NotifyEvent(object data)
     {
-        transform.gameObject.SetActive(false);
+        bool activeSeft = (bool)data;
+        transform.gameObject.SetActive(!activeSeft);
     }
 
 }

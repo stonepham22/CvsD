@@ -8,11 +8,8 @@ public class ShopButtonOn : BaseButton
     protected override void OnClick()
     {
         base.OnClick();
-        //UICtrl.Instance.ShoppingMenu.gameObject.SetActive(true);
-        //UICtrl.Instance.GameplayScreen.gameObject.SetActive(false);
-
-        ObserverManager.Instance.NotifyEvent(EventType.EnableShoppingMenu, null);
-
+        ObserverManager.Instance.NotifyEvent(EventType.ShoppingMenu, true);
+        Debug.Log("ShopButtonOn");
     }
 
 }

@@ -8,9 +8,6 @@ public class ManagerCtrl : BaseSingleton<ManagerCtrl>
     [SerializeField] private InputManager _inputManager;
     public InputManager InputManager => _inputManager;
 
-    [SerializeField] private PlayerPrefsManager _playerPrefs;
-    public PlayerPrefsManager PlayerPrefs => _playerPrefs;
-
     [SerializeField] private PlayerManager _playerManager;
     public PlayerManager PlayerManager => _playerManager;
 
@@ -24,7 +21,6 @@ public class ManagerCtrl : BaseSingleton<ManagerCtrl>
     {
         base.LoadComponents();
         this.LoadInputManager();
-        this.LoadPlayerPrefsManager();
         this.LoadPlayerManager();
         this.LoadWaveManager();
         this.LoadPoolManager();
@@ -35,13 +31,6 @@ public class ManagerCtrl : BaseSingleton<ManagerCtrl>
         if (this._inputManager != null) return;
         this._inputManager = GetComponentInChildren<InputManager>();
         Debug.LogWarning(transform.name + ": LoadInputManager", gameObject);
-    }
-
-    private void LoadPlayerPrefsManager()
-    {
-        if (this._playerPrefs != null) return;
-        this._playerPrefs = GetComponentInChildren<PlayerPrefsManager>();
-        Debug.LogWarning(transform.name + ": LoadPlayerPrefsManager", gameObject);
     }
 
     private void LoadPlayerManager()
