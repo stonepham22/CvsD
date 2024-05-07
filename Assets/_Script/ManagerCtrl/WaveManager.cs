@@ -12,13 +12,18 @@ public class WaveManager : MonoBehaviour, IObserverListener
 
     private void Start()
     {
-        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.NextWave, this);
+        this.RegisterEventNextWave();
     }
 
     public void NotifyEvent(object data)
     {
         this.NextWave();
     }
+
+    private void RegisterEventNextWave()
+    {
+        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.NextWave, this);
+    }    
 
     public int GetSpawnCountLimiteInWave()
     {

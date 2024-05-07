@@ -1,14 +1,15 @@
 public enum EventType
 {
-    EnableShoppingMenu = 0, 
+    DogSendExpToPlayer, 
     
-    NextWave = 1, 
-    ShowWaveText = 2,
+    NextWave, 
+    ShowWaveText,
     
-    LevelUp = 3,
-    ShowLevel = 4,
+    LevelUp,
+    
+    ShowLevel,
+    ShowExp,
+    ShowCoin,
 
-    ShowExp = 5,
-
-    ShowCoin = 6
+    EnableShoppingMenu
 }

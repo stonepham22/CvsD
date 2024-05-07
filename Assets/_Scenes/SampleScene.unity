@@ -18622,7 +18622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1399572929}
-  _level: 1
 --- !u!1001 &1402525765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19547,7 +19546,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1528463344}
-  _wave: 1
 --- !u!1001 &1530612141
 PrefabInstance:
   m_ObjectHideFlags: 0

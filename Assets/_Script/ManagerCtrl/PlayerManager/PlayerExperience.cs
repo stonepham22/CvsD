@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerExperience : BasePlayerManager
+public class PlayerExperience : BasePlayerManager, IObserverListener
 {
 
     private int _totalExp = 100; 
@@ -12,6 +12,18 @@ public class PlayerExperience : BasePlayerManager
     private void Start()
     {
         this.ShowExpSlider();
+        this.RegisterEventDogSendExpToPlayer();
+    }
+
+    public void NotifyEvent(object data)
+    {
+        int exp = (int)data;
+        this.ReceiveExp(exp);
+    }
+
+    private void RegisterEventDogSendExpToPlayer()
+    {
+        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.DogSendExpToPlayer, this);
     }
 
     private void FixedUpdate()
@@ -22,18 +34,20 @@ public class PlayerExperience : BasePlayerManager
     private void CheckExp()
     {
         if (this._xp < this._totalExp) return;
-        this.CalExpNextLevel();
+        this.CalculateExpNextLevel();
+
         ManagerCtrl.Instance.Observer.NotifyEvent(EventType.LevelUp, null);
+        
         this.ShowExpSlider();
     }
 
-    public void CalExpNextLevel()
+    private void CalculateExpNextLevel()
     {
         this._expToNextLevel = (int)(this._expToNextLevel + this._totalExp * 1.5);
         this._totalExp = this._expToNextLevel + this._totalExp;
     }
 
-    public void ReceiveExp(int expPoint)
+    private void ReceiveExp(int expPoint)
     {
         this._xp += expPoint;
         this.ShowExpSlider();
@@ -42,8 +56,8 @@ public class PlayerExperience : BasePlayerManager
     private void ShowExpSlider()
     {
         float value = (float)this._xp / (float)this._totalExp;
-        //UICtrl.Instance.GameplayScreen.TopScreen.LevelExp.ShowExpSlider(value);
         ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowExp, value);
-    }   
+    }
 
+    
 }
