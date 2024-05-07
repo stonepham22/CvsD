@@ -23,7 +23,7 @@ public class PlayerLevel : BasePlayerManager, IObserverListener
 
     private void RegisterEventLevelUp()
     {
-        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.LevelUp, this);
+        ObserverManager.Instance.RegisterEvent(EventType.LevelUp, this);
     }    
 
     private void LoadLevel()
@@ -39,7 +39,7 @@ public class PlayerLevel : BasePlayerManager, IObserverListener
 
     private void ShowLevel()
     {
-        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowLevel, this._level);
+        ObserverManager.Instance.NotifyEvent(EventType.ShowLevel, this._level);
     }    
 
 }

@@ -22,7 +22,7 @@ public class WaveManager : MonoBehaviour, IObserverListener
 
     private void RegisterEventNextWave()
     {
-        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.NextWave, this);
+        ObserverManager.Instance.RegisterEvent(EventType.NextWave, this);
     }    
 
     public int GetSpawnCountLimiteInWave()
@@ -45,7 +45,7 @@ public class WaveManager : MonoBehaviour, IObserverListener
 
     private void ShowWaveText()
     {
-        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowWaveText, this._currentWave);
+        ObserverManager.Instance.NotifyEvent(EventType.ShowWaveText, this._currentWave);
     }
 
     private void WinGame()

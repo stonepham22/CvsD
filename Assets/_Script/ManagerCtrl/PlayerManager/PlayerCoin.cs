@@ -39,7 +39,7 @@ public class PlayerCoin : MonoBehaviour
 
     void ShowCoin()
     {
-        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowCoin, this._coin);
+        ObserverManager.Instance.NotifyEvent(EventType.ShowCoin, this._coin);
     }
 
     void SaveCoin()

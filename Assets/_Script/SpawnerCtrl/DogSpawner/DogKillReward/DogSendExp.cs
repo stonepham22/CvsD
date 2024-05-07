@@ -14,7 +14,7 @@ public class DogSendExp : BaseDogKillReward
         int expSend = scale * this.expDefault;
         //ManagerCtrl.Instance.PlayerManager.PlayerExperience.ReceiveExp(expSend);
 
-        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.DogSendExpToPlayer, expSend);
+        ObserverManager.Instance.NotifyEvent(EventType.DogSendExpToPlayer, expSend);
 
     }
 

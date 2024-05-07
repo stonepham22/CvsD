@@ -11,7 +11,7 @@ public class ShopButtonOn : BaseButton
         //UICtrl.Instance.ShoppingMenu.gameObject.SetActive(true);
         //UICtrl.Instance.GameplayScreen.gameObject.SetActive(false);
 
-        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.EnableShoppingMenu, null);
+        ObserverManager.Instance.NotifyEvent(EventType.EnableShoppingMenu, null);
 
     }
 

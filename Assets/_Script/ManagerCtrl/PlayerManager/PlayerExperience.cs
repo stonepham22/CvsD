@@ -23,7 +23,7 @@ public class PlayerExperience : BasePlayerManager, IObserverListener
 
     private void RegisterEventDogSendExpToPlayer()
     {
-        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.DogSendExpToPlayer, this);
+        ObserverManager.Instance.RegisterEvent(EventType.DogSendExpToPlayer, this);
     }
 
     private void FixedUpdate()
@@ -36,7 +36,7 @@ public class PlayerExperience : BasePlayerManager, IObserverListener
         if (this._xp < this._totalExp) return;
         this.CalculateExpNextLevel();
 
-        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.LevelUp, null);
+        ObserverManager.Instance.NotifyEvent(EventType.LevelUp, null);
         
         this.ShowExpSlider();
     }
@@ -56,7 +56,7 @@ public class PlayerExperience : BasePlayerManager, IObserverListener
     private void ShowExpSlider()
     {
         float value = (float)this._xp / (float)this._totalExp;
-        ManagerCtrl.Instance.Observer.NotifyEvent(EventType.ShowExp, value);
+        ObserverManager.Instance.NotifyEvent(EventType.ShowExp, value);
     }
 
     

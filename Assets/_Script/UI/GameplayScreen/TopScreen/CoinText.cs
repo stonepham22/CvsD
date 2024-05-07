@@ -20,7 +20,7 @@ public class CoinText : BaseText, IObserverListener
 
     private void RegisterEventShowCoin()
     {
-        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.ShowCoin, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShowCoin, this);
     }
 
     private void ShowCoin(int coin)

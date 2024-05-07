@@ -18,7 +18,7 @@ public class LevelText : BaseText, IObserverListener
 
     private void RegisterEventShowLevel()
     {
-        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.ShowLevel, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
     }    
 
     private void ShowLevel(int level)

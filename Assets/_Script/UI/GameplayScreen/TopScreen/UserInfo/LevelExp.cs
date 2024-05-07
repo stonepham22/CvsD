@@ -8,7 +8,7 @@ public class LevelExp : BaseSlider, IObserverListener
     protected override void Start()
     {
         base.Start();
-        ManagerCtrl.Instance.Observer.RegisterEvent(EventType.ShowExp, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShowExp, this);
     }
 
     public void NotifyEvent(object data)
