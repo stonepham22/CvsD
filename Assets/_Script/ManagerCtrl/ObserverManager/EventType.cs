@@ -14,5 +14,6 @@ public enum EventType
     ShowExp,
     ShowCoin,
 
-    ShoppingMenu
+    EnableShoppingMenu,
+    DisableShoppingMenu
 }

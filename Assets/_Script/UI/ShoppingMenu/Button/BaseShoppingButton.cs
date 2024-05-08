@@ -16,18 +16,23 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
 
     [SerializeField] protected int levelPlayer;
 
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadShoppingMenu();
+        this.LoadText();
+    }
+
     protected override void Start()
     {
         base.Start();
-        ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
-        ObserverManager.Instance.NotifyEvent(EventType.ShoppingMenu, false);
+        this.RegisterEventShowLevel();
     }
 
     public void NotifyEvent(object data)
     {
         int level = (int)data;
         this.levelPlayer = level;
-        Debug.Log(levelPlayer);
     }
 
     public void CheckPrice()
@@ -39,13 +44,6 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
         this.ShowPrice();
     }
 
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        this.LoadShoppingMenu();
-        this.LoadText();
-    }
-
     protected override void OnClick()
     {
         base.OnClick();
@@ -54,6 +52,11 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
         ManagerCtrl.Instance.PlayerManager.PlayerCoin.DecreaseCoin(this.price);
         UICtrl.Instance.ShoppingMenu.ItemBuyList.ShowLevel(this.index, this.level);
         this.CheckLevel();
+    }
+
+    private void RegisterEventShowLevel()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
     }
 
     private void LoadShoppingMenu()
