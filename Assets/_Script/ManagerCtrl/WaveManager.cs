@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour, IObserverListener
+public class WaveManager : BaseSingleton<WaveManager>, IObserverListener
 {
+    [Header("Wave Manager")]
 
     [SerializeField] private int _currentWave = 1;
     public int CurrentWave => _currentWave;

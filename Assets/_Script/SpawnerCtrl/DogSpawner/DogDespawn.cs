@@ -23,7 +23,9 @@ public class DogDespawn : MonoBehaviour, IObserverListener
 
     private void Despawning()
     {
-        SpawnerCtrl.Instance.DogSpawner.Despawn(transform.parent.gameObject);
+        //SpawnerCtrl.Instance.DogSpawner.Despawn(transform.parent.gameObject);
+
+        ObserverManager.Instance.NotifyEvent(EventType.DogDespawn, transform.parent.gameObject);
     }
 
 }

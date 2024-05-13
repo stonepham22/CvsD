@@ -12,9 +12,15 @@ public class ObserverManager : BaseSingleton<ObserverManager>
         dicListeners[type].Add(listener);
     }
 
+    public void UnregisterEvent(EventType type, IObserverListener listener) 
+    {
+        if (!dicListeners.ContainsKey(type)) return;
+        dicListeners[type].Remove(listener);
+    }
+
     public void NotifyEvent(EventType type, object data)
     {
-        if(!dicListeners.ContainsKey(type)) dicListeners.Add(type, new List<IObserverListener>());
+        if(!dicListeners.ContainsKey(type)) return;
         foreach(IObserverListener listener in dicListeners[type])
         {
             listener.NotifyEvent(data);

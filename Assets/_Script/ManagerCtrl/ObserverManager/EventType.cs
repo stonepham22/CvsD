@@ -1,8 +1,12 @@
 public enum EventType
 {
     DogOnDead,
-    DogSendExpToPlayer, 
-    
+    DogSendExpToPlayer,
+    DogDespawn,
+    CheckDogPrefabInList,
+
+    BulletDespawn,
+
     NextWave, 
     ShowWaveText,
     

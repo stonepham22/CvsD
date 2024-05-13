@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenSpawner : Spawner
+public class ChickenSpawner : BaseSpawner
 {
 
     [SerializeField] public Transform Holder => holder;
@@ -23,7 +23,7 @@ public class ChickenSpawner : Spawner
     
     public void ChickenSpawnInLobbyFromEgg()
     {
-        int wave = ManagerCtrl.Instance.Wave.CurrentWave;
+        int wave = WaveManager.Instance.CurrentWave;
         int prefabNumber = Random.Range(0, wave+1);
         this.ChickenSpawnInLobby(this.prefabs[prefabNumber]);
     }

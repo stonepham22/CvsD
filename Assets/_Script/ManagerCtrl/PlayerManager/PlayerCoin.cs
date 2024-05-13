@@ -25,11 +25,6 @@ public class PlayerCoin : MonoBehaviour, IObserverListener
         this.IncreaseCoin(coin);
     }
 
-    public int GetCoin()
-    {
-        return this._coin;
-    }    
-
     public void IncreaseCoin(int coin)
     {
         this._coin += coin;

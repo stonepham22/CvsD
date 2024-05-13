@@ -49,7 +49,7 @@ public class ShieldPrefabRepair : BaseShieldPrefab
     {
         if (!this.IsCanRepair()) return;
         this.shieldPrefab.DamageReceiver.ShieldPrefabRepaired();
-        ManagerCtrl.Instance.PlayerManager.PlayerCoin.DecreaseCoin(this._repairPrice);
+        PlayerManager.Instance.PlayerCoin.DecreaseCoin(this._repairPrice);
         this._repairPrice += this._scaleRepairPrice;
         this._scaleRepairPrice++;
         this.ShieldPrefabRepairing();
@@ -57,7 +57,7 @@ public class ShieldPrefabRepair : BaseShieldPrefab
 
     private bool IsEnoughMoney()
     {
-        int playerCoin = ManagerCtrl.Instance.PlayerManager.PlayerCoin.Coin;
+        int playerCoin = PlayerManager.Instance.PlayerCoin.Coin;
         if (playerCoin < this._repairPrice) return false;
         return true;
     }
