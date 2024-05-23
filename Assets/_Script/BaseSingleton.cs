@@ -3,18 +3,25 @@ using UnityEngine;
 public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSingleton<T>
 {
     
-    private static T _instance;
-    public static T Instance => _instance;
-
-    protected override void Awake()
+    private static volatile T _instance;
+    private static readonly object _lockObject = new object();
+    public static T Instance
     {
-        if (_instance != null && _instance != this)
+        get 
         {
-            Destroy(gameObject);
-        }
-        else
-        {
-            _instance = this as T;
+            if (_instance == null)
+            {
+                lock (_lockObject)
+                {
+                    _instance = GameObject.FindObjectOfType(typeof(T)) as T;
+                    if (_instance == null)
+                    {
+                        var obj = new GameObject(typeof(T).ToString());
+                        _instance = obj.AddComponent<T>();
+                    }
+                }    
+            }
+            return _instance; 
         }
     }
 
