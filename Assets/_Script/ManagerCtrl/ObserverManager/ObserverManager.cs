@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObserverManager : BaseSingleton<ObserverManager>
 {
-    public Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
+    private Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
 
     public void RegisterEvent(EventType type, IObserverListener listener)
     {
