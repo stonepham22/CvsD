@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldSpawner : Spawner
+public class ShieldSpawner : BaseSpawner
 {
 
     [SerializeField] private Transform _parent;

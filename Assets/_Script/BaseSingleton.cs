@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSingleton<T>
 {
+    
     private static T _instance;
     public static T Instance => _instance;
 

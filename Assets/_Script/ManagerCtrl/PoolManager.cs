@@ -2,17 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : LoboMonoBehaviour
+public class PoolManager : BaseSingleton<PoolManager>
 {
-    private static PoolManager _instance;
-    public static PoolManager Instance => _instance;
-
-    protected override void Awake()
-    {
-        if (PoolManager._instance != null) Debug.LogError("only 1 ManagerCtrl allow to exist");
-        PoolManager._instance = this;
-    }
-
     private Dictionary<GameObject, List<GameObject>> _poolingDict = new Dictionary<GameObject, List<GameObject>>();
 
     public GameObject GetObject(GameObject prefab)

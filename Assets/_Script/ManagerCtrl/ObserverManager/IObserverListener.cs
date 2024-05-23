@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPrefsManager : LoboMonoBehaviour
+public interface IObserverListener
 {
-
+    public void NotifyEvent(object data);   
 }

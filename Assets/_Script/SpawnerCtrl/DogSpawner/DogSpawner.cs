@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogSpawner : Spawner
+public class DogSpawner : BaseSpawner, IObserverListener
 {
     [Header("Dog Spawner")]
     [SerializeField] private SpawnPosition _spawnPosition;
@@ -20,11 +20,18 @@ public class DogSpawner : Spawner
     protected void Start()
     {
         this.UpdateSpawnCountLimiteInWave();
+        ObserverManager.Instance.RegisterEvent(EventType.DogDespawn, this);
+    }
+
+    public void NotifyEvent(object data)
+    {
+        GameObject prefab = (GameObject)data;
+        this.Despawn(prefab);
     }
 
     private void UpdateSpawnCountLimiteInWave()
     {
-        this._spawnCountLimiteInWave = ManagerCtrl.Instance.Wave.GetSpawnCountLimiteInWave();
+        this._spawnCountLimiteInWave = WaveManager.Instance.GetSpawnCountLimiteInWave();
         this.currentPrefabs = 0;
         this.spawnedCount = 0;
         this._isSpawn = true;
@@ -83,7 +90,7 @@ public class DogSpawner : Spawner
 
     private void NextWave()
     {
-        ManagerCtrl.Instance.Wave.NextWave();
+        ObserverManager.Instance.NotifyEvent(EventType.NextWave, null);
     }    
 
     protected override void SetParentNewPrefab(GameObject newPrefab)

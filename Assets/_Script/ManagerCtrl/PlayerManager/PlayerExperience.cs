@@ -2,16 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerExperience : BasePlayerManager
+public class PlayerExperience : BasePlayerManager, IObserverListener
 {
-
-    private int _totalExp = 100; 
-    private int _expToNextLevel = 0;
+    [Header("Player Experience")]
+    [SerializeField] private int _totalExp = 100;
     [SerializeField] private int _xp = 0;
+    [SerializeField] private float _scale = 1.5f;
 
     private void Start()
     {
         this.ShowExpSlider();
+        this.RegisterEventDogSendExpToPlayer();
+    }
+
+    public void NotifyEvent(object data)
+    {
+        int exp = (int)data;
+        this.ReceiveExp(exp);
+    }
+
+    private void RegisterEventDogSendExpToPlayer()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.DogSendExpToPlayer, this);
     }
 
     private void FixedUpdate()
@@ -19,29 +31,32 @@ public class PlayerExperience : BasePlayerManager
         this.CheckExp();
     }
 
-    void CheckExp()
+    private void CheckExp()
     {
         if (this._xp < this._totalExp) return;
-        this.CalExpNextLevel();
-        this.playerManager.PlayerLevel.LevelUp();
+        this.CalculateExpNextLevel();
+
+        ObserverManager.Instance.NotifyEvent(EventType.LevelUp, null);
+        
+        this.ShowExpSlider();
     }
 
-    public void CalExpNextLevel()
+    private void CalculateExpNextLevel()
     {
-        this._expToNextLevel = (int)(this._expToNextLevel + this._totalExp * 1.5);
-        this._totalExp = this._expToNextLevel + this._totalExp;
+        this._totalExp += (int)(this._totalExp * this._scale);
     }
 
-    public void ReceiveExp(int expPoint)
+    private void ReceiveExp(int expPoint)
     {
         this._xp += expPoint;
         this.ShowExpSlider();
     }
 
-    void ShowExpSlider()
+    private void ShowExpSlider()
     {
         float value = (float)this._xp / (float)this._totalExp;
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelExp.ShowExpSlider(value);
-    }   
+        ObserverManager.Instance.NotifyEvent(EventType.ShowExp, value);
+    }
 
+    
 }

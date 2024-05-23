@@ -82,9 +82,9 @@ public abstract class ObjectDragAndDrop : LoboMonoBehaviour, IBeginDragHandler, 
 
     protected abstract void CheckIsCanDrag();
 
-    Vector3 GetMousePos()
+    private Vector3 GetMousePos()
     {
-        return ManagerCtrl.Instance.InputManager.MouseWorldPos;
+        return InputManager.Instance.MouseWorldPos;
     }
 
     public virtual void OnPointerClick(PointerEventData eventData)

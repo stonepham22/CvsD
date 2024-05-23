@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BaseText : LoboMonoBehaviour
 {
+    [Header("Base Text")]
     [SerializeField] protected Text text;
 
     protected override void LoadComponents()

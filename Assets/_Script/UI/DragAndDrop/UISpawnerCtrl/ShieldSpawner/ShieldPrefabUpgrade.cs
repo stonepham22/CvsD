@@ -28,7 +28,7 @@ public class ShieldPrefabUpgrade : BaseShieldPrefab
 
     bool CheckEnoughMoney()
     {
-        int playCoin = ManagerCtrl.Instance.PlayerManager.PlayerCoin.Coin;
+        int playCoin = PlayerManager.Instance.PlayerCoin.Coin;
         if(playCoin < this._upgradePrice) return false;
         return true;
     }    
@@ -36,7 +36,7 @@ public class ShieldPrefabUpgrade : BaseShieldPrefab
     public void ShieldUpgraded()
     {
         this.shieldPrefab.DamageReceiver.UpgradeHp();
-        ManagerCtrl.Instance.PlayerManager.PlayerCoin.DecreaseCoin(this._upgradePrice);
+        PlayerManager.Instance.PlayerCoin.DecreaseCoin(this._upgradePrice);
         this._upgradePrice += this._scaleUpgradePrice;
         this._scaleUpgradePrice += 1;
         this.ShowUpgradePrice();

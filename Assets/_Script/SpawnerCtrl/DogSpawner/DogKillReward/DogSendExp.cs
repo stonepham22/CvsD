@@ -3,16 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogSendExp : BaseDogKillReward
+public class DogSendExp : BaseDogSendReward, IObserverListener
 {
+    [Header("Dog Send Exp")]
 
     [SerializeField] private int expDefault = 10;
 
+    private void Start()
+    {
+        this.RegisterEventDogOnDead();
+    }
+
+    public void NotifyEvent(object data)
+    {
+        if (transform.parent != (Transform)data) return;
+        this.SendExp();
+    }
+
+    private void RegisterEventDogOnDead()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+    }
+
     public void SendExp()
     {
-        int scale = this.dogKillReward.GetScale();
-        int expSend = scale * this.expDefault;
-        ManagerCtrl.Instance.PlayerManager.PlayerExperience.ReceiveExp(expSend);
+        int expSend = this.scale * this.expDefault;
+        ObserverManager.Instance.NotifyEvent(EventType.DogSendExpToPlayer, expSend);
     }
 
 }

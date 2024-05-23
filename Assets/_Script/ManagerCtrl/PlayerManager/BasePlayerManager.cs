@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class BasePlayerManager : LoboMonoBehaviour
 {
-
+    [Header("Base Player Manager")]
+    
     [SerializeField] protected PlayerManager playerManager;
 
     protected override void LoadComponents()

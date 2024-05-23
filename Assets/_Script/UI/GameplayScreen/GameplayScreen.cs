@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameplayScreen : LoboMonoBehaviour
+public class GameplayScreen : LoboMonoBehaviour, IObserverListener
 {
 
     [SerializeField] private TopScreen _topScreen;
@@ -30,6 +30,16 @@ public class GameplayScreen : LoboMonoBehaviour
         if (this._bottomScreen != null) return;
         this._bottomScreen = GetComponentInChildren<BottomScreen>();
         Debug.LogWarning(transform.name + ": LoadBottomScreen", gameObject);
+    }
+
+    private void Start()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenu, this);
+    }
+
+    public void NotifyEvent(object data)
+    {
+        transform.gameObject.SetActive(false);
     }
 
 }

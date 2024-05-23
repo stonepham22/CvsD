@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Spawner : LoboMonoBehaviour
+public abstract class BaseSpawner : LoboMonoBehaviour
 {
-    [Header("Spawner")]
+    [Header("Base Spawner")]
     [SerializeField] protected Transform holder;
 
     [SerializeField] protected int currentPrefabs = 0;
@@ -83,4 +83,5 @@ public abstract class Spawner : LoboMonoBehaviour
         int rand = Random.Range(0, prefabs.Count);
         return prefabs[rand];
     }
+
 }

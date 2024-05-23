@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCoin : MonoBehaviour
+public class PlayerCoin : MonoBehaviour, IObserverListener
 {
 
     [SerializeField] private int _coin = 10;
@@ -11,13 +11,19 @@ public class PlayerCoin : MonoBehaviour
     private void Awake()
     {
         this.GetCoinFromPlayerPrefs();
-        this.ShowCoin();
     }
 
-    public int GetCoin()
+    private void Start()
     {
-        return this._coin;
-    }    
+        this.ShowCoin();
+        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
+    }
+
+    public void NotifyEvent(object data)
+    {
+        int coin = (int)data;
+        this.IncreaseCoin(coin);
+    }
 
     public void IncreaseCoin(int coin)
     {
@@ -33,19 +39,20 @@ public class PlayerCoin : MonoBehaviour
         this.SaveCoin();
     }
 
-    void ShowCoin()
+    private void ShowCoin()
     {
-        UICtrl.Instance.GameplayScreen.TopScreen.CoinText.ShowCoin(this._coin);
+        ObserverManager.Instance.NotifyEvent(EventType.ShowCoin, this._coin);
     }
 
-    void SaveCoin()
+    private void SaveCoin()
     {
         PlayerPrefs.SetInt("Coin", this._coin);
     }    
 
-    void GetCoinFromPlayerPrefs()
+    private void GetCoinFromPlayerPrefs()
     {
         PlayerPrefs.GetInt("Coin", this._coin);
-    }    
+    }
 
+    
 }
