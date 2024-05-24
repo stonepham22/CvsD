@@ -13,10 +13,15 @@ public enum EventType
     LevelUp,
 
     IncreaseCoin,
+    DecreaseCoin,
 
     ShowLevel,
     ShowExp,
     ShowCoin,
+
+    BuyChicken,
+
+    DisableChickenButtonOn,
 
     EnableShoppingMenu,
     DisableShoppingMenu

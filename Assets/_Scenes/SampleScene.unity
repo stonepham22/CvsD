@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 6712000}
   - component: {fileID: 6711999}
   m_Layer: 5
-  m_Name: ChickenIcon_1
+  m_Name: ChickenIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,11 +228,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1304516545}
+  m_Father: {fileID: 1274350121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100.00003, y: 9.999973}
+  m_AnchoredPosition: {x: -100.00003, y: 0}
   m_SizeDelta: {x: 98, y: 99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6711999
@@ -556,7 +556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22822745}
   m_Layer: 5
-  m_Name: Coin
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -575,7 +575,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1553008798}
-  - {fileID: 1337669499}
+  - {fileID: 1855692905}
   m_Father: {fileID: 796410446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1255,11 +1255,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1274350121}
+  m_Father: {fileID: 1304516545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: 0}
+  m_AnchoredPosition: {x: 80, y: 9.999982}
   m_SizeDelta: {x: 178.38, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &67493202
@@ -9568,7 +9568,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 22822745}
-  - {fileID: 1855692905}
+  - {fileID: 1337669499}
   m_Father: {fileID: 981204499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9626,7 +9626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ec71913359ff2488da7a1033e12e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chickenPriceText: {fileID: 1337669502}
 --- !u!1 &796974770
 GameObject:
   m_ObjectHideFlags: 0
@@ -16948,7 +16947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274350121}
   m_Layer: 5
-  m_Name: Coin_1
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16967,7 +16966,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1185190995}
-  - {fileID: 67493200}
+  - {fileID: 6711998}
   m_Father: {fileID: 1304516545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -17460,7 +17459,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1274350121}
-  - {fileID: 6711998}
+  - {fileID: 67493200}
   m_Father: {fileID: 981204499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -17481,7 +17480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1304516547}
-  _chickenPriceText: {fileID: 67493204}
+  _chickenPrice: 1
 --- !u!114 &1304516547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18025,11 +18024,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 22822745}
+  m_Father: {fileID: 796410446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: 0}
+  m_AnchoredPosition: {x: 80, y: 9.999982}
   m_SizeDelta: {x: 178.38, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1337669500
@@ -23307,11 +23306,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 796410446}
+  m_Father: {fileID: 22822745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100.00003, y: 9.999973}
+  m_AnchoredPosition: {x: -100.00002, y: 0}
   m_SizeDelta: {x: 98, y: 99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1855692906

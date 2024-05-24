@@ -2,49 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyChickenButtonOn : BaseButton
+public class BuyChickenButtonOn : BaseButton, IObserverListener
 {
-    [SerializeField] private ChickenPriceTextButtonOn _chickenPriceText;
+    [Header("Buy Chicken Button On")]
+    [SerializeField] private int _chickenPrice = 1;
 
-    private int _chickenPrice = 1;
-
-    protected override void LoadComponents()
+    private void OnEnable()
     {
-        base.LoadComponents();
-        this.LoadChickenPriceTextButtonOn();
+        ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
     }
 
-    void LoadChickenPriceTextButtonOn()
+    private void OnDestroy()
     {
-        if (this._chickenPriceText != null) return;
-        this._chickenPriceText = GetComponentInChildren<ChickenPriceTextButtonOn>();
-        Debug.LogWarning(transform.name + ": LoadChickenPriceTextButtonOn", gameObject);
+        ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
     }
+
     protected override void OnClick()
     {
         base.OnClick();
-        UICtrl.Instance.DragAndDrop.UISpawnerCtrl.ChickenSpawner.ChickenZeroSpawnInLobby();
-        //int chickenPrice = this.GetChickenPrice();
-        
-        PlayerManager.Instance.PlayerCoin.DecreaseCoin(_chickenPrice);
-
-
-        
-        UICtrl.Instance.CheckAllPriceInUI();
+        ObserverManager.Instance.NotifyEvent(EventType.BuyChicken, _chickenPrice);
     }
 
-    int GetChickenPrice()
+    public void NotifyEvent(EventType type, object data)
     {
-        BottomScreen bottomScreen = UICtrl.Instance.GameplayScreen.BottomScreen;
-        int chickenPrice = bottomScreen.BuyChickenButton.ChickenPriceText.ChickenPrice;
-        return chickenPrice;
+        int playerCoin = (int)data;
+        CheckChickPrice(playerCoin);
     }
 
-    //private void OnDisable()
-    //{
-    //    int chickenPrice = this.GetChickenPrice();
-    //    BuyChickenButton buyChickenButton = UICtrl.Instance.GameplayScreen.BottomScreen.BuyChickenButton;
-    //    buyChickenButton.ButtonOff.ChickenPriceText.ShowChickenPrice(chickenPrice);
-    //}
+    private void CheckChickPrice(int playerCoin)
+    {
+        if (_chickenPrice <= playerCoin) return;
+        transform.gameObject.SetActive(false);
+        ObserverManager.Instance.NotifyEvent(EventType.DisableChickenButtonOn, _chickenPrice);
+    }
 
 }
