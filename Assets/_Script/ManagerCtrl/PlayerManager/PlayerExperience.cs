@@ -15,7 +15,7 @@ public class PlayerExperience : BasePlayerManager, IObserverListener
         this.RegisterEventDogSendExpToPlayer();
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         int exp = (int)data;
         this.ReceiveExp(exp);

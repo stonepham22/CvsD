@@ -18,7 +18,7 @@ public class BulletSpawner : BaseSpawner, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.BulletDespawn, this);
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         GameObject prefab = (GameObject)data;
         this.Despawn(prefab);

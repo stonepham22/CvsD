@@ -29,7 +29,7 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
         this.RegisterEventShowLevel();
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         int level = (int)data;
         this.levelPlayer = level;

@@ -11,7 +11,7 @@ public class LevelExp : BaseSlider, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.ShowExp, this);
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         float value = (float)data;
         this.ShowExpSlider(value);

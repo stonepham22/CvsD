@@ -30,7 +30,7 @@ public class PlayerLevel : BasePlayerManager, IObserverListener
         ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         this.LevelUp();
     }

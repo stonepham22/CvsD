@@ -12,7 +12,7 @@ public class DogAnimation : BaseDogPrefab, IObserverListener
         this.RegisterEventDogOnDead();
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         if (transform.parent != (Transform)data) return;
         this.SetDead();

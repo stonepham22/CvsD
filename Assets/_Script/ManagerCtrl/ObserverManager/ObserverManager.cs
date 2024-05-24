@@ -24,7 +24,7 @@ public class ObserverManager : BaseSingleton<ObserverManager>
         if(!dicListeners.ContainsKey(type)) return;
         foreach(IObserverListener listener in dicListeners[type])
         {
-            listener.NotifyEvent(data);
+            listener.NotifyEvent(type, data);
         }
     }
 

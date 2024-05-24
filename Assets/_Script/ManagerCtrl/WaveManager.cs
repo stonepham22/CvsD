@@ -16,7 +16,7 @@ public class WaveManager : BaseLazySingleton<WaveManager>, IObserverListener
         this.RegisterEventNextWave();
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         this.NextWave();
     }
