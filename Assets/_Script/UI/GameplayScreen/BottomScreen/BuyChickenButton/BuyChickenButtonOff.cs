@@ -2,23 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyChickenButtonOff : LoboMonoBehaviour
+public class BuyChickenButtonOff : LoboMonoBehaviour, IObserverListener
 {
-
-    [SerializeField] private ChickenPriceTextButtonOff _chickenPriceText;
-    public ChickenPriceTextButtonOff ChickenPriceText=> _chickenPriceText;
-
-    protected override void LoadComponents()
+    public void NotifyEvent(EventType type, object data)
     {
-        base.LoadComponents();
-        this.LoadChickenPriceTextButtonOff();
+        transform.gameObject.SetActive(true);
     }
 
-    void LoadChickenPriceTextButtonOff()
+    private void Start()
     {
-        if (this._chickenPriceText != null) return;
-        this._chickenPriceText = GetComponentInChildren<ChickenPriceTextButtonOff>();
-        Debug.LogWarning(transform.name + ": LoadChickenPriceTextButtonOff", gameObject);
+        ObserverManager.Instance.RegisterEvent(EventType.DisableChickenButtonOn, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.DisableChickenButtonOn, this);
     }
 
 }

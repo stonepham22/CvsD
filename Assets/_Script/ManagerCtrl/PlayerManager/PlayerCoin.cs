@@ -13,16 +13,32 @@ public class PlayerCoin : MonoBehaviour, IObserverListener
         this.GetCoinFromPlayerPrefs();
     }
 
+    private void OnEnable()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
+        // sua lai su kien IncreaseCoin cho dung ten cua su kien cu the la gi
+        ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
+    }
+
     private void Start()
     {
         this.ShowCoin();
-        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        int coin = (int)data;
-        this.IncreaseCoin(coin);
+        if(type == EventType.IncreaseCoin)
+        {
+            int coin = (int)data;
+            this.IncreaseCoin(coin);
+        }
+
+        else if(type == EventType.BuyChicken)
+        {
+            int coin = (int)data;
+            this.DecreaseCoin(coin);
+        }
+        
     }
 
     public void IncreaseCoin(int coin)
@@ -37,6 +53,7 @@ public class PlayerCoin : MonoBehaviour, IObserverListener
         this._coin -= coin;
         this.ShowCoin();
         this.SaveCoin();
+        ObserverManager.Instance.NotifyEvent(EventType.DecreaseCoin, _coin);
     }
 
     private void ShowCoin()
