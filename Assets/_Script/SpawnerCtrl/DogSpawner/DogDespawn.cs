@@ -10,7 +10,7 @@ public class DogDespawn : MonoBehaviour, IObserverListener
         this.RegisterEventDogOnDead();
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         if (transform.parent != (Transform)data) return;
         Invoke(nameof(Despawning), 1f);

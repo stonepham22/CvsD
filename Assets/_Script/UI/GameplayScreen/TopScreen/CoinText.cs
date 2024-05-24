@@ -12,7 +12,7 @@ public class CoinText : BaseText, IObserverListener
         this.RegisterEventShowCoin();
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         int coin = (int)data;
         this.ShowCoin(coin);

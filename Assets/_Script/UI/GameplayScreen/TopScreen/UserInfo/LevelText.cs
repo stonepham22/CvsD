@@ -10,7 +10,7 @@ public class LevelText : BaseText, IObserverListener
         this.RegisterEventShowLevel();
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         int level = (int)data;
         this.ShowLevel(level);

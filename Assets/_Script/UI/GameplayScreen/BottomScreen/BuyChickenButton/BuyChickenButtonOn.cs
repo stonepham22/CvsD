@@ -6,6 +6,8 @@ public class BuyChickenButtonOn : BaseButton
 {
     [SerializeField] private ChickenPriceTextButtonOn _chickenPriceText;
 
+    private int _chickenPrice = 1;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -22,8 +24,12 @@ public class BuyChickenButtonOn : BaseButton
     {
         base.OnClick();
         UICtrl.Instance.DragAndDrop.UISpawnerCtrl.ChickenSpawner.ChickenZeroSpawnInLobby();
-        int chickenPrice = this.GetChickenPrice();
-        PlayerManager.Instance.PlayerCoin.DecreaseCoin(chickenPrice);
+        //int chickenPrice = this.GetChickenPrice();
+        
+        PlayerManager.Instance.PlayerCoin.DecreaseCoin(_chickenPrice);
+
+
+        
         UICtrl.Instance.CheckAllPriceInUI();
     }
 

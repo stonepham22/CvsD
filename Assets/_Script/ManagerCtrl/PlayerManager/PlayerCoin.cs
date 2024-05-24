@@ -19,7 +19,7 @@ public class PlayerCoin : MonoBehaviour, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
     }
 
-    public void NotifyEvent(object data)
+    public void NotifyEvent(EventType type, object data)
     {
         int coin = (int)data;
         this.IncreaseCoin(coin);
