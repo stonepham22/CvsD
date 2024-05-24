@@ -34,7 +34,7 @@ public class BuyChickenButtonOn : BaseButton
         return chickenPrice;
     }
 
-    protected void OnDisable()
+    private void OnDisable()
     {
         int chickenPrice = this.GetChickenPrice();
         BuyChickenButton buyChickenButton = UICtrl.Instance.GameplayScreen.BottomScreen.BuyChickenButton;

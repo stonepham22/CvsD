@@ -27,7 +27,7 @@ public class PlayerLevel : BasePlayerManager, IObserverListener
 
     private void OnDestroy()
     {
-        //ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
     }
 
     public void NotifyEvent(object data)
