@@ -34,11 +34,11 @@ public class BuyChickenButtonOn : BaseButton
         return chickenPrice;
     }
 
-    private void OnDisable()
-    {
-        int chickenPrice = this.GetChickenPrice();
-        BuyChickenButton buyChickenButton = UICtrl.Instance.GameplayScreen.BottomScreen.BuyChickenButton;
-        buyChickenButton.ButtonOff.ChickenPriceText.ShowChickenPrice(chickenPrice);
-    }
+    //private void OnDisable()
+    //{
+    //    int chickenPrice = this.GetChickenPrice();
+    //    BuyChickenButton buyChickenButton = UICtrl.Instance.GameplayScreen.BottomScreen.BuyChickenButton;
+    //    buyChickenButton.ButtonOff.ChickenPriceText.ShowChickenPrice(chickenPrice);
+    //}
 
 }

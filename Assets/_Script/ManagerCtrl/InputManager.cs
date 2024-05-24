@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : BaseSingleton<InputManager>
+public class InputManager : BaseLazySingleton<InputManager>
 {
     [Header("Input Manager")]
     

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerCtrl : BaseSingleton<SpawnerCtrl>
+public class SpawnerCtrl : BaseLazySingleton<SpawnerCtrl>
 {
 
     [SerializeField] private DogSpawner _dogSpawner;

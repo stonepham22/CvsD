@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UICtrl : BaseSingleton<UICtrl>
+public class UICtrl : BaseLazySingleton<UICtrl>
 {
     
     [SerializeField] private DragAndDrop _dragAndDrop;
