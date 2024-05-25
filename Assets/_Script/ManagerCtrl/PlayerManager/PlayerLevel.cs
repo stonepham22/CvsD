@@ -9,20 +9,11 @@ public class PlayerLevel : BasePlayerManager, IObserverListener
     [SerializeField] private int _level = 1;
     public int Level => _level;
 
-    private void OnEnable()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.LevelUp, this);
-    }
-
     private void Start()
     {
+        ObserverManager.Instance.RegisterEvent(EventType.LevelUp, this);
         this.LoadLevel();
         this.ShowLevel();
-    }
-
-    private void OnDisable()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
     }
 
     private void OnDestroy()

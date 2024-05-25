@@ -6,6 +6,7 @@ public enum EventType
     CheckDogPrefabInList,
 
     BulletDespawn,
+    BulletCollideWithDog,
 
     NextWave, 
     ShowWaveText,

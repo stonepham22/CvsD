@@ -9,18 +9,18 @@ public class DogAnimation : BaseDogPrefab, IObserverListener
 
     private void Start()
     {
-        this.RegisterEventDogOnDead();
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
         if (transform.parent != (Transform)data) return;
         this.SetDead();
-    }
-
-    private void RegisterEventDogOnDead()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
     }
 
     private void SetDead()

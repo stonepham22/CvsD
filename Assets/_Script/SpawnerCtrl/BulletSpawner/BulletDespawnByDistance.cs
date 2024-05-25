@@ -9,27 +9,25 @@ public class BulletDespawnByDistance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.Despawning();
+        this.CheckBulletOverScreen();
     }
 
-    public void Despawning()
+    private void CheckBulletOverScreen()
     {
-        if (this.CheckDistance()) return;
-        this.Despawn();
+        if (IsOverScreen()) this.Despawn();
     }
 
     public void Despawn()
     {
-        //SpawnerCtrl.Instance.BulletSpawner.Despawn(transform.parent.gameObject);
-
-        ObserverManager.Instance.NotifyEvent(EventType.BulletDespawn, transform.parent.gameObject);
-
+        BulletData bulletData = new BulletData();
+        bulletData.bulletPrefab = transform.parent.gameObject;
+        ObserverManager.Instance.NotifyEvent(EventType.BulletDespawn, bulletData);
     }
 
-    bool CheckDistance()
+    private bool IsOverScreen()
     {
-        if(transform.parent.position.x > this._distance) return false;
-        return true;
+        if(transform.parent.position.x > this._distance) return true;
+        return false;
     }
 
 }

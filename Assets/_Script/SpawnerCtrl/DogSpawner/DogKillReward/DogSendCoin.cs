@@ -10,18 +10,18 @@ public class DogSendCoin : BaseDogSendReward, IObserverListener
 
     private void Start()
     {
-        this.RegisterEventDogOnDead();
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
         if (transform.parent != (Transform)data) return;
         this.SendCoin();
-    }
-
-    private void RegisterEventDogOnDead()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
     }
 
     public void SendCoin()

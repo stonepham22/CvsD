@@ -24,18 +24,19 @@ public class ShoppingMenu : LoboMonoBehaviour, IObserverListener
 
     private void Start()
     {
-        this.RegisterEvent();
+        ObserverManager.Instance.RegisterEvent(EventType.DisableShoppingMenu, this);
+        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenu, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.DisableShoppingMenu, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.EnableShoppingMenu, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
         transform.gameObject.SetActive(!transform.gameObject.activeSelf);
-    }
-
-    private void RegisterEvent()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.DisableShoppingMenu, this);
-        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenu, this);
     }
 
     private void LoadItemBuyList()
@@ -65,4 +66,5 @@ public class ShoppingMenu : LoboMonoBehaviour, IObserverListener
     }
 
     
+
 }

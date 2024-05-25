@@ -5,9 +5,14 @@ using UnityEngine;
 public class ChickenPriceTextButtonOff : BaseText, IObserverListener
 {
 
-    private void OnEnable()
+    private void Start()
     {
         ObserverManager.Instance.RegisterEvent(EventType.DisableChickenButtonOn, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.DisableChickenButtonOn, this);
     }
 
     public void NotifyEvent(EventType type, object data)
@@ -21,5 +26,4 @@ public class ChickenPriceTextButtonOff : BaseText, IObserverListener
         this.text.text = price.ToString();
     }
 
-    
 }

@@ -46,18 +46,18 @@ public class UICtrl : BaseLazySingleton<UICtrl>
     public void CheckAllPriceInUI()
     {
         this.CheckAllPriceInShoppingMenu();
-        this.CheckAllPriceInGamePlayScreen();
+        //this.CheckAllPriceInGamePlayScreen();
     }
 
-    void CheckAllPriceInGamePlayScreen()
-    {
-        this.CheckPriceBuyChickenButton();
-    }
+    //void CheckAllPriceInGamePlayScreen()
+    //{
+    //    this.CheckPriceBuyChickenButton();
+    //}
 
-    void CheckPriceBuyChickenButton()
-    {
-        this._gameplayScreen.BottomScreen.BuyChickenButton.CheckPrice();
-    }
+    //void CheckPriceBuyChickenButton()
+    //{
+    //    this._gameplayScreen.BottomScreen.BuyChickenButton.CheckPrice();
+    //}
 
     public void OnEnableButtonOff(int index)
     {
