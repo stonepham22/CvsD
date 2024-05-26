@@ -9,9 +9,14 @@ public class DogSendExp : BaseDogSendReward, IObserverListener
 
     [SerializeField] private int expDefault = 10;
 
-    private void Start()
+    private void OnEnable()
     {
         ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+    }
+
+    private void OnDisable()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
     }
 
     private void OnDestroy()
@@ -21,8 +26,8 @@ public class DogSendExp : BaseDogSendReward, IObserverListener
 
     public void NotifyEvent(EventType type, object data)
     {
-        if (transform.parent != (Transform)data) return;
-        this.SendExp();
+        DogData dogData = (DogData)data;
+        if (transform.parent == dogData.dogPrefab.transform) this.SendExp();
     }
 
     public void SendExp()

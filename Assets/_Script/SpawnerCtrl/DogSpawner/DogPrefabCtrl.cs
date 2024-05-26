@@ -5,9 +5,6 @@ using UnityEngine;
 public class DogPrefabCtrl : LoboMonoBehaviour
 {
 
-    [SerializeField] private Animator _animator;
-    public Animator Animator => _animator;
-
     [SerializeField] private DogMovement _dogMovement;
     public DogMovement DogMovement => _dogMovement;
 
@@ -23,18 +20,10 @@ public class DogPrefabCtrl : LoboMonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadAnimator();
         this.LoadDogMovement();
         this.LoadDogDespawn();
         this.LoadDogDamageReceiver();
         this.LoadDogAnimation();
-    }
-
-    private void LoadAnimator()
-    {
-        if (this._animator != null) return;
-        this._animator = GetComponentInChildren<Animator>();
-        Debug.LogWarning(transform.name + ": LoadAnimator", gameObject);
     }
 
     private void LoadDogMovement()

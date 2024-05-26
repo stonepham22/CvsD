@@ -28,8 +28,9 @@ public class DogDamageReceiver : DamageReceiver, IObserverListener
 
     protected override void OnDead()
     {
-        Transform prefab = transform.parent.parent;
-        ObserverManager.Instance.NotifyEvent(EventType.DogOnDead, prefab);
+        DogData dogData = new DogData();
+        dogData.dogPrefab = transform.parent.parent.gameObject;
+        ObserverManager.Instance.NotifyEvent(EventType.DogOnDead, dogData);
     }
 
     public void NotifyEvent(EventType type, object data)
@@ -43,3 +44,8 @@ public class DogDamageReceiver : DamageReceiver, IObserverListener
 
 
 }
+/*protected override void OnDead()
+    {
+        Transform prefab = transform.parent.parent;
+        ObserverManager.Instance.NotifyEvent(EventType.DogOnDead, prefab);
+    }*/

@@ -5,9 +5,14 @@ using UnityEngine;
 public class DogDespawn : MonoBehaviour, IObserverListener
 {
 
-    private void Start()
+    private void OnEnable()
     {
         ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+    }
+
+    private void OnDisable()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
     }
 
     private void OnDestroy()
@@ -17,8 +22,8 @@ public class DogDespawn : MonoBehaviour, IObserverListener
 
     public void NotifyEvent(EventType type, object data)
     {
-        if (transform.parent != (Transform)data) return;
-        Invoke(nameof(Despawning), 1f);
+        DogData dogData = (DogData)data;
+        if (transform.parent == dogData.dogPrefab.transform) Invoke(nameof(Despawning), 1f);
     }
 
     private void Despawning()
