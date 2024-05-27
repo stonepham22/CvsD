@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class ShopButtonOn : BaseButton
 {
+
     protected override void OnClick()
     {
         base.OnClick();
-        UICtrl.Instance.ShoppingMenu.gameObject.SetActive(true);
-        UICtrl.Instance.GameplayScreen.gameObject.SetActive(false);
+        this.NotifyEventEnableShoppingMenu();
     }
+
+    private void NotifyEventEnableShoppingMenu()
+    {
+        ObserverManager.Instance.NotifyEvent(EventType.EnableShoppingMenu, null);
+    }
+
 }

@@ -33,8 +33,8 @@ public abstract class BaseButton : LoboMonoBehaviour
 
     protected virtual void OnClick()
     {
-        this.UnClickShieldPrefab();
-        this.UnClickChickenPrefab();
+        //this.UnClickShieldPrefab();
+        //this.UnClickChickenPrefab();
     }
 
     private void UnClickShieldPrefab()

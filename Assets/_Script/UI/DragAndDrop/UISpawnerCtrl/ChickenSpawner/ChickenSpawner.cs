@@ -2,11 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenSpawner : Spawner
+public class ChickenSpawner : BaseSpawner, IObserverListener
 {
-
+    
     [SerializeField] public Transform Holder => holder;
     [SerializeField] private Transform _parent;
+
+    private void Start()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.BuyChicken, this);
+    }
+
+    public void NotifyEvent(EventType type, object data)
+    {
+        ChickenZeroSpawnInLobby();
+    }
+
     void ChickenSpawnInLobby(GameObject prefab)
     {
         this._parent = UICtrl.Instance.DragAndDrop.ContainersCtrl.LobbyCtrl.CheckLobbyEmpty();
@@ -23,7 +39,7 @@ public class ChickenSpawner : Spawner
     
     public void ChickenSpawnInLobbyFromEgg()
     {
-        int wave = UICtrl.Instance.GameplayScreen.TopScreen.WaveText.Wave;
+        int wave = WaveManager.Instance.CurrentWave;
         int prefabNumber = Random.Range(0, wave+1);
         this.ChickenSpawnInLobby(this.prefabs[prefabNumber]);
     }
@@ -42,4 +58,5 @@ public class ChickenSpawner : Spawner
         }
     }
 
+    
 }

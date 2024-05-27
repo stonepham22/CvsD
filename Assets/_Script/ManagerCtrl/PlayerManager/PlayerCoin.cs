@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCoin : MonoBehaviour
+public class PlayerCoin : MonoBehaviour, IObserverListener
 {
 
     [SerializeField] private int _coin = 10;
@@ -11,13 +11,35 @@ public class PlayerCoin : MonoBehaviour
     private void Awake()
     {
         this.GetCoinFromPlayerPrefs();
+    }
+
+    private void OnEnable()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
+        // sua lai su kien IncreaseCoin cho dung ten cua su kien cu the la gi
+        ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
+    }
+
+    private void Start()
+    {
         this.ShowCoin();
     }
 
-    public int GetCoin()
+    public void NotifyEvent(EventType type, object data)
     {
-        return this._coin;
-    }    
+        if(type == EventType.IncreaseCoin)
+        {
+            int coin = (int)data;
+            this.IncreaseCoin(coin);
+        }
+
+        else if(type == EventType.BuyChicken)
+        {
+            int coin = (int)data;
+            this.DecreaseCoin(coin);
+        }
+        
+    }
 
     public void IncreaseCoin(int coin)
     {
@@ -31,21 +53,23 @@ public class PlayerCoin : MonoBehaviour
         this._coin -= coin;
         this.ShowCoin();
         this.SaveCoin();
+        ObserverManager.Instance.NotifyEvent(EventType.DecreaseCoin, _coin);
     }
 
-    void ShowCoin()
+    private void ShowCoin()
     {
-        UICtrl.Instance.GameplayScreen.TopScreen.CoinText.ShowCoin(this._coin);
+        ObserverManager.Instance.NotifyEvent(EventType.ShowCoin, this._coin);
     }
 
-    void SaveCoin()
+    private void SaveCoin()
     {
         PlayerPrefs.SetInt("Coin", this._coin);
     }    
 
-    void GetCoinFromPlayerPrefs()
+    private void GetCoinFromPlayerPrefs()
     {
         PlayerPrefs.GetInt("Coin", this._coin);
-    }    
+    }
 
+    
 }

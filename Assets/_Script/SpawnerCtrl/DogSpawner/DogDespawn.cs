@@ -2,12 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogDespawn : MonoBehaviour
+public class DogDespawn : MonoBehaviour, IObserverListener
 {
-    
-    public void Despawning()
+
+    private void Start()
     {
-        SpawnerCtrl.Instance.DogSpawner.Despawn(transform.parent.gameObject);
+        this.RegisterEventDogOnDead();
+    }
+
+    public void NotifyEvent(EventType type, object data)
+    {
+        if (transform.parent != (Transform)data) return;
+        Invoke(nameof(Despawning), 1f);
+    }
+
+    private void RegisterEventDogOnDead()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+    }
+
+    private void Despawning()
+    {
+        //SpawnerCtrl.Instance.DogSpawner.Despawn(transform.parent.gameObject);
+
+        ObserverManager.Instance.NotifyEvent(EventType.DogDespawn, transform.parent.gameObject);
     }
 
 }

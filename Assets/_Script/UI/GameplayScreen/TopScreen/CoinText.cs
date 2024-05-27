@@ -4,12 +4,30 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CoinText : BaseText
+public class CoinText : BaseText, IObserverListener
 {
+
     
-    public void ShowCoin(int coin)
+    private void OnEnable()
+    {
+        this.RegisterEventShowCoin();
+    }
+
+    public void NotifyEvent(EventType type, object data)
+    {
+        int coin = (int)data;
+        this.ShowCoin(coin);
+    }
+
+    private void RegisterEventShowCoin()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.ShowCoin, this);
+    }
+
+    private void ShowCoin(int coin)
     {
         this.text.text = coin.ToString();
     }
 
+   
 }

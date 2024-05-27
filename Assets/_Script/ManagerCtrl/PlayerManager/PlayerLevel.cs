@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-public class PlayerLevel : BasePlayerManager
+public class PlayerLevel : BasePlayerManager, IObserverListener
 {
 
     [SerializeField] private int _level = 1;
+    public int Level => _level;
+
+    private void OnEnable()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.LevelUp, this);
+    }
 
     private void Start()
     {
@@ -14,26 +20,35 @@ public class PlayerLevel : BasePlayerManager
         this.ShowLevel();
     }
 
-    void LoadLevel()
+    private void OnDisable()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
+    }
+
+    public void NotifyEvent(EventType type, object data)
+    {
+        this.LevelUp();
+    }
+
+    private void LoadLevel()
     {
             
-    }    
-
-    void ShowLevel()
-    {
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelText.ShowLevel(this._level);
-    }    
+    }
 
     public void LevelUp()
     {
         this._level++;
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelText.ShowLevel(this._level);
-        UICtrl.Instance.GameplayScreen.TopScreen.LevelExp.ShowExpSlider(0);
-    }    
-
-    public int GetLevel()
-    {
-        return this._level;
+        this.ShowLevel();
     }
+
+    private void ShowLevel()
+    {
+        ObserverManager.Instance.NotifyEvent(EventType.ShowLevel, this._level);
+    }    
 
 }

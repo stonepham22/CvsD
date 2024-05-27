@@ -18,8 +18,6 @@ public class ChickenShooting : MonoBehaviour
         this._isStandy = value;
     }
 
-    
-
     private void FixedUpdate()
     {
         this.CheckIstandy();
@@ -46,7 +44,7 @@ public class ChickenShooting : MonoBehaviour
         this._indexStandy = int.Parse(indexChar.ToString());
     }
 
-    void IsShooting()
+    private void IsShooting()
     {
         if(!this._isStandy) return;
         SpawnPosition spawnPosition = SpawnerCtrl.Instance.DogSpawner.SpawnPosition;
@@ -54,7 +52,7 @@ public class ChickenShooting : MonoBehaviour
         else this._isShooting = false;
     }
 
-    void Shooting()
+    private void Shooting()
     {
         if (!this._isShooting) return;
         if(!this._isStandy) return;
@@ -63,7 +61,7 @@ public class ChickenShooting : MonoBehaviour
         SpawnerCtrl.Instance.BulletSpawner.Spawning(BulletSpawnPos);
     }
 
-    bool CheckDelayTime()
+    private bool CheckDelayTime()
     {
         this._shootTimer += Time.fixedDeltaTime;
         if (this._shootTimer < this._shootDelay) return true;

@@ -1,15 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSingleton<T>
+public class BaseSingleton<T> : MonoBehaviour where T : BaseSingleton<T>
 {
+
     private static T _instance;
     public static T Instance => _instance;
 
-    protected override void Awake()
+    private void Awake()
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
         else
         {
@@ -17,11 +20,4 @@ public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSinglet
         }
     }
 
-    protected virtual void OnDestroy()
-    {
-        if (_instance == this)
-        {
-            _instance = null;
-        }
-    }
 }

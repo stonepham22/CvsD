@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : BaseLazySingleton<InputManager>
 {
+    [Header("Input Manager")]
     
     [SerializeField] private Vector3 _mouseWorldPos;
     public Vector3 MouseWorldPos => _mouseWorldPos;
@@ -21,20 +22,19 @@ public class InputManager : MonoBehaviour
         this.GetMouseRay();
     }
    
-    void GetMousePos()
+    private void GetMousePos()
     {
         this._mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    void GetMouseDown()
+    private void GetMouseDown()
     {
         this._isMouseDown = Input.GetMouseButton(0);
     }
 
-    void GetMouseRay()
+    private void GetMouseRay()
     {
         this._mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
     }    
-
 
 }

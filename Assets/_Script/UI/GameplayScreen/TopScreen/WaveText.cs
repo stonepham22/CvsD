@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveText : BaseText
+public class WaveText : BaseText, IObserverListener
 {
-
-    [SerializeField] private int _wave = 0;
-    public int Wave => _wave;
-
-    public void UpdateWaveText(int wave)
+    private void Start()
     {
-        this._wave = wave;
-        this.ShowWaveText();
+        ObserverManager.Instance.RegisterEvent(EventType.ShowWaveText, this);
     }
-    
-    public void ShowWaveText()
+
+    public void NotifyEvent(EventType type, object data)
     {
-        this.ShowText(_wave.ToString());
+        this.ShowWaveText((int)data);
+    }
+
+    private void ShowWaveText(int wave)
+    {
+        this.ShowText(wave.ToString());
     }
 
 }

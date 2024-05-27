@@ -20,7 +20,10 @@ public class BulletDespawnByDistance : MonoBehaviour
 
     public void Despawn()
     {
-        SpawnerCtrl.Instance.BulletSpawner.Despawn(transform.parent.gameObject);
+        //SpawnerCtrl.Instance.BulletSpawner.Despawn(transform.parent.gameObject);
+
+        ObserverManager.Instance.NotifyEvent(EventType.BulletDespawn, transform.parent.gameObject);
+
     }
 
     bool CheckDistance()
