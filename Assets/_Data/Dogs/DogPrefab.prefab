@@ -125,12 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c857a7ba263ec4e98a6aca8379576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 9167011537986115251}
   _dogMovement: {fileID: 8601959614627094693}
   _dogDespawn: {fileID: 3950383381604965658}
   _damageReceiver: {fileID: 203796968524825283}
   _dogAnimation: {fileID: 8477554454119696416}
-  _dogKillReward: {fileID: 0}
 --- !u!1 &2572760845333011468
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b598ca5a54a8b44af87ceac61c9a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody2D: {fileID: 5015764895874689002}
+  rigidbody2d: {fileID: 5015764895874689002}
   _speed: 0.3
 --- !u!1 &3975529839512124236
 GameObject:
@@ -377,7 +375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7934639330686072844
 Transform:
   m_ObjectHideFlags: 0
@@ -405,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3de109b24358d4eb7817f7f63d8a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dogPrefabCtrl: {fileID: 4076141493731787260}
+  animator: {fileID: 0}
 --- !u!1 &6130164267435985926
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +415,7 @@ GameObject:
   - component: {fileID: 6693619274842650044}
   - component: {fileID: 7991196081108268499}
   - component: {fileID: 9167011537986115251}
+  - component: {fileID: 4270267877861276717}
   m_Layer: 0
   m_Name: Model
   m_TagString: Dog
@@ -512,6 +511,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4270267877861276717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130164267435985926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3de109b24358d4eb7817f7f63d8a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9167011537986115251}
 --- !u!1 &8391369614941384887
 GameObject:
   m_ObjectHideFlags: 0

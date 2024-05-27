@@ -13,16 +13,17 @@ public class PlayerCoin : MonoBehaviour, IObserverListener
         this.GetCoinFromPlayerPrefs();
     }
 
-    private void OnEnable()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
-        // sua lai su kien IncreaseCoin cho dung ten cua su kien cu the la gi
-        ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
-    }
-
     private void Start()
     {
+        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
         this.ShowCoin();
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.BuyChicken, this);
     }
 
     public void NotifyEvent(EventType type, object data)

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogKillReward : BaseDogPrefab
+public class DogKillReward : LoboMonoBehaviour
 {
 
     [SerializeField] private DogSendExp _dogSendExp;
@@ -34,9 +34,9 @@ public class DogKillReward : BaseDogPrefab
 
     void LoadScale()
     {
-        string DogPrefabName = this.dogPrefabCtrl.gameObject.name;
-        char dogPrefabIndex = DogPrefabName[DogPrefabName.Length - 1];
-        this._scale = (int)Char.GetNumericValue(dogPrefabIndex);
+        //string DogPrefabName = this.dogPrefabCtrl.gameObject.name;
+        //char dogPrefabIndex = DogPrefabName[DogPrefabName.Length - 1];
+        //this._scale = (int)Char.GetNumericValue(dogPrefabIndex);
     }
 
     public void SendReward()

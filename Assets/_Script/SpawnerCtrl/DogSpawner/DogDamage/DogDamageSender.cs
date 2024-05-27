@@ -34,8 +34,11 @@ public class DogDamageSender : DamageSender
         if (collision.name != DAMAGE_RECEIVER) return;
         if (!collision.CompareTag(CHICKEN_TAG) && !collision.CompareTag(SHIELD_TAG)) return;
         this._collision = collision.gameObject;
+        
         this._ctrl.DogMovement.Stop();
+        
         this.SetAnimationAttack(true);
+        
         InvokeRepeating(nameof(this.SendDamage), 0, this._timeDelaySend);
     }
 

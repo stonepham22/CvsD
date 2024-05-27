@@ -16,11 +16,19 @@ public class BulletSpawner : BaseSpawner, IObserverListener
     private void Start()
     {
         ObserverManager.Instance.RegisterEvent(EventType.BulletDespawn, this);
+        ObserverManager.Instance.RegisterEvent(EventType.BulletCollideWithDog, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.BulletDespawn, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.BulletCollideWithDog, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        GameObject prefab = (GameObject)data;
+        BulletData bulletData = data as BulletData;
+        GameObject prefab = bulletData.bulletPrefab;
         this.Despawn(prefab);
     }
 

@@ -9,6 +9,11 @@ public class WaveText : BaseText, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.ShowWaveText, this);
     }
 
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.ShowWaveText, this);
+    }
+
     public void NotifyEvent(EventType type, object data)
     {
         this.ShowWaveText((int)data);

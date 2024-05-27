@@ -13,18 +13,19 @@ public class WaveManager : BaseLazySingleton<WaveManager>, IObserverListener
 
     private void Start()
     {
-        this.RegisterEventNextWave();
+        ObserverManager.Instance.RegisterEvent(EventType.NextWave, this);
+    }
+
+    protected override void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.NextWave, this);
+        base.OnDestroy();
     }
 
     public void NotifyEvent(EventType type, object data)
     {
         this.NextWave();
     }
-
-    private void RegisterEventNextWave()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.NextWave, this);
-    }    
 
     public int GetSpawnCountLimiteInWave()
     {

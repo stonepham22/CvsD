@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class ChickenPriceTextButtonOn : BaseText
 {
-    /// <summary>
-    /// Chicken Price Text In Buy Chicken Button On
-    /// </summary>
-
 
     [SerializeField] private int _chickenPrice = 1;
     

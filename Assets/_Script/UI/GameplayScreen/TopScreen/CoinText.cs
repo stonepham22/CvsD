@@ -7,10 +7,14 @@ using UnityEngine;
 public class CoinText : BaseText, IObserverListener
 {
 
-    
-    private void OnEnable()
+    private void Start()
     {
-        this.RegisterEventShowCoin();
+        ObserverManager.Instance.RegisterEvent(EventType.ShowCoin, this);
+    }
+
+    private void OnDestroy()
+    {
+        UnregisterEvent();
     }
 
     public void NotifyEvent(EventType type, object data)
@@ -19,15 +23,13 @@ public class CoinText : BaseText, IObserverListener
         this.ShowCoin(coin);
     }
 
-    private void RegisterEventShowCoin()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.ShowCoin, this);
-    }
-
     private void ShowCoin(int coin)
     {
         this.text.text = coin.ToString();
     }
 
-   
+    public void UnregisterEvent()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.ShowCoin, this);
+    }
 }

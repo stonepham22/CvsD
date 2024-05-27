@@ -26,7 +26,12 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
     protected override void Start()
     {
         base.Start();
-        this.RegisterEventShowLevel();
+        ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.ShowLevel, this);
     }
 
     public void NotifyEvent(EventType type, object data)
@@ -52,11 +57,6 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
         PlayerManager.Instance.PlayerCoin.DecreaseCoin(this.price);
         UICtrl.Instance.ShoppingMenu.ItemBuyList.ShowLevel(this.index, this.level);
         this.CheckLevel();
-    }
-
-    private void RegisterEventShowLevel()
-    {
-        ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
     }
 
     private void LoadShoppingMenu()

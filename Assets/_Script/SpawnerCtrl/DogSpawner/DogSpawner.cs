@@ -23,6 +23,11 @@ public class DogSpawner : BaseSpawner, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.DogDespawn, this);
     }
 
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.DogDespawn, this);
+    }
+
     public void NotifyEvent(EventType type, object data)
     {
         GameObject prefab = (GameObject)data;
