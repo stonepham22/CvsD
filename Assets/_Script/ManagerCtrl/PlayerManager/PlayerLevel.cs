@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-public class PlayerLevel : BasePlayerManager, IObserverListener
+public class PlayerLevel : LoboMonoBehaviour, IObserverListener
 {
 
     [SerializeField] private int _level = 1;

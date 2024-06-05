@@ -11,6 +11,7 @@ public enum EventType
     
     LevelUp,
 
+    IncreaseCoin,
     DecreaseCoin,
 
     ShowLevel,

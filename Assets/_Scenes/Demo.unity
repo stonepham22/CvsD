@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56efefb9b2620694eac5d15e77c09b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 1053741225}
   _totalExp: 100
   _xp: 0
   _scale: 1.5
@@ -13256,51 +13255,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2288257662131821974, guid: 8ff52b8afcab4a74d9b0f99322cacc2b, type: 3}
   m_PrefabInstance: {fileID: 1049228783}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1053741223
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1053741224}
-  - component: {fileID: 1053741225}
-  m_Layer: 0
-  m_Name: PlayerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1053741224
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053741223}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1053741225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053741223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ed1be8655f794746967a62f5f13b6d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerCoin: {fileID: 724083531}
 --- !u!1001 &1057020688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22889,7 +22843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894b68b98a005c1479235417c1c74e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 1053741225}
   _level: 1
 --- !u!1001 &1805614006
 PrefabInstance:
@@ -26681,7 +26634,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1361643762}
   - {fileID: 955342717}
-  - {fileID: 1053741224}
   - {fileID: 1266802141}
   - {fileID: 1398044873}
   - {fileID: 63498532}

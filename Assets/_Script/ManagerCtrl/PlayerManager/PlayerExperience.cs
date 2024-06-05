@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerExperience : BasePlayerManager, IObserverListener
+public class PlayerExperience : LoboMonoBehaviour, IObserverListener
 {
     [Header("Player Experience")]
     [SerializeField] private int _totalExp = 100;

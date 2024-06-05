@@ -7,11 +7,20 @@ public class ShieldPrefabRepair : BaseShieldPrefab
     [SerializeField] private int _repairPrice = 1;
     [SerializeField] private int _scaleRepairPrice = 1;
 
+    public void ShieldPrefabRepaired()
+    {
+        if (!this.IsCanRepair()) return;
+        this.shieldPrefab.DamageReceiver.ShieldPrefabRepaired();
+        ObserverManager.Instance.NotifyEvent(EventType.ShieldRepaired, _repairPrice);
+        this._repairPrice += this._scaleRepairPrice;
+        this._scaleRepairPrice++;
+        this.ShieldPrefabRepairing();
+    }
+
     public void ShieldPrefabRepairing()
     {
         if (this.IsCanRepair()) this.CanRepair();
         else this.CantRepair();
-        
     }
 
     private bool IsCanRepair()
@@ -45,25 +54,14 @@ public class ShieldPrefabRepair : BaseShieldPrefab
         UICtrl.Instance.GameplayScreen.BottomScreen.ShieldRepair.ButtonOff.RepairPriceText.ShowRepairPrice(this._repairPrice);
     }
 
-    public void ShieldPrefabRepaired()
-    {
-        if (!this.IsCanRepair()) return;
-        this.shieldPrefab.DamageReceiver.ShieldPrefabRepaired();
-
-        //PlayerManager.Instance.PlayerCoin.DecreaseCoin(this._repairPrice);
-        ObserverManager.Instance.NotifyEvent(EventType.ShieldRepaired, _repairPrice);
-
-        this._repairPrice += this._scaleRepairPrice;
-        this._scaleRepairPrice++;
-        this.ShieldPrefabRepairing();
-        
-    }
+    
 
     private bool IsEnoughMoney()
     {
-        int playerCoin = PlayerManager.Instance.PlayerCoin.Coin;
+        int playerCoin = PlayerCoin.Instance.Coin;
         if (playerCoin < this._repairPrice) return false;
         return true;
     }
-    
+
+   
 }
