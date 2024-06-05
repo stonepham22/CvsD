@@ -12,17 +12,19 @@ public class PlayerExperience : BasePlayerManager, IObserverListener
     private void Start()
     {
         this.ShowExpSlider();
-        ObserverManager.Instance.RegisterEvent(EventType.DogSendExpToPlayer, this);
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
     }
 
     private void OnDestroy()
     {
-        ObserverManager.Instance.UnregisterEvent(EventType.DogSendExpToPlayer, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        int exp = (int)data;
+        DogData dogData = (DogData)data;
+
+        int exp = dogData.expDefault;
         this.ReceiveExp(exp);
     }
 

@@ -43,40 +43,9 @@ public class UICtrl : BaseLazySingleton<UICtrl>
         Debug.LogWarning(transform.name + ": LoadShoppingMenu", gameObject);
     }
 
-    public void CheckAllPriceInUI()
-    {
-        this.CheckAllPriceInShoppingMenu();
-        //this.CheckAllPriceInGamePlayScreen();
-    }
-
-    //void CheckAllPriceInGamePlayScreen()
-    //{
-    //    this.CheckPriceBuyChickenButton();
-    //}
-
-    //void CheckPriceBuyChickenButton()
-    //{
-    //    this._gameplayScreen.BottomScreen.BuyChickenButton.CheckPrice();
-    //}
-
     public void OnEnableButtonOff(int index)
     {
         this._shoppingMenu.ItemBuyList.OnEnableButtonOff(index);
     }
-
-    public void DisableShoppingMenu()
-    {
-        this._shoppingMenu.gameObject.SetActive(false);
-    }
-
-    public void OnEnableShoppingMenu()
-    {
-        this._shoppingMenu.gameObject.SetActive(true);
-    }
-
-    void CheckAllPriceInShoppingMenu()
-    {
-        this._shoppingMenu.CheckPriceAll();
-    }    
 
 }

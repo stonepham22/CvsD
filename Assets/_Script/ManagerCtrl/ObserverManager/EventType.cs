@@ -1,9 +1,7 @@
 public enum EventType
 {
     DogOnDead,
-    DogSendExpToPlayer,
     DogDespawn,
-    CheckDogPrefabInList,
 
     BulletDespawn,
     BulletCollideWithDog,
@@ -13,7 +11,6 @@ public enum EventType
     
     LevelUp,
 
-    IncreaseCoin,
     DecreaseCoin,
 
     ShowLevel,
@@ -25,5 +22,8 @@ public enum EventType
     DisableChickenButtonOn,
 
     EnableShoppingMenu,
-    DisableShoppingMenu
+    DisableShoppingMenu,
+
+    ShieldRepaired,
+
 }

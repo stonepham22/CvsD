@@ -15,26 +15,29 @@ public class PlayerCoin : MonoBehaviour, IObserverListener
 
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
         ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShieldRepaired, this);
         this.ShowCoin();
     }
 
     private void OnDestroy()
     {
-        ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
         ObserverManager.Instance.UnregisterEvent(EventType.BuyChicken, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShieldRepaired, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        if(type == EventType.IncreaseCoin)
+        if(type == EventType.DogOnDead)
         {
-            int coin = (int)data;
+            DogData dogData = (DogData)data;
+            int coin = dogData.coinDefault;
             this.IncreaseCoin(coin);
         }
 
-        else if(type == EventType.BuyChicken)
+        else if(type == EventType.BuyChicken || type == EventType.ShieldRepaired)
         {
             int coin = (int)data;
             this.DecreaseCoin(coin);
