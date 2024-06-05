@@ -2,10 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldPrefabRepair : BaseShieldPrefab
+public class ShieldPrefabRepair : BaseShieldPrefab, IObserverListener
 {
     [SerializeField] private int _repairPrice = 1;
     [SerializeField] private int _scaleRepairPrice = 1;
+    [SerializeField] private int _playerCoin;
+
+    private void OnEnable()
+    {
+        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
+
+        ObserverManager.Instance.NotifyEvent(EventType.ShieldOnEnable, this);
+    }
+
+    private void OnDisable()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
+    }
+
+    private void OnDestroy()
+    {
+        ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
+    }
+
+    public void NotifyEvent(EventType type, object data)
+    {
+        SetPlayerCoin((int)data);
+    }
+
+    public void SetPlayerCoin(int playerCoin)
+    {
+        this._playerCoin = playerCoin;
+    }
 
     public void ShieldPrefabRepaired()
     {
@@ -54,14 +85,11 @@ public class ShieldPrefabRepair : BaseShieldPrefab
         UICtrl.Instance.GameplayScreen.BottomScreen.ShieldRepair.ButtonOff.RepairPriceText.ShowRepairPrice(this._repairPrice);
     }
 
-    
-
     private bool IsEnoughMoney()
     {
-        int playerCoin = PlayerCoin.Instance.Coin;
-        if (playerCoin < this._repairPrice) return false;
+        if (_playerCoin < this._repairPrice) return false;
         return true;
     }
 
-   
+    
 }

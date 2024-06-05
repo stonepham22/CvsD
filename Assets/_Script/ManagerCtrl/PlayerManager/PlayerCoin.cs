@@ -18,7 +18,12 @@ public class PlayerCoin : BaseLazySingleton<PlayerCoin>, IObserverListener
     {
         ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
         ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
+
         ObserverManager.Instance.RegisterEvent(EventType.ShieldRepaired, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShieldUpgraded, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShieldOnEnable, this);
+
+        ObserverManager.Instance.RegisterEvent(EventType.OnClickShoppingButton, this);
         this.ShowCoin();
     }
 
@@ -26,7 +31,12 @@ public class PlayerCoin : BaseLazySingleton<PlayerCoin>, IObserverListener
     {
         ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
         ObserverManager.Instance.UnregisterEvent(EventType.BuyChicken, this);
-        ObserverManager.Instance.RegisterEvent(EventType.ShieldRepaired, this);
+
+        ObserverManager.Instance.UnregisterEvent(EventType.ShieldRepaired, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.ShieldUpgraded, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.ShieldOnEnable, this);
+
+        ObserverManager.Instance.UnregisterEvent(EventType.OnClickShoppingButton, this);
         base.OnDestroy();
     }
 
@@ -39,7 +49,23 @@ public class PlayerCoin : BaseLazySingleton<PlayerCoin>, IObserverListener
             this.IncreaseCoin(coin);
         }
 
-        else if(type == EventType.BuyChicken || type == EventType.ShieldRepaired)
+        else if(type == EventType.ShieldOnEnable)
+        {
+            if(data.GetType() == typeof(ShieldPrefabRepair))
+            {
+                ShieldPrefabRepair shieldPrefabRepair = (ShieldPrefabRepair)data;
+                shieldPrefabRepair.SetPlayerCoin(_coin);
+            }
+
+            else
+            {
+                ShieldPrefabUpgrade shieldPrefabUpgrade = (ShieldPrefabUpgrade)data;
+                shieldPrefabUpgrade.SetPlayerCoin(_coin);
+            }    
+            
+        }
+
+        else
         {
             int coin = (int)data;
             this.DecreaseCoin(coin);
@@ -52,6 +78,7 @@ public class PlayerCoin : BaseLazySingleton<PlayerCoin>, IObserverListener
         this._coin += coin;
         this.ShowCoin();
         this.SaveCoin();
+        ObserverManager.Instance.NotifyEvent(EventType.IncreaseCoin, _coin);
     }
 
     public void DecreaseCoin(int coin)

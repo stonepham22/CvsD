@@ -25,6 +25,10 @@ public enum EventType
     EnableShoppingMenu,
     DisableShoppingMenu,
 
+    ShieldOnEnable,
     ShieldRepaired,
+    ShieldUpgraded,
+
+    OnClickShoppingButton,
 
 }
