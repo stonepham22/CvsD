@@ -39,8 +39,6 @@ public class PlayerExperience : LoboMonoBehaviour, IObserverListener
         this.CalculateExpNextLevel();
         float value = (float)this._xp / (float)this._totalExp;
         ObserverManager.Instance.NotifyEvent(EventType.LevelUp, value);
-        
-        //this.ShowExpSlider();
     }
 
     private void CalculateExpNextLevel()

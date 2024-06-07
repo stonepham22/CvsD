@@ -32,8 +32,6 @@ public class DogSpawner : BaseSpawner, IObserverListener
     {
         DogData dogData = (DogData)data;
         StartCoroutine(DespawnAfterDelay(dogData.dogPrefab, 1f));
-        //GameObject prefab = (GameObject) data;
-        //this.Despawn(prefab);
     }
 
     private IEnumerator DespawnAfterDelay(GameObject dogPrefab, float delay)
