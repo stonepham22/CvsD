@@ -42,7 +42,7 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
 
     public void CheckPrice()
     {
-        int playerCoin = PlayerManager.Instance.PlayerCoin.Coin;
+        int playerCoin = PlayerCoin.Instance.Coin;
         if (this.price < playerCoin) return;
         transform.gameObject.SetActive(false);
         this.OnEnableButtonOff();
@@ -54,7 +54,7 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
         base.OnClick();
         this.level++;
         this.price += this.scale;
-        PlayerManager.Instance.PlayerCoin.DecreaseCoin(this.price);
+        ObserverManager.Instance.NotifyEvent(EventType.OnClickShoppingButton, this.price);
         UICtrl.Instance.ShoppingMenu.ItemBuyList.ShowLevel(this.index, this.level);
         this.CheckLevel();
     }

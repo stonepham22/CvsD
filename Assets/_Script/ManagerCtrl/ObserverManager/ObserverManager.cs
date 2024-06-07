@@ -2,8 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObserverManager : BaseSingleton<ObserverManager>
+public class ObserverManager : MonoBehaviour
 {
+    private static ObserverManager _instance;
+    public static ObserverManager Instance => _instance;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            _instance = this as ObserverManager;
+        }
+    }
 
     private Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
 

@@ -1,9 +1,6 @@
 public enum EventType
 {
     DogOnDead,
-    DogSendExpToPlayer,
-    DogDespawn,
-    CheckDogPrefabInList,
 
     BulletDespawn,
     BulletCollideWithDog,
@@ -25,5 +22,12 @@ public enum EventType
     DisableChickenButtonOn,
 
     EnableShoppingMenu,
-    DisableShoppingMenu
+    DisableShoppingMenu,
+
+    ShieldOnEnable,
+    ShieldRepaired,
+    ShieldUpgraded,
+
+    OnClickShoppingButton,
+
 }

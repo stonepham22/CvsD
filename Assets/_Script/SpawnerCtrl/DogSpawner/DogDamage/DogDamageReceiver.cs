@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DogDamageReceiver : DamageReceiver, IObserverListener
 {
-    [Header("Dog Damage Receiver")]
-    [SerializeField] private DogPrefabCtrl _dogPrefabCtrl;
+    [Header("Dog")]
+    [SerializeField] private int _expDefault = 10;
+    [SerializeField] private int _coinDefault = 1;
 
     protected override void OnEnable()
     {
@@ -13,23 +15,20 @@ public class DogDamageReceiver : DamageReceiver, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.BulletCollideWithDog, this);
     }
 
-    protected override void LoadComponents()
+    private void OnDisable()
     {
-        base.LoadComponents();
-        this.LoadDogPrefabCtrl();
-    }
-
-    private void LoadDogPrefabCtrl()
-    {
-        if (this._dogPrefabCtrl != null) return;
-        this._dogPrefabCtrl = GetComponentInParent<DogPrefabCtrl>();
-        Debug.LogWarning(transform.name + ": LoadDogPrefabCtrl", gameObject);
+        ObserverManager.Instance.UnregisterEvent(EventType.BulletCollideWithDog, this);
     }
 
     protected override void OnDead()
     {
-        DogData dogData = new DogData();
-        dogData.dogPrefab = transform.parent.parent.gameObject;
+        DogData dogData = new DogData()
+        {
+            dogPrefab = transform.parent.parent.gameObject,
+            expDefault = _expDefault,
+            coinDefault = _coinDefault,
+        };
+        
         ObserverManager.Instance.NotifyEvent(EventType.DogOnDead, dogData);
     }
 
@@ -42,10 +41,4 @@ public class DogDamageReceiver : DamageReceiver, IObserverListener
         this.Deduct(damage);
     }
 
-
 }
-/*protected override void OnDead()
-    {
-        Transform prefab = transform.parent.parent;
-        ObserverManager.Instance.NotifyEvent(EventType.DogOnDead, prefab);
-    }*/

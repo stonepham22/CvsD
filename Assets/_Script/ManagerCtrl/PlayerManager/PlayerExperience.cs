@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerExperience : BasePlayerManager, IObserverListener
+public class PlayerExperience : LoboMonoBehaviour, IObserverListener
 {
     [Header("Player Experience")]
     [SerializeField] private int _totalExp = 100;
@@ -12,17 +12,19 @@ public class PlayerExperience : BasePlayerManager, IObserverListener
     private void Start()
     {
         this.ShowExpSlider();
-        ObserverManager.Instance.RegisterEvent(EventType.DogSendExpToPlayer, this);
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
     }
 
     private void OnDestroy()
     {
-        ObserverManager.Instance.UnregisterEvent(EventType.DogSendExpToPlayer, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        int exp = (int)data;
+        DogData dogData = (DogData)data;
+
+        int exp = dogData.expDefault;
         this.ReceiveExp(exp);
     }
 
@@ -37,8 +39,6 @@ public class PlayerExperience : BasePlayerManager, IObserverListener
         this.CalculateExpNextLevel();
         float value = (float)this._xp / (float)this._totalExp;
         ObserverManager.Instance.NotifyEvent(EventType.LevelUp, value);
-        
-        //this.ShowExpSlider();
     }
 
     private void CalculateExpNextLevel()

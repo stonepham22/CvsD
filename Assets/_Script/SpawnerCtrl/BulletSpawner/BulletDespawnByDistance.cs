@@ -17,7 +17,7 @@ public class BulletDespawnByDistance : MonoBehaviour
         if (IsOverScreen()) this.Despawn();
     }
 
-    public void Despawn()
+    private void Despawn()
     {
         BulletData bulletData = new BulletData();
         bulletData.bulletPrefab = transform.parent.gameObject;

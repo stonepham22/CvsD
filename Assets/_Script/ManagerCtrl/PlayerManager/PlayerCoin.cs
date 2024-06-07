@@ -2,39 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCoin : MonoBehaviour, IObserverListener
+public class PlayerCoin : BaseLazySingleton<PlayerCoin>, IObserverListener
 {
 
     [SerializeField] private int _coin = 10;
     public int Coin => _coin;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         this.GetCoinFromPlayerPrefs();
     }
 
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
         ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
+
+        ObserverManager.Instance.RegisterEvent(EventType.ShieldRepaired, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShieldUpgraded, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ShieldOnEnable, this);
+
+        ObserverManager.Instance.RegisterEvent(EventType.OnClickShoppingButton, this);
         this.ShowCoin();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
-        ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
         ObserverManager.Instance.UnregisterEvent(EventType.BuyChicken, this);
+
+        ObserverManager.Instance.UnregisterEvent(EventType.ShieldRepaired, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.ShieldUpgraded, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.ShieldOnEnable, this);
+
+        ObserverManager.Instance.UnregisterEvent(EventType.OnClickShoppingButton, this);
+        base.OnDestroy();
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        if(type == EventType.IncreaseCoin)
+        if(type == EventType.DogOnDead)
         {
-            int coin = (int)data;
+            DogData dogData = (DogData)data;
+            int coin = dogData.coinDefault;
             this.IncreaseCoin(coin);
         }
 
-        else if(type == EventType.BuyChicken)
+        else if(type == EventType.ShieldOnEnable)
+        {
+            if(data.GetType() == typeof(ShieldPrefabRepair))
+            {
+                ShieldPrefabRepair shieldPrefabRepair = (ShieldPrefabRepair)data;
+                shieldPrefabRepair.SetPlayerCoin(_coin);
+            }
+
+            else
+            {
+                ShieldPrefabUpgrade shieldPrefabUpgrade = (ShieldPrefabUpgrade)data;
+                shieldPrefabUpgrade.SetPlayerCoin(_coin);
+            }    
+            
+        }
+
+        else
         {
             int coin = (int)data;
             this.DecreaseCoin(coin);
@@ -47,6 +78,7 @@ public class PlayerCoin : MonoBehaviour, IObserverListener
         this._coin += coin;
         this.ShowCoin();
         this.SaveCoin();
+        ObserverManager.Instance.NotifyEvent(EventType.IncreaseCoin, _coin);
     }
 
     public void DecreaseCoin(int coin)

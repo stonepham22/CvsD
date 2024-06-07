@@ -8,4 +8,6 @@ using UnityEngine;
 public class DogData
 {
     public GameObject dogPrefab;
+    public int expDefault;
+    public int coinDefault;
 }

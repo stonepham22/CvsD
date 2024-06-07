@@ -42,6 +42,7 @@ public class ShieldRepairButtonOn : BaseButton
             if (!shield.IsSelected) continue;
             shield.Repair.ShieldPrefabRepaired();
         }
+        Debug.Log("OnClick");
     }
 
 }

@@ -53,6 +53,7 @@ public class DogDamageSender : DamageSender
         DamageReceiver damageReceiver = this._collision.GetComponent<DamageReceiver>();
         if (damageReceiver == null) return;
         this.Send(damageReceiver);
+        Debug.Log("SendDamage");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -60,6 +61,7 @@ public class DogDamageSender : DamageSender
         if (!collision.CompareTag(CHICKEN_TAG) && !collision.CompareTag(SHIELD_TAG)) return;
         this.SetAnimationAttack(false);
         this._ctrl.DogMovement.Moving();
+        CancelInvoke(nameof(SendDamage));
     }    
 
 }

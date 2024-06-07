@@ -20,18 +20,24 @@ public class DogSpawner : BaseSpawner, IObserverListener
     protected void Start()
     {
         this.UpdateSpawnCountLimiteInWave();
-        ObserverManager.Instance.RegisterEvent(EventType.DogDespawn, this);
+        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
     }
 
     private void OnDestroy()
     {
-        ObserverManager.Instance.UnregisterEvent(EventType.DogDespawn, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        GameObject prefab = (GameObject)data;
-        this.Despawn(prefab);
+        DogData dogData = (DogData)data;
+        StartCoroutine(DespawnAfterDelay(dogData.dogPrefab, 1f));
+    }
+
+    private IEnumerator DespawnAfterDelay(GameObject dogPrefab, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Despawn(dogPrefab);
     }
 
     private void UpdateSpawnCountLimiteInWave()
