@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : BaseLazySingleton<PoolManager>
+public class PoolManager : BaseSingleton<PoolManager>
 {
     private Dictionary<GameObject, List<GameObject>> _poolingDict = new Dictionary<GameObject, List<GameObject>>();
 

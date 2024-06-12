@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : BaseLazySingleton<WaveManager>, IObserverListener
+public class WaveManager : BaseSingleton<WaveManager>, IObserverListener
 {
     [Header("Wave Manager")]
 

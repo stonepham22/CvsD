@@ -1,33 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObserverManager : MonoBehaviour
+public class ObserverManager : BaseSingleton<ObserverManager>
 {
-    private static ObserverManager _instance;
-    public static ObserverManager Instance => _instance;
+    
+    // public static ObserverManager Instance => _instance;
 
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            _instance = this as ObserverManager;
-        }
-    }
+    // private void Awake()
+    // {
+    //     if (_instance != null && _instance != this)
+    //     {
+    //         Destroy(this);
+    //     }
+    //     else
+    //     {
+    //         _instance = this as ObserverManager;
+    //     }
+    // }
 
     private Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
 
     public void RegisterEvent(EventType type, IObserverListener listener)
     {
-        if(!dicListeners.ContainsKey(type)) dicListeners.Add(type, new List<IObserverListener>());
+        if (!dicListeners.ContainsKey(type)) dicListeners.Add(type, new List<IObserverListener>());
         dicListeners[type].Add(listener);
     }
 
-    public void UnregisterEvent(EventType type, IObserverListener listener) 
+    public void UnregisterEvent(EventType type, IObserverListener listener)
     {
         if (!dicListeners.ContainsKey(type)) return;
         dicListeners[type].Remove(listener);
@@ -35,13 +36,13 @@ public class ObserverManager : MonoBehaviour
 
     public void NotifyEvent(EventType type, object data)
     {
-        if(!dicListeners.ContainsKey(type)) return;
-        foreach(IObserverListener listener in dicListeners[type])
+        if (!dicListeners.ContainsKey(type)) return;
+        foreach (IObserverListener listener in dicListeners[type])
         {
             listener.NotifyEvent(type, data);
         }
     }
 
-    
+
 
 }

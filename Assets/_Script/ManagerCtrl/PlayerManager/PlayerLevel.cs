@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
-
+public delegate void GetPlayerLevelDelegate(int playerLevel);
 public class PlayerLevel : LoboMonoBehaviour, IObserverListener
 {
 
@@ -12,6 +12,7 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
     private void Start()
     {
         ObserverManager.Instance.RegisterEvent(EventType.LevelUp, this);
+        ObserverManager.Instance.RegisterEvent(EventType.GetPlayerLevel, this);
         this.LoadLevel();
         this.ShowLevel();
     }
@@ -19,11 +20,18 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
     private void OnDestroy()
     {
         ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
+        ObserverManager.Instance.RegisterEvent(EventType.GetPlayerLevel, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        this.LevelUp();
+        if(type == EventType.LevelUp) this.LevelUp();
+        else
+        {
+            // GetPlayerLevelDelegate getPlayerLevel = (GetPlayerLevelDelegate)data;
+            // getPlayerLevel(_level);
+            Debug.Log("Player Level");
+        }
     }
 
     private void LoadLevel()

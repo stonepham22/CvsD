@@ -9,6 +9,7 @@ public enum EventType
     ShowWaveText,
     
     LevelUp,
+    GetPlayerLevel,
 
     IncreaseCoin,
     DecreaseCoin,

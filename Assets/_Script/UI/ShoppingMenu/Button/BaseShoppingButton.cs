@@ -7,20 +7,21 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
 {
 
     [SerializeField] protected ShoppingMenu shoppingMenu;
-    [SerializeField] protected Text text;
-
+    // [SerializeField] protected Text text;
     [SerializeField] protected int index;
-    [SerializeField] protected int level = 1;
+    [SerializeField] protected int itemLevel = 1;
     [SerializeField] protected int price = 1;
     [SerializeField] protected int scale = 1;
-
     [SerializeField] protected int levelPlayer;
+
+    [SerializeField] protected ShoppingMenuItemLevel itemLevelShoppingMenu;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadShoppingMenu();
-        this.LoadText();
+        // this.LoadText();
+        this.LoadItemLevelShoppingMenu();
     }
 
     protected override void Start()
@@ -52,10 +53,10 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
     protected override void OnClick()
     {
         base.OnClick();
-        this.level++;
+        this.itemLevel++;
         this.price += this.scale;
         ObserverManager.Instance.NotifyEvent(EventType.OnClickShoppingButton, this.price);
-        UICtrl.Instance.ShoppingMenu.ItemBuyList.ShowLevel(this.index, this.level);
+        // UICtrl.Instance.ShoppingMenu.ItemBuyList.ShowLevel(this.index, this.level);
         this.CheckLevel();
     }
 
@@ -66,16 +67,23 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
         Debug.LogWarning(transform.name + ": LoadShoppingMenu", gameObject);
     }
 
-    private void LoadText()
+    private void LoadItemLevelShoppingMenu()
     {
-        if (this.text != null) return;
-        this.text = GetComponentInChildren<Text>();
-        Debug.LogWarning(transform.name + ": LoadText", gameObject);
+        if (this.itemLevelShoppingMenu != null) return;
+        this.itemLevelShoppingMenu = transform.parent.GetComponentInChildren<ShoppingMenuItemLevel>();
+        Debug.LogWarning(transform.name + ": LoadShoppingMenu", gameObject);
     }
+
+    // private void LoadText()
+    // {
+    //     if (this.text != null) return;
+    //     this.text = GetComponentInChildren<Text>();
+    //     Debug.LogWarning(transform.name + ": LoadText", gameObject);
+    // }
 
     private void CheckLevel()
     {
-        if (this.level < this.levelPlayer) return;
+        if (this.itemLevel < this.levelPlayer) return;
         transform.gameObject.SetActive(false);
         this.OnEnableButtonMax();
     }

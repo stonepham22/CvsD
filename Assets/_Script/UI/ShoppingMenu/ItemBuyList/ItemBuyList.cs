@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemBuyList : LoboMonoBehaviour
 {
 
-    [SerializeField] private ItemLevel _itemLevel;
+    [SerializeField] private ShoppingMenuItemLevel _itemLevel;
     [SerializeField] private ButtonMax _buttonMax;
     [SerializeField] private ButtonOff _buttonOff;
 
@@ -20,7 +20,7 @@ public class ItemBuyList : LoboMonoBehaviour
     void LoadItemLevel()
     {
         if (this._itemLevel != null) return;
-        this._itemLevel = GetComponentInChildren<ItemLevel>();
+        this._itemLevel = GetComponentInChildren<ShoppingMenuItemLevel>();
         Debug.LogWarning(transform.name + ": LoadItemLevel", gameObject);
     }
 

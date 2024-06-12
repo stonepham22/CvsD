@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCoin : BaseLazySingleton<PlayerCoin>, IObserverListener
+public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
 {
 
     [SerializeField] private int _coin = 10;
