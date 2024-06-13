@@ -6,24 +6,20 @@ public class ShoppingMenuItemButton : BaseButton
 {
     [Header("Shopping Menu Item Button")]
 
-    [SerializeField] private int _itemLevel;
-    [SerializeField] private int _itemPrice;
-    [SerializeField] private int _itemScalePrice;
+    [SerializeField] private int _itemLevel = 1;
+    [SerializeField] private int _itemPrice = 1;
+    [SerializeField] private int _itemScalePrice = 1;
     [SerializeField] private int _playerLevel;
-
-    
 
     private void GetPlayerLevel(int playerLevel)
     {
         this._playerLevel = playerLevel;
     }
 
-
     private void OnEnable()
     {
-        // GetPlayerLevelDelegate getPlayerLevelDelegate = new GetPlayerLevelDelegate(GetPlayerLevel);
-        // if(getPlayerLevelDelegate == null) Debug.Log("ShoppingMenuItemButton");
-        ObserverManager.Instance.NotifyEvent(EventType.GetPlayerLevel, this);
+        ObserverManager.Instance.NotifyEvent
+        (EventType.EnableShoppingMenuItemButton, new GetPlayerLevelDelegate(GetPlayerLevel));
     }
     
     protected override void OnClick()
@@ -31,8 +27,13 @@ public class ShoppingMenuItemButton : BaseButton
         base.OnClick();
         this._itemLevel++;
         this._itemPrice += this._itemScalePrice;
-        ObserverManager.Instance.NotifyEvent(EventType.OnClickShoppingButton, this._itemPrice);
-        // show level
+        ItemButtonData itemButtonData = new ItemButtonData
+        {
+            itemPrefab = transform.parent.gameObject,
+            itemPrice = this._itemPrice,
+            itemLevel = this._itemLevel
+        };
+        ObserverManager.Instance.NotifyEvent(EventType.OnClickShoppingMenuItemButton, itemButtonData);
         // this.CheckLevel();
     }    
 }

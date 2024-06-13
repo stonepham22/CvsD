@@ -23,7 +23,7 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.ShieldUpgraded, this);
         ObserverManager.Instance.RegisterEvent(EventType.ShieldOnEnable, this);
 
-        ObserverManager.Instance.RegisterEvent(EventType.OnClickShoppingButton, this);
+        ObserverManager.Instance.RegisterEvent(EventType.OnClickShoppingMenuItemButton, this);
         this.ShowCoin();
     }
 
@@ -36,7 +36,7 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
         ObserverManager.Instance.UnregisterEvent(EventType.ShieldUpgraded, this);
         ObserverManager.Instance.UnregisterEvent(EventType.ShieldOnEnable, this);
 
-        ObserverManager.Instance.UnregisterEvent(EventType.OnClickShoppingButton, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.OnClickShoppingMenuItemButton, this);
     }
 
     public void NotifyEvent(EventType type, object data)
@@ -66,8 +66,7 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
 
         else
         {
-            int coin = (int)data;
-            this.DecreaseCoin(coin);
+            this.DecreaseCoin(((ItemButtonData)data).itemPrice);
         }
         
     }

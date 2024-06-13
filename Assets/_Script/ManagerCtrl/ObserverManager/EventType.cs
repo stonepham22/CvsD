@@ -9,7 +9,6 @@ public enum EventType
     ShowWaveText,
     
     LevelUp,
-    GetPlayerLevel,
 
     IncreaseCoin,
     DecreaseCoin,
@@ -24,11 +23,12 @@ public enum EventType
 
     EnableShoppingMenu,
     DisableShoppingMenu,
+    EnableShoppingMenuItemButton,
 
     ShieldOnEnable,
     ShieldRepaired,
     ShieldUpgraded,
 
-    OnClickShoppingButton,
+    OnClickShoppingMenuItemButton,
 
 }

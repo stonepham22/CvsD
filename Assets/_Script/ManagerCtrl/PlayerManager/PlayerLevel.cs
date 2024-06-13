@@ -9,10 +9,14 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
     [SerializeField] private int _level = 1;
     public int Level => _level;
 
-    private void Start()
+    private void OnEnable()
     {
         ObserverManager.Instance.RegisterEvent(EventType.LevelUp, this);
-        ObserverManager.Instance.RegisterEvent(EventType.GetPlayerLevel, this);
+        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenuItemButton, this);
+    }
+
+    private void Start()
+    {
         this.LoadLevel();
         this.ShowLevel();
     }
@@ -20,7 +24,7 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
     private void OnDestroy()
     {
         ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
-        ObserverManager.Instance.RegisterEvent(EventType.GetPlayerLevel, this);
+        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenuItemButton, this);
     }
 
     public void NotifyEvent(EventType type, object data)
@@ -28,9 +32,7 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
         if(type == EventType.LevelUp) this.LevelUp();
         else
         {
-            // GetPlayerLevelDelegate getPlayerLevel = (GetPlayerLevelDelegate)data;
-            // getPlayerLevel(_level);
-            Debug.Log("Player Level");
+            ((GetPlayerLevelDelegate)data)(this._level);
         }
     }
 

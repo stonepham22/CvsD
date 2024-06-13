@@ -40,7 +40,7 @@ public class ItemBuyList : LoboMonoBehaviour
 
     public void ShowLevel(int index, int level)
     {
-        this._itemLevel.ShowLevel(index, level);
+        // this._itemLevel.ShowLevel(index, level);
     }    
 
     public void OnEnableButtonOff(int index)
