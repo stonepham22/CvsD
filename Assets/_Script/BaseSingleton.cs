@@ -10,19 +10,28 @@ public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSinglet
         {
             if (_instance == null)
             {
+                _instance = GameObject.FindObjectOfType<T>();
                 if (_instance == null)
                 {
-                    _instance = GameObject.FindObjectOfType<T>();
-                    if (_instance == null)
-                    {
-                        var obj = new GameObject(typeof(T).ToString());
-                        _instance = obj.AddComponent<T>();
-                    }
+                    var obj = new GameObject(typeof(T).ToString());
+                    _instance = obj.AddComponent<T>();
                 }
-
             }
             return _instance;
         }
+    }
+
+    protected override void Awake()
+    {
+        if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<T>();
+                if (_instance == null)
+                {
+                    var obj = new GameObject(typeof(T).ToString());
+                    _instance = obj.AddComponent<T>();
+                }
+            }
     }
 
     // protected virtual void OnDestroy()

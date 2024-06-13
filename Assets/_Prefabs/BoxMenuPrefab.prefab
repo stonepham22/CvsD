@@ -48,6 +48,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3865106461519864701}
     m_Modifications:
+    - target: {fileID: 3372159434301279049, guid: 0d354590ca615734fb98aafd88424328, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4708469838617768091, guid: 0d354590ca615734fb98aafd88424328, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -296,10 +300,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3865106461519864701}
     m_Modifications:
-    - target: {fileID: 3372159434301279049, guid: 0d354590ca615734fb98aafd88424328, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ff1c6d1c29bb4964e87b5a195be87a95, type: 3}
     - target: {fileID: 4708469838617768091, guid: 0d354590ca615734fb98aafd88424328, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -490,10 +490,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxMenuButton
       objectReference: {fileID: 0}
-    - target: {fileID: 6995288002569275768, guid: 459786b3d9c9feb4c9bce822b588d5fb, type: 3}
-      propertyPath: button
-      value: 
-      objectReference: {fileID: 3609695764567417444}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -504,17 +500,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3759130042742751958, guid: 459786b3d9c9feb4c9bce822b588d5fb, type: 3}
   m_PrefabInstance: {fileID: 4264333361224196603}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3609695764567417444 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 663651704374838175, guid: 459786b3d9c9feb4c9bce822b588d5fb, type: 3}
-  m_PrefabInstance: {fileID: 4264333361224196603}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6388113147866701075
 PrefabInstance:
   m_ObjectHideFlags: 0

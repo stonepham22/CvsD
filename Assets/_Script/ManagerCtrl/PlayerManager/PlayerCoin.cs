@@ -27,7 +27,7 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
         this.ShowCoin();
     }
 
-    protected override void OnDestroy()
+    private void OnDestroy()
     {
         ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
         ObserverManager.Instance.UnregisterEvent(EventType.BuyChicken, this);
@@ -37,7 +37,6 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
         ObserverManager.Instance.UnregisterEvent(EventType.ShieldOnEnable, this);
 
         ObserverManager.Instance.UnregisterEvent(EventType.OnClickShoppingButton, this);
-        base.OnDestroy();
     }
 
     public void NotifyEvent(EventType type, object data)

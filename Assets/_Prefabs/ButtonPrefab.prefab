@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 335cf4ada7676354892cfc7654947beb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 387e20ada154b324bb414961b319d007, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -135,6 +135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04b6bbe231879c4f9bed415ab9710e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 663651704374838175}
+  _itemLevel: 0
+  _itemPrice: 0
+  _itemScalePrice: 0
+  _playerLevel: 0
 --- !u!1001 &2866146457605054659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 3372159434301279049, guid: 0d354590ca615734fb98aafd88424328, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 315cf9580893cc04389621d3a652023c, type: 3}
+      objectReference: {fileID: 21300000, guid: b6186bac76802aa44988b12188dd66ba, type: 3}
     - target: {fileID: 4708469838617768091, guid: 0d354590ca615734fb98aafd88424328, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

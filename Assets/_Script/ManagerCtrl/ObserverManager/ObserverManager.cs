@@ -6,20 +6,6 @@ using UnityEngine;
 public class ObserverManager : BaseSingleton<ObserverManager>
 {
     
-    // public static ObserverManager Instance => _instance;
-
-    // private void Awake()
-    // {
-    //     if (_instance != null && _instance != this)
-    //     {
-    //         Destroy(this);
-    //     }
-    //     else
-    //     {
-    //         _instance = this as ObserverManager;
-    //     }
-    // }
-
     private Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
 
     public void RegisterEvent(EventType type, IObserverListener listener)
