@@ -56,7 +56,6 @@ public abstract class BaseShoppingButton : BaseButton, IObserverListener
         this.itemLevel++;
         this.price += this.scale;
         ObserverManager.Instance.NotifyEvent(EventType.OnClickShoppingMenuItemButton, this.price);
-        // UICtrl.Instance.ShoppingMenu.ItemBuyList.ShowLevel(this.index, this.level);
         this.CheckLevel();
     }
 

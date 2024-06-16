@@ -2,21 +2,16 @@ public enum EventType
 {
     DogOnDead,
 
-    BulletDespawn,
-    BulletCollideWithDog,
+    BulletDespawn, BulletCollideWithDog,
 
     NextWave, 
     ShowWaveText,
     
-    LevelUp,
-
-    IncreaseCoin,
-    DecreaseCoin,
-
-    ShowLevel,
     ShowExp,
-    ShowCoin,
+    LevelUp, ShowLevel,
 
+    IncreaseCoin,  DecreaseCoin, ShowCoin,
+   
     BuyChicken,
 
     DisableChickenButtonOn,
@@ -25,9 +20,7 @@ public enum EventType
     DisableShoppingMenu,
     EnableShoppingMenuItemButton,
 
-    ShieldOnEnable,
-    ShieldRepaired,
-    ShieldUpgraded,
+    ShieldOnEnable, ShieldRepaired, ShieldUpgraded,
 
     OnClickShoppingMenuItemButton,
 

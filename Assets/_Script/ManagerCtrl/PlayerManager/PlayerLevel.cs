@@ -5,9 +5,8 @@ using UnityEngine;
 public delegate void GetPlayerLevelDelegate(int playerLevel);
 public class PlayerLevel : LoboMonoBehaviour, IObserverListener
 {
-
-    [SerializeField] private int _level = 1;
-    public int Level => _level;
+    [SerializeField] private int _playerLevel = 1;
+    public int Level => _playerLevel;
 
     private void OnEnable()
     {
@@ -32,7 +31,9 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
         if(type == EventType.LevelUp) this.LevelUp();
         else
         {
-            ((GetPlayerLevelDelegate)data)(this._level);
+            ItemButtonDelegateData itemButtonDelegateData = (ItemButtonDelegateData)data;
+            GetPlayerLevelDelegate getPlayerLevelDelegate = itemButtonDelegateData.getPlayerLevelDelegate;
+            getPlayerLevelDelegate(this._playerLevel);
         }
     }
 
@@ -43,13 +44,13 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
 
     public void LevelUp()
     {
-        this._level++;
+        this._playerLevel++;
         this.ShowLevel();
     }
 
     private void ShowLevel()
     {
-        ObserverManager.Instance.NotifyEvent(EventType.ShowLevel, this._level);
+        ObserverManager.Instance.NotifyEvent(EventType.ShowLevel, this._playerLevel);
     }    
 
 }

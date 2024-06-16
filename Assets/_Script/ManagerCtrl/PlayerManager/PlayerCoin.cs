@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public delegate void GetPlayerCoinDelegate(int playerCoin);
 public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
 {
 
-    [SerializeField] private int _coin = 10;
-    public int Coin => _coin;
+    [SerializeField] private int _playerCoin = 10;
+    public int Coin => _playerCoin;
 
     protected override void Awake()
     {
@@ -24,19 +24,8 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.ShieldOnEnable, this);
 
         ObserverManager.Instance.RegisterEvent(EventType.OnClickShoppingMenuItemButton, this);
+        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenuItemButton, this);
         this.ShowCoin();
-    }
-
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
-        ObserverManager.Instance.UnregisterEvent(EventType.BuyChicken, this);
-
-        ObserverManager.Instance.UnregisterEvent(EventType.ShieldRepaired, this);
-        ObserverManager.Instance.UnregisterEvent(EventType.ShieldUpgraded, this);
-        ObserverManager.Instance.UnregisterEvent(EventType.ShieldOnEnable, this);
-
-        ObserverManager.Instance.UnregisterEvent(EventType.OnClickShoppingMenuItemButton, this);
     }
 
     public void NotifyEvent(EventType type, object data)
@@ -53,53 +42,63 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
             if(data.GetType() == typeof(ShieldPrefabRepair))
             {
                 ShieldPrefabRepair shieldPrefabRepair = (ShieldPrefabRepair)data;
-                shieldPrefabRepair.SetPlayerCoin(_coin);
+                shieldPrefabRepair.SetPlayerCoin(_playerCoin);
             }
 
             else
             {
                 ShieldPrefabUpgrade shieldPrefabUpgrade = (ShieldPrefabUpgrade)data;
-                shieldPrefabUpgrade.SetPlayerCoin(_coin);
+                shieldPrefabUpgrade.SetPlayerCoin(_playerCoin);
             }    
             
         }
+        else if(type == EventType.BuyChicken)
+        {
+            this.DecreaseCoin((int)data);
+        }
 
-        else
+        else if(type == EventType.OnClickShoppingMenuItemButton)
         {
             this.DecreaseCoin(((ItemButtonData)data).itemPrice);
+        }
+        else
+        {
+            ItemButtonDelegateData itemButtonDelegateData = (ItemButtonDelegateData)data;
+            GetPlayerCoinDelegate getPlayerCoinDelegate = itemButtonDelegateData.getPlayerCoinDelegate;
+            getPlayerCoinDelegate(this._playerCoin);      
         }
         
     }
 
     public void IncreaseCoin(int coin)
     {
-        this._coin += coin;
+        this._playerCoin += coin;
         this.ShowCoin();
         this.SaveCoin();
-        ObserverManager.Instance.NotifyEvent(EventType.IncreaseCoin, _coin);
+        ObserverManager.Instance.NotifyEvent(EventType.IncreaseCoin, _playerCoin);
     }
 
     public void DecreaseCoin(int coin)
     {
-        this._coin -= coin;
+        this._playerCoin -= coin;
         this.ShowCoin();
         this.SaveCoin();
-        ObserverManager.Instance.NotifyEvent(EventType.DecreaseCoin, _coin);
+        ObserverManager.Instance.NotifyEvent(EventType.DecreaseCoin, _playerCoin);
     }
 
     private void ShowCoin()
     {
-        ObserverManager.Instance.NotifyEvent(EventType.ShowCoin, this._coin);
+        ObserverManager.Instance.NotifyEvent(EventType.ShowCoin, this._playerCoin);
     }
 
     private void SaveCoin()
     {
-        PlayerPrefs.SetInt("Coin", this._coin);
+        PlayerPrefs.SetInt("Coin", this._playerCoin);
     }    
 
     private void GetCoinFromPlayerPrefs()
     {
-        PlayerPrefs.GetInt("Coin", this._coin);
+        PlayerPrefs.GetInt("Coin", this._playerCoin);
     }
 
     
