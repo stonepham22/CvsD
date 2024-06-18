@@ -610,7 +610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &39762983
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6864,7 +6864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb7291d014f6db48819946a4e1703b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCoin: 10
+  _playerCoin: 0
 --- !u!1 &734573995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 722094215069439028, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
@@ -20732,6 +20732,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxMenuPrefab_5
       objectReference: {fileID: 0}
+    - target: {fileID: 2785729530370029788, guid: 82908b83a6d410343b6381c818e9757e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3609695764567417444, guid: 82908b83a6d410343b6381c818e9757e, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -21708,6 +21712,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 5bb62c58ec4189348a5349a1144e72ba, type: 3}
+    - target: {fileID: 1334190194458556249, guid: 82908b83a6d410343b6381c818e9757e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1983519102125602241, guid: 82908b83a6d410343b6381c818e9757e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 200

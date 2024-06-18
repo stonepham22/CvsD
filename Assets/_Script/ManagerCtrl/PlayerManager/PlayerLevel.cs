@@ -31,8 +31,8 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
         if(type == EventType.LevelUp) this.LevelUp();
         else
         {
-            ItemButtonDelegateData itemButtonDelegateData = (ItemButtonDelegateData)data;
-            GetPlayerLevelDelegate getPlayerLevelDelegate = itemButtonDelegateData.getPlayerLevelDelegate;
+            ItemButtonData itemButtonData = (ItemButtonData)data;
+            GetPlayerLevelDelegate getPlayerLevelDelegate = itemButtonData.getPlayerLevelDelegate;
             getPlayerLevelDelegate(this._playerLevel);
         }
     }

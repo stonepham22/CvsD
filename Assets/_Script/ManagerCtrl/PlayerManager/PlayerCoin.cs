@@ -59,11 +59,11 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
 
         else if(type == EventType.OnClickShoppingMenuItemButton)
         {
-            this.DecreaseCoin(((ItemButtonData)data).itemPrice);
+            this.DecreaseCoin(((ItemButtonData)data).itemPricePrev);
         }
         else
         {
-            ItemButtonDelegateData itemButtonDelegateData = (ItemButtonDelegateData)data;
+            ItemButtonData itemButtonDelegateData = (ItemButtonData)data;
             GetPlayerCoinDelegate getPlayerCoinDelegate = itemButtonDelegateData.getPlayerCoinDelegate;
             getPlayerCoinDelegate(this._playerCoin);      
         }
