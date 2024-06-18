@@ -4,8 +4,7 @@ public enum EventType
 
     BulletDespawn, BulletCollideWithDog,
 
-    NextWave, 
-    ShowWaveText,
+    NextWave, ShowWaveText,
     
     ShowExp,
     LevelUp, ShowLevel,
@@ -16,9 +15,8 @@ public enum EventType
 
     DisableChickenButtonOn,
 
-    EnableShoppingMenu,
-    DisableShoppingMenu,
-    EnableShoppingMenuItemButton,
+    EnableShoppingMenu, DisableShoppingMenu,
+    EnableShoppingMenuItemButton, DisableShoppingMenuItemButton, 
 
     ShieldOnEnable, ShieldRepaired, ShieldUpgraded,
 

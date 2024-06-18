@@ -6864,7 +6864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb7291d014f6db48819946a4e1703b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCoin: 0
+  _playerCoin: 10
 --- !u!1 &734573995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 722094215069439028, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
@@ -18533,7 +18533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894b68b98a005c1479235417c1c74e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerLevel: 1
+  _playerLevel: 10
 --- !u!1001 &1805614006
 PrefabInstance:
   m_ObjectHideFlags: 0

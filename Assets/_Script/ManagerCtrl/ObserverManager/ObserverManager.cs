@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ObserverManager : BaseSingleton<ObserverManager>
 {
-    
     private Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
 
     public void RegisterEvent(EventType type, IObserverListener listener)
@@ -19,16 +18,13 @@ public class ObserverManager : BaseSingleton<ObserverManager>
         if (!dicListeners.ContainsKey(type)) return;
         dicListeners[type].Remove(listener);
     }
-
     public void NotifyEvent(EventType type, object data)
     {
         if (!dicListeners.ContainsKey(type)) return;
+        Debug.Log(type);
         foreach (IObserverListener listener in dicListeners[type])
         {
             listener.NotifyEvent(type, data);
         }
     }
-
-
-
 }

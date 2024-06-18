@@ -11,35 +11,32 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
     [Header("Player")]
     [SerializeField] private int _playerLevel;
     [SerializeField] private int _playerCoin;
-    public void NotifyEvent(EventType type, object data)
-    {
-        this._playerLevel = (int)data;
-    }
-    private void GetPlayerLevel(int playerLevel)
-    {
-        this._playerLevel = playerLevel;
-    }
-    private void GetPlayerCoin(int playerCoin)
-    {
-        this._playerCoin = playerCoin;
-    }
+
     private void OnEnable()
     {
         this.NotifyEventEnable();
         ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
+        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
+        Debug.Log(transform.parent.name);
+
     }
-    private void OnDisable()
+    // private void OnDisable()
+    // {
+    //     ObserverManager.Instance.UnregisterEvent(EventType.ShowLevel, this);
+    //     ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
+    //     ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);        
+    // }
+    
+    public void NotifyEvent(EventType type, object data)
     {
-        ObserverManager.Instance.UnregisterEvent(EventType.ShowLevel, this);        
-    }
-    protected override void OnClick()
-    {
-        base.OnClick();
-        this._itemLevel++;
-        this._itemPrice += this._itemScalePrice;
-        this.NotifyEventOnClick();
-        this.CheckLevel();
-        this.CheckCoin();
+        if(type == EventType.ShowLevel) this._playerLevel = (int)data;
+        else
+        {
+            this._playerCoin = (int)data;
+            this.CheckCoin();
+            
+        }
     }
     private void NotifyEventEnable()
     {
@@ -63,14 +60,37 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
         };
         ObserverManager.Instance.NotifyEvent(EventType.OnClickShoppingMenuItemButton, itemButtonData);
     }
+    
+    protected override void OnClick()
+    {
+        base.OnClick();
+        this._itemLevel++;
+        this._itemPrice += this._itemScalePrice;
+        this.NotifyEventOnClick();
+        this.CheckLevel();
+        this.CheckCoin();
+    }
+    
+    private void GetPlayerLevel(int playerLevel)
+    {
+        this._playerLevel = playerLevel;
+    }
+    private void GetPlayerCoin(int playerCoin)
+    {
+        this._playerCoin = playerCoin;
+    }
+    
     private void CheckLevel()
     {
         if (this._itemLevel <= this._playerLevel) return;
+        ObserverManager.Instance.NotifyEvent(EventType.DisableShoppingMenuItemButton, this);
         transform.gameObject.SetActive(false);
         
     }
     private void CheckCoin()
     {
-      
+        if(this._itemPrice <= this._playerCoin) return;
+        ObserverManager.Instance.NotifyEvent(EventType.DisableShoppingMenuItemButton, this);
+        transform.gameObject.SetActive(false);        
     }
 }
