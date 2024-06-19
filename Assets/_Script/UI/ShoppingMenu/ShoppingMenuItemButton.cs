@@ -18,15 +18,7 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
         ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
         ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
-        Debug.Log(transform.parent.name);
-
     }
-    // private void OnDisable()
-    // {
-    //     ObserverManager.Instance.UnregisterEvent(EventType.ShowLevel, this);
-    //     ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
-    //     ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);        
-    // }
     
     public void NotifyEvent(EventType type, object data)
     {
@@ -35,7 +27,6 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
         {
             this._playerCoin = (int)data;
             this.CheckCoin();
-            
         }
     }
     private void NotifyEventEnable()
@@ -49,6 +40,15 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
         ObserverManager.Instance.NotifyEvent
         (EventType.EnableShoppingMenuItemButton, itemButtonData);
     }
+    protected override void OnClick()
+    {
+        base.OnClick();
+        this._itemLevel++;
+        this._itemPrice += this._itemScalePrice;
+        this.NotifyEventOnClick();
+        this.CheckLevel();
+        this.CheckCoin();
+    }
     private void NotifyEventOnClick()
     {
         ItemButtonData itemButtonData = new ItemButtonData
@@ -58,17 +58,8 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
             itemPriceCur = this._itemPrice,
             itemLevel = this._itemLevel
         };
-        ObserverManager.Instance.NotifyEvent(EventType.OnClickShoppingMenuItemButton, itemButtonData);
-    }
-    
-    protected override void OnClick()
-    {
-        base.OnClick();
-        this._itemLevel++;
-        this._itemPrice += this._itemScalePrice;
-        this.NotifyEventOnClick();
-        this.CheckLevel();
-        this.CheckCoin();
+        ObserverManager.Instance.NotifyEvent
+        (EventType.OnClickShoppingMenuItemButton, itemButtonData);
     }
     
     private void GetPlayerLevel(int playerLevel)
@@ -79,18 +70,16 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
     {
         this._playerCoin = playerCoin;
     }
-    
     private void CheckLevel()
     {
         if (this._itemLevel <= this._playerLevel) return;
-        ObserverManager.Instance.NotifyEvent(EventType.DisableShoppingMenuItemButton, this);
+        ObserverManager.Instance.NotifyEvent(EventType.ItemLevelGatherThanPlayerLevel, this);
         transform.gameObject.SetActive(false);
-        
     }
     private void CheckCoin()
     {
         if(this._itemPrice <= this._playerCoin) return;
-        ObserverManager.Instance.NotifyEvent(EventType.DisableShoppingMenuItemButton, this);
+        ObserverManager.Instance.NotifyEvent(EventType.ItemCoinGatherThanPlayerCoin, this);
         transform.gameObject.SetActive(false);        
     }
 }

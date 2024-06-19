@@ -7,11 +7,16 @@ public class ItemButtonOff : LoboMonoBehaviour, IObserverListener
 {
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.DisableShoppingMenuItemButton, this);
-        transform.gameObject.SetActive(false);
+        ObserverManager.Instance.RegisterEvent(EventType.ItemLevelGatherThanPlayerLevel, this);
+        ObserverManager.Instance.RegisterEvent(EventType.ItemCoinGatherThanPlayerCoin, this);
     }
+    
     public void NotifyEvent(EventType type, object data)
     {
-        transform.gameObject.SetActive(true);
+        if(type == EventType.ItemLevelGatherThanPlayerLevel)
+            transform.gameObject.SetActive(false);
+        else transform.gameObject.SetActive(true);
     }
+
+    
 }

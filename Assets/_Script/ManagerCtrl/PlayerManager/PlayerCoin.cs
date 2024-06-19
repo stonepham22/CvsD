@@ -100,6 +100,4 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
     {
         PlayerPrefs.GetInt("Coin", this._playerCoin);
     }
-
-    
 }

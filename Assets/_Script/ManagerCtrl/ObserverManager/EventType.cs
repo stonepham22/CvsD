@@ -16,7 +16,8 @@ public enum EventType
     DisableChickenButtonOn,
 
     EnableShoppingMenu, DisableShoppingMenu,
-    EnableShoppingMenuItemButton, DisableShoppingMenuItemButton, 
+    EnableShoppingMenuItemButton, 
+    ItemLevelGatherThanPlayerLevel, ItemCoinGatherThanPlayerCoin, 
 
     ShieldOnEnable, ShieldRepaired, ShieldUpgraded,
 

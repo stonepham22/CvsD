@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemPriceText : BaseText, IObserverListener
 {
-    private void OnEnable()
+    private void Start()
     {
         ObserverManager.Instance.RegisterEvent(EventType.OnClickShoppingMenuItemButton, this);
     }
