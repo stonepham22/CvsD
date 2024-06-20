@@ -32,4 +32,8 @@ public class ShieldUpGradeButtonOff : BaseButton
         Debug.LogWarning(transform.name + ": LoadCoin", gameObject);
     }
 
+    protected override void OnClick()
+    {
+        
+    }
 }

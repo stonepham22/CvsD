@@ -57,5 +57,4 @@ public class PlayerExperience : LoboMonoBehaviour, IObserverListener
         float value = (float)this._xp / (float)this._totalExp;
         ObserverManager.Instance.NotifyEvent(EventType.ShowExp, value);
     }
-
 }

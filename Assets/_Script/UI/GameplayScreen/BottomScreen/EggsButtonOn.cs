@@ -7,7 +7,6 @@ public class EggsButtonOn : BaseButton
     [SerializeField] private bool isSpawnChicken = true;
     protected override void OnClick()
     {
-        base.OnClick(); 
         gameObject.SetActive(false);
         if(this.isSpawnChicken)
         {
