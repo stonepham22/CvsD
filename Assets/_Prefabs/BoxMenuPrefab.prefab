@@ -139,6 +139,7 @@ MonoBehaviour:
   _itemLevel: 1
   _itemPrice: 1
   _itemScalePrice: 1
+  _indexItem: -1
   _playerLevel: 0
   _playerCoin: 0
 --- !u!1 &161805544898312076

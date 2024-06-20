@@ -15,14 +15,16 @@ public class BulletDamageSender : DamageSender
     {
         if (!collision.CompareTag(DOG_TAG)) return;
         if (collision.name != DAMAGE_RECEIVER) return;
-
+        NotifyEventBulletCollideWithDog(collision.transform.parent.gameObject);
+    }
+    private void NotifyEventBulletCollideWithDog(GameObject objReceiveDamage)
+    {
         BulletData bulletData = new BulletData()
         {
-            objReceiveDamage = collision.transform.parent.gameObject,
+            objReceiveDamage = objReceiveDamage,
             damage = this.damage,
             bulletPrefab = transform.parent.gameObject,
         };
-
         ObserverManager.Instance.NotifyEvent(EventType.BulletCollideWithDog, bulletData);
     }
 

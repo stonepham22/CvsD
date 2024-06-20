@@ -32,4 +32,8 @@ public class ShieldRepairButtonOff : BaseButton
         Debug.LogWarning(transform.name + ": LoadRepairPriceText", gameObject);
     }
 
+    protected override void OnClick()
+    {
+        
+    }
 }

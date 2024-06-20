@@ -8,13 +8,30 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
     [SerializeField] private int _itemLevel = 1;
     [SerializeField] private int _itemPrice = 1;
     [SerializeField] private int _itemScalePrice = 1;
+    [SerializeField] private int _indexItem;
     [Header("Player")]
     [SerializeField] private int _playerLevel;
     [SerializeField] private int _playerCoin;
 
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadIndexItem();
+    }
+
     private void OnEnable()
     {
         this.NotifyEventEnable();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        this.RegisterEvent();
+    }
+
+    private void RegisterEvent()
+    {
         ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
         ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
         ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
@@ -42,7 +59,6 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
     }
     protected override void OnClick()
     {
-        base.OnClick();
         this._itemLevel++;
         this._itemPrice += this._itemScalePrice;
         this.NotifyEventOnClick();
@@ -81,5 +97,12 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
         if(this._itemPrice <= this._playerCoin) return;
         ObserverManager.Instance.NotifyEvent(EventType.ItemCoinGatherThanPlayerCoin, this);
         transform.gameObject.SetActive(false);        
+    }
+
+    private void LoadIndexItem()
+    {
+        string prefabName = transform.parent.gameObject.name;
+        char index = prefabName[prefabName.Length - 1];
+        _indexItem = (int)char.GetNumericValue(index);
     }
 }

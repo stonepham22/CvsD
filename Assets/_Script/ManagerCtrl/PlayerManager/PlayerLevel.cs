@@ -52,5 +52,4 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
     {
         ObserverManager.Instance.NotifyEvent(EventType.ShowLevel, this._playerLevel);
     }    
-
 }
