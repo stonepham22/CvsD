@@ -12,11 +12,6 @@ public class BuyChickenButtonOn : BaseButton, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
-    }
-
     protected override void OnClick()
     {
         ObserverManager.Instance.NotifyEvent(EventType.BuyChicken, _chickenPrice);

@@ -12,11 +12,6 @@ public class CoinText : BaseText, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.ShowCoin, this);
     }
 
-    private void OnDestroy()
-    {
-        UnregisterEvent();
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         int coin = (int)data;
@@ -28,8 +23,4 @@ public class CoinText : BaseText, IObserverListener
         this.text.text = coin.ToString();
     }
 
-    public void UnregisterEvent()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.ShowCoin, this);
-    }
 }

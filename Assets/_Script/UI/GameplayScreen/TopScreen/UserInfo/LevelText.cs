@@ -10,11 +10,6 @@ public class LevelText : BaseText, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.ShowLevel, this);    
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         int level = (int)data;

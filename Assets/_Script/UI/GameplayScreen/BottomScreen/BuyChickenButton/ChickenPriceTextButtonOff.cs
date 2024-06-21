@@ -10,11 +10,6 @@ public class ChickenPriceTextButtonOff : BaseText, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.DisableChickenButtonOn, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.DisableChickenButtonOn, this);
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         int chickenPrice = (int)data;
