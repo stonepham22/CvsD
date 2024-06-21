@@ -15,11 +15,6 @@ public class PlayerExperience : LoboMonoBehaviour, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         DogData dogData = (DogData)data;

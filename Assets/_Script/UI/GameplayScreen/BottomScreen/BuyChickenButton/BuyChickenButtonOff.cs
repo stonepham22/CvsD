@@ -14,9 +14,4 @@ public class BuyChickenButtonOff : LoboMonoBehaviour, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.DisableChickenButtonOn, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.DisableChickenButtonOn, this);
-    }
-
 }

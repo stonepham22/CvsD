@@ -20,12 +20,6 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
         this.ShowLevel();
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.LevelUp, this);
-        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenuItemButton, this);
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         if(type == EventType.LevelUp) this.LevelUp();

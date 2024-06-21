@@ -19,12 +19,6 @@ public class BulletSpawner : BaseSpawner, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.BulletCollideWithDog, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.BulletDespawn, this);
-        ObserverManager.Instance.UnregisterEvent(EventType.BulletCollideWithDog, this);
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         BulletData bulletData = data as BulletData;

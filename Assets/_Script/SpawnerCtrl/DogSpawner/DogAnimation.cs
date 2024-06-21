@@ -15,11 +15,6 @@ public class DogAnimation : BaseAnimation, IObserverListener
         ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         DogData dogData = (DogData)data;

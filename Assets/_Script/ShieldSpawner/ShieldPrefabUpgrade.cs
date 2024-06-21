@@ -22,12 +22,6 @@ public class ShieldPrefabUpgrade : BaseShieldPrefab, IObserverListener
         ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
-        ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         SetPlayerCoin((int)data);

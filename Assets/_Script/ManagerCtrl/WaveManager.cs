@@ -16,11 +16,6 @@ public class WaveManager : BaseSingleton<WaveManager>, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.NextWave, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.NextWave, this);
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         this.NextWave();

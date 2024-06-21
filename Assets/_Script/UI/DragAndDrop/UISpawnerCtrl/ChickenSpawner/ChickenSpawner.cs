@@ -13,11 +13,6 @@ public class ChickenSpawner : BaseSpawner, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
     }
 
-    private void OnDestroy()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.BuyChicken, this);
-    }
-
     public void NotifyEvent(EventType type, object data)
     {
         ChickenZeroSpawnInLobby();
