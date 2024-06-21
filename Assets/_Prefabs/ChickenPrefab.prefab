@@ -660,6 +660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isShooting: 0
   _isStandy: 0
-  _shootDelay: 1
+  _shootDelay: 5
   _shootTimer: 0
   _indexStandy: 0
+  _chickenDamage: 0

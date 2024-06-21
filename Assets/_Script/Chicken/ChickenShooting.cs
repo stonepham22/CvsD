@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenShooting : MonoBehaviour
+public class ChickenShooting : LoboMonoBehaviour
 {
     
     [SerializeField] private bool _isShooting = false;
     [SerializeField] private bool _isStandy = false;
-
     [SerializeField] private float _shootDelay = 5f;
     [SerializeField] private float _shootTimer = 0f;
-
     [SerializeField] private int _indexStandy;
-    
+
+    [SerializeField] private int _chickenDamage;
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadChickenDamage();
+    }
+
+    void LoadChickenDamage()
+    {
+        string parentName = transform.parent.name;
+        char indexChar = parentName[parentName.Length - 1];
+        this._chickenDamage = int.Parse(indexChar.ToString());
+    }
+
     public void SetIsStandy(bool value)
     {
         this._isStandy = value;

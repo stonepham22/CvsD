@@ -1551,6 +1551,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 83792c5c9247d91428158e749acc434d, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2840,6 +2848,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 20ebd1d946fb4fb45b32bada087b5aa8, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5700,6 +5716,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 5023f990b68fb9b4ca14fec84018beb1, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10668,6 +10692,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 7fcf02ec5bb1aec43a2756348c33e639, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15553,6 +15585,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9da4e0b361e784249a12fbab0fc54750, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16037,6 +16077,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 6f315fb0c03124d4d8735e9d9c7e7144, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16261,6 +16305,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 19bf4b71d3bcdc947ae832cc451040e6, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16476,6 +16528,14 @@ PrefabInstance:
     - target: {fileID: 722094215069439028, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
@@ -17680,6 +17740,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3fe912a295d9268418a07269dedb4246, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -21326,6 +21394,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: eb38eb497beb3ec419ecbcd7189300e6, type: 3}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _shootDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4750071633321594062, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
+      propertyPath: _chickenDamage
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9010675385356150241, guid: ae04e1ac4c32ecb459a8f2cb33d2624b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
