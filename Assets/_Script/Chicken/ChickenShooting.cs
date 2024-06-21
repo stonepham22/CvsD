@@ -70,8 +70,17 @@ public class ChickenShooting : LoboMonoBehaviour
         if (!this._isShooting) return;
         if(!this._isStandy) return;
         if (this.CheckDelayTime()) return;
-        Vector3 BulletSpawnPos = transform.parent.position;
-        SpawnerCtrl.Instance.BulletSpawner.Spawning(BulletSpawnPos);
+        // Vector3 BulletSpawnPos = transform.parent.position;
+        // SpawnerCtrl.Instance.BulletSpawner.Spawning(BulletSpawnPos);
+
+        ChickenShootingData data = new ChickenShootingData()
+        {
+            bulletSpawnPos = transform.parent.position,
+            chickenDamage = this._chickenDamage
+        };
+
+        ObserverManager.Instance.NotifyEvent(EventType.ChickenShooting, data);
+
     }
 
     private bool CheckDelayTime()

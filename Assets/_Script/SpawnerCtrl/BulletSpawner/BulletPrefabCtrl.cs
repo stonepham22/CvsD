@@ -8,6 +8,8 @@ public class BulletPrefabCtrl : LoboMonoBehaviour
     [SerializeField] private BulletDespawnByDistance _despawn;
     public BulletDespawnByDistance Despawn => _despawn;
 
+    public int Damage;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();

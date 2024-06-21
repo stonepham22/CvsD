@@ -11,7 +11,7 @@ public enum EventType
 
     IncreaseCoin,  DecreaseCoin, ShowCoin,
    
-    BuyChicken,
+    BuyChicken, ChickenShooting,
 
     DisableChickenButtonOn,
 
