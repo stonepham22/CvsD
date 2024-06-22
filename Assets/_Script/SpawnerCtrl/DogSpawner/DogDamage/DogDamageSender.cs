@@ -53,7 +53,6 @@ public class DogDamageSender : DamageSender
         DamageReceiver damageReceiver = this._collision.GetComponent<DamageReceiver>();
         if (damageReceiver == null) return;
         this.Send(damageReceiver);
-        Debug.Log("SendDamage");
     }
 
     private void OnTriggerExit2D(Collider2D collision)

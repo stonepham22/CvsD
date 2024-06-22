@@ -15,10 +15,10 @@ public class DogDamageReceiver : DamageReceiver, IObserverListener
         ObserverManager.Instance.RegisterEvent(EventType.BulletCollideWithDog, this);
     }
 
-    private void OnDisable()
-    {
-        ObserverManager.Instance.UnregisterEvent(EventType.BulletCollideWithDog, this);
-    }
+    // private void OnDisable()
+    // {
+    //     ObserverManager.Instance.UnregisterEvent(EventType.BulletCollideWithDog, this);
+    // }
 
     protected override void OnDead()
     {
