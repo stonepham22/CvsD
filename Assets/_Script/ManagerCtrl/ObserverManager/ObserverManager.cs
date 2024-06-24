@@ -5,18 +5,28 @@ using UnityEngine;
 
 public class ObserverManager : BaseSingleton<ObserverManager>
 {
+    private ObserverManager() { }
     private Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
 
     public void RegisterEvent(EventType type, IObserverListener listener)
     {
-        if (!dicListeners.ContainsKey(type)) dicListeners.Add(type, new List<IObserverListener>());
-        dicListeners[type].Add(listener);
+        if (!dicListeners.ContainsKey(type))
+        {
+            dicListeners.Add(type, new List<IObserverListener>());
+        }
+        if (!dicListeners[type].Contains(listener))
+        {
+            dicListeners[type].Add(listener);
+        }
+
     }
 
     public void UnregisterEvent(EventType type, IObserverListener listener)
     {
-        if (!dicListeners.ContainsKey(type)) return;
-        dicListeners[type].Remove(listener);
+        if (dicListeners.ContainsKey(type) && dicListeners[type].Contains(listener))
+        {
+            dicListeners[type].Remove(listener);
+        }
     }
     public void NotifyEvent(EventType type, object data)
     {

@@ -16,12 +16,13 @@ public class ShieldPrefabUpgrade : BaseShieldPrefab, IObserverListener
         ObserverManager.Instance.NotifyEvent(EventType.ShieldOnEnable, this);
     }
 
-    // private void OnDisable()
-    // {
-    //     Debug.Log(transform.name);
-    //     ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
-    //     ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
-    // }
+    private void OnDisable()
+    {
+        Debug.Log(transform.name);
+        if(ObserverManager.Instance == null) return;    
+        ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
+    }
 
     public void NotifyEvent(EventType type, object data)
     {
