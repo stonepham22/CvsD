@@ -10,36 +10,46 @@ public class PlayerLevel : LoboMonoBehaviour, IObserverListener
 
     private void OnEnable()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.LevelUp, this);
-        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenuItemButton, this);
+        this.RegisterEvent();
     }
-
     private void Start()
     {
-        this.LoadLevel();
         this.ShowLevel();
     }
 
+    private void RegisterEvent()
+    {
+        List<EventType> types = new List<EventType>
+        {
+            EventType.LevelUp,
+            EventType.EnableShoppingMenuItemButton
+        };
+        ObserverManager.Instance.RegisterEvent(types, this);
+    }
     public void NotifyEvent(EventType type, object data)
     {
-        if(type == EventType.LevelUp) this.LevelUp();
-        else
+        switch (type)
         {
-            ItemButtonData itemButtonData = (ItemButtonData)data;
-            GetPlayerLevelDelegate getPlayerLevelDelegate = itemButtonData.getPlayerLevelDelegate;
-            getPlayerLevelDelegate(this._playerLevel);
+            case EventType.LevelUp:
+                HandleLevelUp();
+                break;
+            case EventType.EnableShoppingMenuItemButton:
+                HandleEnableShoppingMenuItemButton(data);
+                break;
         }
     }
-
-    private void LoadLevel()
-    {
-            
-    }
-
-    public void LevelUp()
+    private void HandleLevelUp()
     {
         this._playerLevel++;
         this.ShowLevel();
+    }
+    private void HandleEnableShoppingMenuItemButton(object data)
+    {
+        if(data is ItemButtonData itemButtonData)
+        {
+            GetPlayerLevelDelegate getPlayerLevelDelegate = itemButtonData.getPlayerLevelDelegate;
+            getPlayerLevelDelegate(_playerLevel);
+        }
     }
 
     private void ShowLevel()

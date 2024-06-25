@@ -3,37 +3,52 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// The ObserverManager class is responsible for managing observers and notifying them of events.
+/// </summary>
 public class ObserverManager : BaseSingleton<ObserverManager>
 {
     private ObserverManager() { }
-    private Dictionary<EventType, List<IObserverListener>> dicListeners = new Dictionary<EventType, List<IObserverListener>>();
+    private Dictionary<EventType, HashSet<IObserverListener>> dicListeners = new Dictionary<EventType, HashSet<IObserverListener>>();
 
     public void RegisterEvent(EventType type, IObserverListener listener)
     {
-        if (!dicListeners.ContainsKey(type))
+        if (!dicListeners.TryGetValue(type, out var listeners))
         {
-            dicListeners.Add(type, new List<IObserverListener>());
+            listeners = new HashSet<IObserverListener>();
+            dicListeners[type] = listeners;
         }
-        if (!dicListeners[type].Contains(listener))
-        {
-            dicListeners[type].Add(listener);
-        }
+        listeners.Add(listener);
+        // if ((listener.GetType()) == typeof(PlayerCoin))
+        // {
+        //     Debug.Log("RegisterEvent: " + type + " " + listener.GetType());
+        // }
+    }
 
+    public void RegisterEvent(List<EventType> types, IObserverListener listener)
+    {
+        foreach (EventType type in types)
+        {
+            RegisterEvent(type, listener);
+        }
     }
 
     public void UnregisterEvent(EventType type, IObserverListener listener)
     {
-        if (dicListeners.ContainsKey(type) && dicListeners[type].Contains(listener))
+        if (dicListeners.TryGetValue(type, out var listeners))
         {
-            dicListeners[type].Remove(listener);
+            listeners.Remove(listener);
         }
     }
+
     public void NotifyEvent(EventType type, object data)
     {
-        if (!dicListeners.ContainsKey(type)) return;
-        foreach (IObserverListener listener in dicListeners[type])
+        if (dicListeners.TryGetValue(type, out var listeners))
         {
-            listener.NotifyEvent(type, data);
+            foreach (IObserverListener listener in listeners)
+            {
+                listener.NotifyEvent(type, data);
+            }
         }
     }
 }

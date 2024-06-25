@@ -12,20 +12,20 @@ public class PlayerExperience : LoboMonoBehaviour, IObserverListener
     private void Start()
     {
         this.ShowExpSlider();
+        this.RegisterEvent();
+    }
+
+    private void RegisterEvent()
+    {
         ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
     }
-
     public void NotifyEvent(EventType type, object data)
     {
-        DogData dogData = (DogData)data;
-
-        int exp = dogData.expDefault;
-        this.ReceiveExp(exp);
-    }
-
-    private void FixedUpdate()
-    {
-        this.CheckExp();
+        if(data is DogData dogData)
+        {
+            int exp = dogData.expDefault;
+            this.ReceiveExp(exp);
+        }
     }
 
     private void CheckExp()
@@ -44,6 +44,7 @@ public class PlayerExperience : LoboMonoBehaviour, IObserverListener
     private void ReceiveExp(int expPoint)
     {
         this._xp += expPoint;
+        this.CheckExp();
         this.ShowExpSlider();
     }
 

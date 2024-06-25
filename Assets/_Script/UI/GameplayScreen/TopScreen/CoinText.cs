@@ -7,7 +7,7 @@ using UnityEngine;
 public class CoinText : BaseText, IObserverListener
 {
 
-    private void Start()
+    private void OnEnable()
     {
         ObserverManager.Instance.RegisterEvent(EventType.ShowCoin, this);
     }
