@@ -12,13 +12,13 @@ public class DogDamageReceiver : DamageReceiver, IObserverListener
     protected override void OnEnable()
     {
         base.OnEnable();
-        ObserverManager.Instance.RegisterEvent(EventType.BulletCollideWithDog, this);
+        ObserverManager.Instance.RegistEvent(EventType.BulletCollideWithDog, this);
     }
 
-    // private void OnDisable()
-    // {
-    //     ObserverManager.Instance.UnregisterEvent(EventType.BulletCollideWithDog, this);
-    // }
+    private void OnDisable()
+    {
+        ObserverManager.Instance?.UnregistEvent(EventType.BulletCollideWithDog, this);
+    }
 
     protected override void OnDead()
     {
@@ -34,11 +34,13 @@ public class DogDamageReceiver : DamageReceiver, IObserverListener
 
     public void NotifyEvent(EventType type, object data)
     {
-        BulletData bulletData = (BulletData)data;
-        GameObject objReceiveDamage = bulletData.objReceiveDamage;
-        if (objReceiveDamage != transform.parent.gameObject) return;
-        int damage = bulletData.damage;
-        this.Deduct(damage);
+        if(data is BulletData bulletData)
+        {
+            GameObject objReceiveDamage = bulletData.objReceiveDamage;
+            if (objReceiveDamage != transform.parent.gameObject) return;
+            int damage = bulletData.damage;
+            this.Deduct(damage);
+        }
     }
 
 }

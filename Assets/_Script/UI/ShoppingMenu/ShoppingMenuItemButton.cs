@@ -32,17 +32,36 @@ public class ShoppingMenuItemButton : BaseButton, IObserverListener
 
     private void RegisterEvent()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.ShowLevel, this);
-        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
-        ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
+        ObserverManager.Instance.RegistEvent(EventType.ShowLevel, this);
+        ObserverManager.Instance.RegistEvent(EventType.IncreaseCoin, this);
+        ObserverManager.Instance.RegistEvent(EventType.DecreaseCoin, this);
     }
     
     public void NotifyEvent(EventType type, object data)
     {
-        if(type == EventType.ShowLevel) this._playerLevel = (int)data;
-        else
+        switch(type)
         {
-            this._playerCoin = (int)data;
+            case EventType.ShowLevel:
+                this.HandleShowLevel(data);
+                break;
+            default:
+                this.UpdatePlayerCoin(data);
+                break;
+        }
+    }
+    private void HandleShowLevel(object data)
+    {
+        if(data is int playerLevel)
+        {
+            this._playerLevel = playerLevel;
+            this.CheckLevel();
+        }
+    }
+    private void UpdatePlayerCoin(object data)
+    {
+        if (data is int playerCoin)
+        {
+            this._playerCoin = playerCoin;
             this.CheckCoin();
         }
     }

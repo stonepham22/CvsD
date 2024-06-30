@@ -11,7 +11,7 @@ public class ObserverManager : BaseSingleton<ObserverManager>
     private ObserverManager() { }
     private Dictionary<EventType, HashSet<IObserverListener>> dicListeners = new Dictionary<EventType, HashSet<IObserverListener>>();
 
-    public void RegisterEvent(EventType type, IObserverListener listener)
+    public void RegistEvent(EventType type, IObserverListener listener)
     {
         if (!dicListeners.TryGetValue(type, out var listeners))
         {
@@ -19,25 +19,27 @@ public class ObserverManager : BaseSingleton<ObserverManager>
             dicListeners[type] = listeners;
         }
         listeners.Add(listener);
-        // if ((listener.GetType()) == typeof(PlayerCoin))
-        // {
-        //     Debug.Log("RegisterEvent: " + type + " " + listener.GetType());
-        // }
     }
-
-    public void RegisterEvent(List<EventType> types, IObserverListener listener)
+    public void RegistEvent(List<EventType> types, IObserverListener listener)
     {
         foreach (EventType type in types)
         {
-            RegisterEvent(type, listener);
+            RegistEvent(type, listener);
         }
     }
 
-    public void UnregisterEvent(EventType type, IObserverListener listener)
+    public void UnregistEvent(EventType type, IObserverListener listener)
     {
         if (dicListeners.TryGetValue(type, out var listeners))
         {
             listeners.Remove(listener);
+        }
+    }
+    public void UnregistEvent(List<EventType> types, IObserverListener listener)
+    {
+        foreach (EventType type in types)
+        {
+            UnregistEvent(type, listener);
         }
     }
 

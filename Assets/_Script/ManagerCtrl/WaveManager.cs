@@ -13,7 +13,7 @@ public class WaveManager : BaseSingleton<WaveManager>, IObserverListener
 
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.NextWave, this);
+        ObserverManager.Instance.RegistEvent(EventType.NextWave, this);
     }
 
     public void NotifyEvent(EventType type, object data)

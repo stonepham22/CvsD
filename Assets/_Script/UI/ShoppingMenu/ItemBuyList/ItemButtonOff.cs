@@ -7,16 +7,33 @@ public class ItemButtonOff : LoboMonoBehaviour, IObserverListener
 {
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.ItemLevelGatherThanPlayerLevel, this);
-        ObserverManager.Instance.RegisterEvent(EventType.ItemCoinGatherThanPlayerCoin, this);
-    }
-    
-    public void NotifyEvent(EventType type, object data)
-    {
-        if(type == EventType.ItemLevelGatherThanPlayerLevel)
-            transform.gameObject.SetActive(false);
-        else transform.gameObject.SetActive(true);
+        this.RegisteredEvents();
     }
 
-    
+    private void RegisteredEvents()
+    {
+        ObserverManager.Instance.RegistEvent(EventType.ItemLevelGatherThanPlayerLevel, this);
+        ObserverManager.Instance.RegistEvent(EventType.ItemCoinGatherThanPlayerCoin, this);
+    }
+    public void NotifyEvent(EventType type, object data)
+    {
+        switch (type)
+        {
+            case EventType.ItemLevelGatherThanPlayerLevel:
+                this.HandleItemLevelGatherThanPlayerLevel();
+                break;
+            default:
+                this.HandleItemLevelGatherThanPlayerCoin();
+                break;
+        }
+    }
+    private void HandleItemLevelGatherThanPlayerLevel()
+    {
+        transform.gameObject.SetActive(false);
+    }
+    private void HandleItemLevelGatherThanPlayerCoin()
+    {
+        transform.gameObject.SetActive(true);
+    }
+
 }

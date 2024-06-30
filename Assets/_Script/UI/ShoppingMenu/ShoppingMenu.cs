@@ -6,15 +6,25 @@ public class ShoppingMenu : MonoBehaviour, IObserverListener
 {
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.OnClickExitShoppingMenuButton, this);
-        ObserverManager.Instance.RegisterEvent(EventType.EnableShoppingMenu, this);
+        this.RegistEvent();
         transform.gameObject.SetActive(false);
+    }
+
+    private void RegistEvent()
+    {
+        ObserverManager.Instance.RegistEvent(EventType.EnableShoppingMenu, this);
+        ObserverManager.Instance.RegistEvent(EventType.OnClickExitShoppingMenuButton, this);
     }
     public void NotifyEvent(EventType type, object data)
     {
-        if(type == EventType.OnClickExitShoppingMenuButton) transform.gameObject.SetActive(false);
-        else transform.gameObject.SetActive(true);
+        switch(type)
+        {
+            case EventType.OnClickExitShoppingMenuButton:
+                transform.gameObject.SetActive(false);
+                break;
+            default:
+                transform.gameObject.SetActive(true);
+                break;
+        }
     }
-
-   
 }

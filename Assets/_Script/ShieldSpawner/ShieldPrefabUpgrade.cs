@@ -10,20 +10,32 @@ public class ShieldPrefabUpgrade : BaseShieldPrefab, IObserverListener
 
     private void OnEnable()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.IncreaseCoin, this);
-        ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
-
+        this.RegisterEvent();
         ObserverManager.Instance.NotifyEvent(EventType.ShieldOnEnable, this);
     }
-
     private void OnDisable()
     {
-        Debug.Log(transform.name);
-        if(ObserverManager.Instance == null) return;    
-        ObserverManager.Instance.UnregisterEvent(EventType.IncreaseCoin, this);
-        ObserverManager.Instance.UnregisterEvent(EventType.DecreaseCoin, this);
+        this.UnregisterEvent();
     }
 
+    private void RegisterEvent()
+    {
+        List<EventType> types = new List<EventType>
+        {
+            EventType.IncreaseCoin,
+            EventType.DecreaseCoin
+        };
+        ObserverManager.Instance.RegistEvent(types, this);
+    }
+    private void UnregisterEvent()
+    {
+        List<EventType> types = new List<EventType>
+        {
+            EventType.IncreaseCoin,
+            EventType.DecreaseCoin
+        };
+        ObserverManager.Instance?.UnregistEvent(types, this);
+    }
     public void NotifyEvent(EventType type, object data)
     {
         SetPlayerCoin((int)data);

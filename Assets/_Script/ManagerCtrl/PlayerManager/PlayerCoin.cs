@@ -25,7 +25,7 @@ public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
             EventType.OnClickShoppingMenuItemButton,
             EventType.EnableShoppingMenuItemButton
         };
-        ObserverManager.Instance.RegisterEvent(types, this);
+        ObserverManager.Instance.RegistEvent(types, this);
     }
 
     public void NotifyEvent(EventType type, object data)

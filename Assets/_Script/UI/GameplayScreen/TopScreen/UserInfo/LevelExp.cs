@@ -8,14 +8,21 @@ public class LevelExp : BaseSlider, IObserverListener
     protected override void Start()
     {
         base.Start();
-        ObserverManager.Instance.RegisterEvent(EventType.LevelUp, this);
-        ObserverManager.Instance.RegisterEvent(EventType.ShowExp, this);
+        this.RegisteredEvents();
+    }
+
+    private void RegisteredEvents()
+    {
+        ObserverManager.Instance.RegistEvent(EventType.LevelUp, this);
+        ObserverManager.Instance.RegistEvent(EventType.ShowExp, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        float value = (float)data;
-        this.ShowExpSlider(value);
+        if(data is float value)
+        {
+            this.ShowExpSlider(value);
+        }
     }
 
     private void ShowExpSlider(float newValue)

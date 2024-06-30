@@ -9,7 +9,7 @@ public class BuyChickenButtonOn : BaseButton, IObserverListener
 
     private void OnEnable()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.DecreaseCoin, this);
+        ObserverManager.Instance.RegistEvent(EventType.DecreaseCoin, this);
     }
 
     protected override void OnClick()

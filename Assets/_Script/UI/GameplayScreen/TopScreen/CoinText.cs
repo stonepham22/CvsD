@@ -9,7 +9,7 @@ public class CoinText : BaseText, IObserverListener
 
     private void OnEnable()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.ShowCoin, this);
+        ObserverManager.Instance.RegistEvent(EventType.ShowCoin, this);
     }
 
     public void NotifyEvent(EventType type, object data)

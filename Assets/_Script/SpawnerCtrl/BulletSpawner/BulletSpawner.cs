@@ -16,22 +16,44 @@ public class BulletSpawner : BaseSpawner, IObserverListener
 
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.BulletDespawn, this);
-        ObserverManager.Instance.RegisterEvent(EventType.BulletCollideWithDog, this);
-        ObserverManager.Instance.RegisterEvent(EventType.ChickenShooting, this);
+        this.RegisterEvent();
     }
-
+    
+    private void RegisterEvent()
+    {
+        List<EventType> types = new List<EventType>
+        {
+            EventType.BulletDespawn,
+            EventType.BulletCollideWithDog,
+            EventType.ChickenShooting
+        };
+        ObserverManager.Instance.RegistEvent(types, this);
+    }
     public void NotifyEvent(EventType type, object data)
     {
-        if(type == EventType.ChickenShooting)
+        switch(type)
         {
-            ChickenShootingData shootingData = (ChickenShootingData)data;
-            this.Spawning(shootingData.bulletSpawnPos, shootingData.chickenDamage);
-            return;
+            case EventType.ChickenShooting:
+                this.HandleChickenShooting(data);
+                break;
+            default:
+                this.HandleDespawnBullet(data);
+                break;
         }
-        BulletData bulletData = data as BulletData;
-        GameObject prefab = bulletData.bulletPrefab;
-        this.Despawn(prefab);
     }
-
+    private void HandleChickenShooting(object data)
+    {
+        if(data is ChickenShootingData shootingData)
+        {
+            this.Spawning(shootingData.bulletSpawnPos, shootingData.chickenDamage);
+        }
+    }
+    private void HandleDespawnBullet(object data)
+    {
+        if(data is BulletData bulletData)
+        {
+            GameObject prefab = bulletData.bulletPrefab;
+            this.Despawn(prefab);
+        }
+    }
 }

@@ -10,7 +10,7 @@ public class ChickenSpawner : BaseSpawner, IObserverListener
 
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.BuyChicken, this);
+        ObserverManager.Instance.RegistEvent(EventType.BuyChicken, this);
     }
 
     public void NotifyEvent(EventType type, object data)

@@ -19,7 +19,7 @@ public class ItemLevelText : BaseText, IObserverListener
 
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.OnClickShoppingMenuItemButton, this);
+        ObserverManager.Instance.RegistEvent(EventType.OnClickShoppingMenuItemButton, this);
     }
     
     public void NotifyEvent(EventType type, object data)

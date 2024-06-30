@@ -4,11 +4,16 @@ public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSinglet
 {
     private static T _instance;
     private static object _lock = new object();
+    private static bool applicationIsQuitting = false;
 
     public static T Instance
     {
         get
         {
+            if (applicationIsQuitting)
+            {
+                return null;
+            }
             lock (_lock)
             {
                 if (_instance == null)
@@ -36,4 +41,15 @@ public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSinglet
             Destroy(gameObject);
         }
     }
+
+    protected virtual void OnDestroy()
+    {
+        applicationIsQuitting = true;
+    }
+
+    protected virtual void OnApplicationQuit()
+    {
+        applicationIsQuitting = true;
+    }
+
 }

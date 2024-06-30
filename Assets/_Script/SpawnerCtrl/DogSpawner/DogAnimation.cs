@@ -7,13 +7,14 @@ public class DogAnimation : BaseAnimation, IObserverListener
     
     private void OnEnable()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+        ObserverManager.Instance.RegistEvent(EventType.DogOnDead, this);
     }
 
-    // private void OnDisable()
-    // {
-    //     ObserverManager.Instance.UnregisterEvent(EventType.DogOnDead, this);
-    // }
+    private void OnDisable()
+    {
+        if(ObserverManager.Instance == null) return;
+        ObserverManager.Instance.UnregistEvent(EventType.DogOnDead, this);
+    }
 
     public void NotifyEvent(EventType type, object data)
     {

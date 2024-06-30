@@ -17,7 +17,7 @@ public class PlayerExperience : LoboMonoBehaviour, IObserverListener
 
     private void RegisterEvent()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.DogOnDead, this);
+        ObserverManager.Instance.RegistEvent(EventType.DogOnDead, this);
     }
     public void NotifyEvent(EventType type, object data)
     {

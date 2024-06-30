@@ -6,7 +6,7 @@ public class WaveText : BaseText, IObserverListener
 {
     private void Start()
     {
-        ObserverManager.Instance.RegisterEvent(EventType.ShowWaveText, this);
+        ObserverManager.Instance.RegistEvent(EventType.ShowWaveText, this);
     }
 
     public void NotifyEvent(EventType type, object data)
