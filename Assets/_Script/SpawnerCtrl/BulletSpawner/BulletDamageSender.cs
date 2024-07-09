@@ -10,6 +10,7 @@ public class BulletDamageSender : DamageSender
 
     private const string DOG_TAG = "Dog";
     private const string DAMAGE_RECEIVER = "DamageReceiver";
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,4 +29,8 @@ public class BulletDamageSender : DamageSender
         ObserverManager.Instance.NotifyEvent(EventType.BulletCollideWithDog, bulletData);
     }
 
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
 }

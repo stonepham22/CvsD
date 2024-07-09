@@ -11,7 +11,7 @@ public class ChickenShooting : LoboMonoBehaviour
     [SerializeField] private float _shootTimer = 0f;
     [SerializeField] private int _indexStandy;
 
-    [SerializeField] private int _chickenDamage;
+    [SerializeField] private int _chickenDamage = 10;
 
     protected override void LoadComponents()
     {
@@ -70,8 +70,6 @@ public class ChickenShooting : LoboMonoBehaviour
         if (!this._isShooting) return;
         if(!this._isStandy) return;
         if (this.CheckDelayTime()) return;
-        // Vector3 BulletSpawnPos = transform.parent.position;
-        // SpawnerCtrl.Instance.BulletSpawner.Spawning(BulletSpawnPos);
 
         ChickenShootingData data = new ChickenShootingData()
         {

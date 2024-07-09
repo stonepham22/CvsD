@@ -11,6 +11,8 @@ public class BulletSpawner : BaseSpawner, IObserverListener
         // Set the damage value for the prefab
         Quaternion rotation = transform.parent.rotation;
         GameObject newBullet = this.Spawn(prefab, spawnPos, rotation);
+        BulletDamageSender bulletDamageSender = newBullet.GetComponentInChildren<BulletDamageSender>();
+        bulletDamageSender.SetDamage(damage);
         newBullet.SetActive(true);
     }
 
