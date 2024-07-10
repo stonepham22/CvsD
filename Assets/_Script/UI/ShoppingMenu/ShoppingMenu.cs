@@ -12,7 +12,7 @@ public class ShoppingMenu : MonoBehaviour, IObserverListener
 
     private void RegistEvent()
     {
-        ObserverManager.Instance.RegistEvent(EventType.EnableShoppingMenu, this);
+        ObserverManager.Instance.RegistEvent(EventType.OnClickShoppingButtonOn, this);
         ObserverManager.Instance.RegistEvent(EventType.OnClickExitShoppingMenuButton, this);
     }
     public void NotifyEvent(EventType type, object data)

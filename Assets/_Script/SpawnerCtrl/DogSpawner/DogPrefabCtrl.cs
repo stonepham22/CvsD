@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DogPrefabCtrl : LoboMonoBehaviour
@@ -42,5 +43,6 @@ public class DogPrefabCtrl : LoboMonoBehaviour
         this._dogAnimation = GetComponentInChildren<DogAnimation>();
         Debug.LogWarning(transform.name + ": LoadDogAnimation", gameObject);
     }
+
 
 }

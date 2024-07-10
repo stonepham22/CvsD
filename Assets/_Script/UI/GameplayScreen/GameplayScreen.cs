@@ -39,12 +39,12 @@ public class GameplayScreen : LoboMonoBehaviour, IObserverListener
 
     private void RegisterEvent()
     {
-        ObserverManager.Instance.RegistEvent(EventType.EnableShoppingMenu, this);
+        ObserverManager.Instance.RegistEvent(EventType.OnClickShoppingButtonOn, this);
         ObserverManager.Instance.RegistEvent(EventType.OnClickExitShoppingMenuButton, this);
     }
     public void NotifyEvent(EventType type, object data)
     {
-        if(type == EventType.EnableShoppingMenu) transform.gameObject.SetActive(false);
+        if(type == EventType.OnClickShoppingButtonOn) transform.gameObject.SetActive(false);
         else transform.gameObject.SetActive(true);
     }
 

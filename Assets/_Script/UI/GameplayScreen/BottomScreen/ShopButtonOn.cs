@@ -7,12 +7,12 @@ public class ShopButtonOn : BaseButton
 
     protected override void OnClick()
     {
-        this.NotifyEventEnableShoppingMenu();
+        this.NotifyEventOnClick();
     }
 
-    private void NotifyEventEnableShoppingMenu()
+    private void NotifyEventOnClick()
     {
-        ObserverManager.Instance.NotifyEvent(EventType.EnableShoppingMenu, this);
+        ObserverManager.Instance.NotifyEvent(EventType.OnClickShoppingButtonOn, this);
     }
 
 }

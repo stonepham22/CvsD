@@ -59,7 +59,7 @@ public class DogDamageSender : DamageSender
     {
         if (!collision.CompareTag(CHICKEN_TAG) && !collision.CompareTag(SHIELD_TAG)) return;
         this.SetAnimationAttack(false);
-        this._ctrl.DogMovement.Moving();
+        this._ctrl.DogMovement.Move();
         CancelInvoke(nameof(SendDamage));
     }    
 
