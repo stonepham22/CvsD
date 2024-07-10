@@ -5,6 +5,7 @@ using UnityEngine;
 public class IdleState : IState
 {
     private Animator _animator;
+    private const string IS_IDLE = "isIdle";
     public IdleState(Animator animator)
     {
         _animator = animator;
@@ -12,7 +13,7 @@ public class IdleState : IState
 
     public void Enter()
     {
-        _animator.SetBool("isIdle", true);
+        _animator.SetBool(IS_IDLE, true);
     }
     public void Update()
     {
@@ -20,6 +21,6 @@ public class IdleState : IState
     }
     public void Exit()
     {
-        _animator.SetBool("isIdle", false);
+        _animator.SetBool(IS_IDLE, false);
     }
 }

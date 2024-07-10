@@ -13,13 +13,13 @@ public class ShoppingMenu : MonoBehaviour, IObserverListener
     private void RegistEvent()
     {
         ObserverManager.Instance.RegistEvent(EventType.OnClickShoppingButtonOn, this);
-        ObserverManager.Instance.RegistEvent(EventType.OnClickExitShoppingMenuButton, this);
+        ObserverManager.Instance.RegistEvent(EventType.ExitShoppingMenu, this);
     }
     public void NotifyEvent(EventType type, object data)
     {
         switch(type)
         {
-            case EventType.OnClickExitShoppingMenuButton:
+            case EventType.ExitShoppingMenu:
                 transform.gameObject.SetActive(false);
                 break;
             default:

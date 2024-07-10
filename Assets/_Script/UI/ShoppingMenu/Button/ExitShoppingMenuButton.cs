@@ -6,7 +6,7 @@ public class ExitShoppingMenuButton : BaseButton
 {
     protected override void OnClick()
     {
-        ObserverManager.Instance.NotifyEvent(EventType.OnClickExitShoppingMenuButton, this);
+        ObserverManager.Instance.NotifyEvent(EventType.ExitShoppingMenu, this);
     }
 
 }

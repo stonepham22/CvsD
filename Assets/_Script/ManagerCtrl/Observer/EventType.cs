@@ -18,7 +18,7 @@ public enum EventType
     OnClickShoppingButtonOn, DisableShoppingMenu,
     EnableShoppingMenuItemButton,  OnClickShoppingMenuItemButton, 
     ItemLevelGatherThanPlayerLevel, ItemCoinGatherThanPlayerCoin,
-    OnClickExitShoppingMenuButton,
+    ExitShoppingMenu,
 
     ShieldOnEnable, ShieldRepaired, ShieldUpgraded,
 

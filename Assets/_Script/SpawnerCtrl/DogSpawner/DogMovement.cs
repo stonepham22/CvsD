@@ -19,12 +19,21 @@ public class DogMovement : MoveByRigidbody2D, IObserverListener
 
     private void RegistEvent()
     {
-        ObserverManager.Instance.RegistEvent(EventType.OnClickShoppingButtonOn, this);
+        List<EventType> types = new List<EventType>()
+        {
+            EventType.OnClickShoppingButtonOn,
+            EventType.ExitShoppingMenu
+        };
+        ObserverManager.Instance?.RegistEvent(types, this);
     }
     private void UnregistEvent()
     {
-        if(ObserverManager.Instance == null) return;
-        ObserverManager.Instance.UnregistEvent(EventType.OnClickShoppingButtonOn, this);
+        List<EventType> types = new List<EventType>()
+        {
+            EventType.OnClickShoppingButtonOn,
+            EventType.ExitShoppingMenu
+        };
+        ObserverManager.Instance?.UnregistEvent(types, this);
     }
 
     public void Move()
@@ -39,6 +48,14 @@ public class DogMovement : MoveByRigidbody2D, IObserverListener
 
     public void NotifyEvent(EventType type, object data)
     {
-        Stop();
+        switch(type)
+        {
+            case EventType.OnClickShoppingButtonOn:
+                Stop();
+                break;
+            default:
+                Move();
+                break;
+        }
     }
 }

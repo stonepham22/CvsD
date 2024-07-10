@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class DogAnimation : BaseAnimation, IObserverListener
 {
-    private StateMachine stateMachine;
-    
+    private StateMachine _stateMachine;
     private void OnEnable()
     {
         RegistEvent();
     }
     private void Start()
     {
-        stateMachine = new StateMachine(animator);
-        stateMachine.Initialize(stateMachine.walkState);
+        CreateStateMachine();
     }
     private void OnDisable()
     {
@@ -22,29 +20,51 @@ public class DogAnimation : BaseAnimation, IObserverListener
 
     private void RegistEvent()
     {
-        ObserverManager.Instance.RegistEvent(EventType.DogOnDead, this);
-        ObserverManager.Instance.RegistEvent(EventType.OnClickShoppingButtonOn, this);
+        List<EventType> types = new List<EventType>()
+        {
+            EventType.DogOnDead,
+            EventType.OnClickShoppingButtonOn,
+            EventType.ExitShoppingMenu
+        };
+        ObserverManager.Instance?.RegistEvent(types, this);
     }
     private void UnregisterEvent()
     {
-        if (ObserverManager.Instance == null) return;
-        ObserverManager.Instance.UnregistEvent(EventType.DogOnDead, this);
-        ObserverManager.Instance.UnregistEvent(EventType.OnClickShoppingButtonOn, this);
+        List<EventType> types = new List<EventType>()
+        {
+            EventType.DogOnDead,
+            EventType.OnClickShoppingButtonOn,
+            EventType.ExitShoppingMenu
+        };
+        ObserverManager.Instance?.UnregistEvent(types, this);
     }
     public void NotifyEvent(EventType type, object data)
     {
-        if(type == EventType.DogOnDead) HandleDogOnDead(data);
-        else HandleOnClickShoppingButtonOn(data);
+        switch(type)
+        {
+            case EventType.DogOnDead:
+                HandleDogOnDead(data);
+                break;
+            case EventType.OnClickShoppingButtonOn:
+                HandleOnClickShoppingButtonOn();
+                break;
+            default:
+                HandleExitShoppingMenu();
+                break;
+        }
     }
-
     private void HandleDogOnDead(object data)
     {
-        DogData dogData = (DogData)data;
+        if (data is not DogData dogData) return;
         if (transform.parent == dogData.dogPrefab.transform) this.SetDead();
     }
-    private void HandleOnClickShoppingButtonOn(object data)
+    private void HandleOnClickShoppingButtonOn()
     {
-        stateMachine.TransitionTo(stateMachine.idleState);
+        _stateMachine.TransitionTo(_stateMachine.IdleState);
+    }
+    private void HandleExitShoppingMenu()
+    {
+        _stateMachine.TransitionTo(_stateMachine.WalkState);
     }
 
     private void SetDead()
@@ -54,5 +74,9 @@ public class DogAnimation : BaseAnimation, IObserverListener
     public void SetAttack(bool value)
     {
         this.animator.SetBool(IS_ATTACK, value);
+    }
+    private void CreateStateMachine()
+    {
+        _stateMachine = new StateMachine(animator);
     }
 }

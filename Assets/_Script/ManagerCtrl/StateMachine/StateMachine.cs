@@ -6,37 +6,37 @@ using UnityEngine;
 [Serializable]
 public class StateMachine
 {
-    public IState CurrentState { get; private set; }
-
-    public IdleState idleState;
-    public WalkState walkState;
-    public DeadState deadState;
+    private IState _currentState;
+    public IState CurrentState => _currentState;
+    private IdleState _idleState;
+    public IdleState IdleState => _idleState;
+    private WalkState _walkState;
+    public WalkState WalkState => _walkState;
+    private DeadState _deadState;
+    public DeadState DeadState => _deadState;
     
     public StateMachine(Animator animator)
     {
-        this.idleState = new IdleState(animator);
-        this.walkState = new WalkState(animator);
-        this.deadState = new DeadState(animator);
+        _idleState = new IdleState(animator);
+        _walkState = new WalkState(animator);
+        _deadState = new DeadState(animator);
     }
 
     public void Initialize(IState state)
     {
-        CurrentState = state;
+        _currentState = state;
         state.Enter();
     }
 
     public void TransitionTo(IState nextState)
     {
-        CurrentState.Exit();
-        CurrentState = nextState;
+        _currentState?.Exit();
+        _currentState = nextState;
         nextState.Enter();
     }
 
     public void Update()
     {
-        if (CurrentState != null)
-        {
-            CurrentState.Update();
-        }
+        _currentState?.Update();
     }
 }

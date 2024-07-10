@@ -40,7 +40,7 @@ public class GameplayScreen : LoboMonoBehaviour, IObserverListener
     private void RegisterEvent()
     {
         ObserverManager.Instance.RegistEvent(EventType.OnClickShoppingButtonOn, this);
-        ObserverManager.Instance.RegistEvent(EventType.OnClickExitShoppingMenuButton, this);
+        ObserverManager.Instance.RegistEvent(EventType.ExitShoppingMenu, this);
     }
     public void NotifyEvent(EventType type, object data)
     {
