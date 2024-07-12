@@ -4,16 +4,6 @@
     ".NETStandard,Version=v2.1": {
       "Microsoft.Unity.Analyzers/1.19.0": {
         "type": "package"
-      },
-      "Assembly-CSharp-firstpass/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.1",
-        "compile": {
-          "bin/placeholder/Assembly-CSharp-firstpass.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Assembly-CSharp-firstpass.dll": {}
-        }
       }
     }
   },
@@ -32,16 +22,10 @@
         "tools/install.ps1",
         "tools/uninstall.ps1"
       ]
-    },
-    "Assembly-CSharp-firstpass/1.0.0": {
-      "type": "project",
-      "path": "../Assembly-CSharp-firstpass/Assembly-CSharp-firstpass.csproj",
-      "msbuildProject": "../Assembly-CSharp-firstpass/Assembly-CSharp-firstpass.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.1": [
-      "Assembly-CSharp-firstpass >= 1.0.0",
       "Microsoft.Unity.Analyzers >= *"
     ]
   },
@@ -51,11 +35,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
-      "projectName": "Assembly-CSharp",
-      "projectPath": "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
+      "projectUniqueName": "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp-firstpass\\Assembly-CSharp-firstpass.csproj",
+      "projectName": "Assembly-CSharp-firstpass",
+      "projectPath": "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp-firstpass\\Assembly-CSharp-firstpass.csproj",
       "packagesPath": "C:\\Users\\tongt\\.nuget\\packages\\",
-      "outputPath": "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp\\obj\\",
+      "outputPath": "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp-firstpass\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\tongt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -71,11 +55,7 @@
       "frameworks": {
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
-          "projectReferences": {
-            "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp-firstpass\\Assembly-CSharp-firstpass.csproj": {
-              "projectPath": "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp-firstpass\\Assembly-CSharp-firstpass.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

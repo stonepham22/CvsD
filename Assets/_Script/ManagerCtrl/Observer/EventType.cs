@@ -1,6 +1,6 @@
 public enum EventType
 {
-    DogOnDead,
+    DogOnDead, DogTriggerEnter, DogTriggerExit,
 
     BulletDespawn, BulletCollideWithDog,
 

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "86GRIH9QzHCPmuWBq9pY7dlwx0gvftp/JgKcZIO6SXvd7l0S3zx5RBqE0kcQTcQJ27dcJNpN5GkXfyGvznIxrw==",
+  "success": true,
+  "projectFilePath": "C:\\Unity Project\\Chickens Vs Dogs\\CSharpProjFolders\\Assembly-CSharp-firstpass\\Assembly-CSharp-firstpass.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tongt\\.nuget\\packages\\microsoft.unity.analyzers\\1.19.0\\microsoft.unity.analyzers.1.19.0.nupkg.sha512"
+  ],
+  "logs": []
+}

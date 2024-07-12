@@ -34,17 +34,18 @@ public class DogDamageSender : DamageSender
         if (collision.name != DAMAGE_RECEIVER) return;
         if (!collision.CompareTag(CHICKEN_TAG) && !collision.CompareTag(SHIELD_TAG)) return;
         this._collision = collision.gameObject;
-        
         this._ctrl.DogMovement.Stop();
-        
-        this.SetAnimationAttack(true);
-        
+        NotifyEventDogTriggerEnter();
         InvokeRepeating(nameof(this.SendDamage), 0, this._timeDelaySend);
     }
 
-    void SetAnimationAttack(bool value)
+    private void NotifyEventDogTriggerEnter()
     {
-        this._ctrl.Animation.SetAttack(value);
+        DogData dogData = new DogData()
+        {
+            dogPrefab = transform.parent.parent.gameObject
+        };
+        ObserverManager.Instance.NotifyEvent(EventType.DogTriggerEnter, dogData);
     }
 
     void SendDamage()
@@ -58,9 +59,18 @@ public class DogDamageSender : DamageSender
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag(CHICKEN_TAG) && !collision.CompareTag(SHIELD_TAG)) return;
-        this.SetAnimationAttack(false);
+        NotifyEventDogTriggerExit();
         this._ctrl.DogMovement.Move();
         CancelInvoke(nameof(SendDamage));
-    }    
+    }
+
+    private void NotifyEventDogTriggerExit()
+    {
+        DogData dogData = new DogData()
+        {
+            dogPrefab = transform.parent.parent.gameObject
+        };
+        ObserverManager.Instance.NotifyEvent(EventType.DogTriggerExit, dogData);
+    }
 
 }

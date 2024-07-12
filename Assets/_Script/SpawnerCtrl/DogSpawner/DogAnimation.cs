@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class DogAnimation : BaseAnimation, IObserverListener
 {
-    private StateMachine _stateMachine;
+    private AnimationStateMachine _animationStateMachine;
     private void OnEnable()
     {
         RegistEvent();
     }
     private void Start()
     {
-        CreateStateMachine();
+        InitStateMachine();
     }
     private void OnDisable()
     {
@@ -22,9 +22,13 @@ public class DogAnimation : BaseAnimation, IObserverListener
     {
         List<EventType> types = new List<EventType>()
         {
+            EventType.DogTriggerEnter,
+            EventType.DogTriggerExit,
             EventType.DogOnDead,
+
             EventType.OnClickShoppingButtonOn,
-            EventType.ExitShoppingMenu
+            EventType.ExitShoppingMenu,
+            
         };
         ObserverManager.Instance?.RegistEvent(types, this);
     }
@@ -32,51 +36,55 @@ public class DogAnimation : BaseAnimation, IObserverListener
     {
         List<EventType> types = new List<EventType>()
         {
+            EventType.DogTriggerEnter,
+            EventType.DogTriggerExit,
             EventType.DogOnDead,
+
             EventType.OnClickShoppingButtonOn,
-            EventType.ExitShoppingMenu
+            EventType.ExitShoppingMenu,
+            
         };
         ObserverManager.Instance?.UnregistEvent(types, this);
     }
     public void NotifyEvent(EventType type, object data)
     {
-        switch(type)
+        switch (type)
         {
+            
+            case EventType.DogTriggerEnter:
+                HandleDogAnimation(data, _animationStateMachine.AttackState);
+                break;
+            case EventType.DogTriggerExit:
+                HandleDogAnimation(data, _animationStateMachine.WalkState);
+                break;
             case EventType.DogOnDead:
-                HandleDogOnDead(data);
+                HandleDogAnimation(data, _animationStateMachine.DeadState);
                 break;
+            
             case EventType.OnClickShoppingButtonOn:
-                HandleOnClickShoppingButtonOn();
+                TransitionTo(_animationStateMachine.IdleState);
                 break;
-            default:
-                HandleExitShoppingMenu();
+            case EventType.ExitShoppingMenu:
+                TransitionTo(_animationStateMachine.WalkState);
                 break;
+
         }
     }
-    private void HandleDogOnDead(object data)
+    private void HandleDogAnimation(object data, IState state)
     {
         if (data is not DogData dogData) return;
-        if (transform.parent == dogData.dogPrefab.transform) this.SetDead();
-    }
-    private void HandleOnClickShoppingButtonOn()
-    {
-        _stateMachine.TransitionTo(_stateMachine.IdleState);
-    }
-    private void HandleExitShoppingMenu()
-    {
-        _stateMachine.TransitionTo(_stateMachine.WalkState);
+        if (transform.parent == dogData.dogPrefab.transform)
+        {
+            TransitionTo(state);
+        }
     }
 
-    private void SetDead()
+    private void InitStateMachine()
     {
-        this.animator.SetBool(IS_DEAD, true);
+        _animationStateMachine = new AnimationStateMachine(animator);
     }
-    public void SetAttack(bool value)
+    private void TransitionTo(IState state)
     {
-        this.animator.SetBool(IS_ATTACK, value);
-    }
-    private void CreateStateMachine()
-    {
-        _stateMachine = new StateMachine(animator);
+        _animationStateMachine.TransitionTo(state);
     }
 }
