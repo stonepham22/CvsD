@@ -4,18 +4,43 @@ using UnityEngine;
 
 public class ChickenSpawner : BaseSpawner, IObserverListener
 {
-    
+
     [SerializeField] public Transform Holder => holder;
     [SerializeField] private Transform _parent;
 
     private void Start()
     {
-        ObserverManager.Instance.RegistEvent(EventType.BuyChicken, this);
+        RegistEvent();
+    }
+
+    private void RegistEvent()
+    {
+        List<EventType> eventTypes = new List<EventType>()
+        {
+            EventType.BuyChicken,
+            EventType.ChickenOnDead
+        };
+        ObserverManager.Instance.RegistEvent(eventTypes, this);
     }
 
     public void NotifyEvent(EventType type, object data)
     {
-        ChickenZeroSpawnInLobby();
+        switch (type)
+        {
+            case EventType.BuyChicken:
+                ChickenZeroSpawnInLobby();
+                break;
+            default:
+                HandleChickenOnDead(data);
+                break;
+        }
+    }
+    private void HandleChickenOnDead(object data)
+    {
+        if(data is GameObject prefab)
+        {
+            Despawn(prefab);
+        }
     }
 
     void ChickenSpawnInLobby(GameObject prefab)
@@ -31,11 +56,11 @@ public class ChickenSpawner : BaseSpawner, IObserverListener
     {
         this.ChickenSpawnInLobby(this.prefabs[0]);
     }
-    
+
     public void ChickenSpawnInLobbyFromEgg()
     {
         int wave = WaveManager.Instance.CurrentWave;
-        int prefabNumber = Random.Range(0, wave+1);
+        int prefabNumber = Random.Range(0, wave + 1);
         this.ChickenSpawnInLobby(this.prefabs[prefabNumber]);
     }
 
@@ -53,5 +78,5 @@ public class ChickenSpawner : BaseSpawner, IObserverListener
         }
     }
 
-    
+
 }

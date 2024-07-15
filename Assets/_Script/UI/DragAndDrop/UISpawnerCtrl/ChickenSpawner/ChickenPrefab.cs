@@ -7,9 +7,6 @@ public class ChickenPrefab : ObjectDragAndDrop
     [Header("Chicken")]
     [SerializeField] const string STANDY = "Standy";
 
-    [SerializeField] private ChickenShooting _chickenShooting;
-    public ChickenShooting ChickenShooting => _chickenShooting;
-
     [SerializeField] private ChickenPrefabDespawn _chickenPrefabDespawn;
     public ChickenPrefabDespawn Despawn => _chickenPrefabDespawn;
 
@@ -23,15 +20,7 @@ public class ChickenPrefab : ObjectDragAndDrop
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadChickenShooting();
         this.LoadChickenPrefabDespawn();
-    }
-
-    void LoadChickenShooting()
-    {
-        if (this._chickenShooting != null) return;
-        this._chickenShooting = GetComponentInChildren<ChickenShooting>();
-        Debug.LogWarning(transform.name + ": LoadChickenShooting", gameObject);
     }
 
     void LoadChickenPrefabDespawn()
