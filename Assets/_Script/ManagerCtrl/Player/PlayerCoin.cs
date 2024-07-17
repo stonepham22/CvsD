@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public delegate void GetPlayerCoinDelegate(int playerCoin);
-public class PlayerCoin : BaseSingleton<PlayerCoin>, IObserverListener
+public class PlayerCoin : Singleton<PlayerCoin>, IObserverListener
 {
     [SerializeField] private int _playerCoin = 10;
     public int Coin => _playerCoin;

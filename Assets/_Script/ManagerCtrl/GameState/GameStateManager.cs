@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameStateManager : BaseSingleton<GameStateManager>
+public class GameStateManager : Singleton<GameStateManager>
 {
     private GameStateManager() { }
     private GameState _currentGameState = GameState.Gameplay;

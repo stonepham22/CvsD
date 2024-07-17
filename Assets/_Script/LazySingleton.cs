@@ -1,8 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSingleton<T>
+public abstract class LazySingleton<T> : LoboMonoBehaviour where T : LazySingleton<T>
 {
-    private static T _instance;
+    protected static T instance;
     private static object _lock = new object();
     private static bool applicationIsQuitting = false;
 
@@ -16,32 +18,19 @@ public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSinglet
             }
             lock (_lock)
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = FindObjectOfType<T>();
-                    if (_instance == null)
+                    instance = FindObjectOfType<T>();
+                    if (instance == null)
                     {
                         var obj = new GameObject(typeof(T).ToString());
-                        _instance = obj.AddComponent<T>();
+                        instance = obj.AddComponent<T>();
                     }
                 }
-                return _instance;
+                return instance;
             }
         }
     }
-
-    protected override void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this as T;
-        }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     protected virtual void OnDestroy()
     {
         applicationIsQuitting = true;
@@ -51,5 +40,4 @@ public abstract class BaseSingleton<T> : LoboMonoBehaviour where T : BaseSinglet
     {
         applicationIsQuitting = true;
     }
-
 }

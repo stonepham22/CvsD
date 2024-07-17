@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// The ObserverManager class is responsible for managing observers and notifying them of events.
 /// </summary>
-public class ObserverManager : BaseSingleton<ObserverManager>
+public class ObserverManager : Singleton<ObserverManager>
 {
     private ObserverManager() { }
     private Dictionary<EventType, HashSet<IObserverListener>> dicListeners = new Dictionary<EventType, HashSet<IObserverListener>>();

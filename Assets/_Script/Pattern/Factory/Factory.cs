@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Factory<T> : LoboMonoBehaviour
+public abstract class Factory<T> : LoboMonoBehaviour where T : class, IProduct
 {
     protected List<T> productChickens = new List<T>();
     [SerializeField] protected Transform holder;
@@ -28,6 +28,7 @@ public abstract class Factory<T> : LoboMonoBehaviour
                 child.gameObject.SetActive(false);
             }
         }
+        Debug.Log(productChickens.Count);
     }
     void LoadHolder()
     {
@@ -39,6 +40,6 @@ public abstract class Factory<T> : LoboMonoBehaviour
         }
     }
     
-    public abstract T GetProduct(Vector3 position, int id);
+    public abstract IProduct GetProduct(Vector3 position, int id);
 
 }

@@ -42,22 +42,9 @@ public class BuyChickenButton : LoboMonoBehaviour
         Debug.LogWarning(transform.name + ": LoadChickenPriceText", gameObject);
     }
 
-    //protected void Start()
-    //{
-    //    this.CheckPrice();
-    //}
-
     void ShowChickenPriceText()
     {
         this._chickenPriceText.ShowChickenPriceText();
     }    
-
-    //public void CheckPrice()
-    //{
-    //    int playerCoin = PlayerManager.Instance.PlayerCoin.Coin;
-    //    int chickenPrice = this._chickenPriceText.ChickenPrice;
-    //    if (chickenPrice <= playerCoin) return;
-    //    this._buttonOn.gameObject.SetActive(false);
-    //}    
 
 }
