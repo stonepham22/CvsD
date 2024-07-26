@@ -14,6 +14,7 @@ public class BuyChickenButtonOn : BaseButton, IObserverListener
 
     protected override void OnClick()
     {
+        // if(_chickenPrice > )
         ObserverManager.Instance.NotifyEvent(EventType.BuyChicken, _chickenPrice);
     }
 

@@ -11,20 +11,7 @@ public class ChickenShooting : LoboMonoBehaviour
     [SerializeField] private float _shootTimer = 0f;
     [SerializeField] private int _indexStandy;
 
-    [SerializeField] private int _chickenDamage = 10;
-
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        this.LoadChickenDamage();
-    }
-
-    void LoadChickenDamage()
-    {
-        string parentName = transform.parent.name;
-        char indexChar = parentName[parentName.Length - 1];
-        this._chickenDamage = int.Parse(indexChar.ToString());
-    }
+    [SerializeField] private int _chickenDamage = 1;
 
     public void SetIsStandy(bool value)
     {
