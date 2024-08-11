@@ -365,7 +365,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 28549619}
-  - component: {fileID: 28549621}
   - component: {fileID: 28549622}
   m_Layer: 5
   m_Name: ChickenFactory
@@ -395,19 +394,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &28549621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28549618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e83fea45f32d0d946b215219df72183d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holder: {fileID: 581547494}
 --- !u!114 &28549622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4524061e71008f4980ecaf98ec62be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _factoryChicken: {fileID: 28549621}
+  _factoryChicken: {fileID: 0}
 --- !u!1001 &39694678
 PrefabInstance:
   m_ObjectHideFlags: 0

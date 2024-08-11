@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EventFactoryChicken : LoboMonoBehaviour, IObserverListener
 {
-    [SerializeField] private FactoryChicken _factoryChicken;
+    [SerializeField] private ChickenFactory _factoryChicken;
 
     protected override void LoadComponents()
     {
@@ -15,7 +15,7 @@ public class EventFactoryChicken : LoboMonoBehaviour, IObserverListener
     void LoadFactoryChicken()
     {
         if(_factoryChicken != null) return;
-        _factoryChicken = GetComponent<FactoryChicken>();
+        _factoryChicken = GetComponent<ChickenFactory>();
     }
 
     void OnEnable()
@@ -24,7 +24,7 @@ public class EventFactoryChicken : LoboMonoBehaviour, IObserverListener
     }
     public void NotifyEvent(EventType type, object data)
     {
-       _factoryChicken.GetProduct(new Vector3(0,0,0), 1);
+    //    _factoryChicken.GetProduct(new Vector3(0,0,0), 1);
     }
     
 }
